@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ShareMobilityApp</string>
+    <string name="login_button">Login</string>
 </resources>
