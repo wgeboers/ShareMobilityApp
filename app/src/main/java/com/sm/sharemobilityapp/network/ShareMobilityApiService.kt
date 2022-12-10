@@ -37,8 +37,28 @@ interface ShareMobilityApiService {
     @PUT(value = "users/{id}")
     suspend fun putUser(@Body userInfo: UserInfo, @Path("id") userId: Long): UserInfo
 
+
     @GET("cars")
     suspend fun getCars() : List<CarInfo>
+
+    @GET("cars/{id}")
+    suspend fun getCar(@Path("id") carId: Long): CarInfo
+
+    @GET("cars/{make}")
+    suspend fun getCarbyMake(@Path("make") carMake: String): CarInfo
+
+    @GET("cars/{model}")
+    suspend fun getCarbyModel(@Path("model") carModel: String): CarInfo
+
+    @DELETE("cars/{id}")
+    suspend fun deleteCar(@Path("id") carId: Long)
+
+    @PUT(value = "cars/{id}")
+    suspend fun putCar(@Body carInfo: CarInfo, @Path("id") carId: Long): CarInfo
+
+    @GET("carsByOwner/cars_owned/{id}")
+    suspend fun getAllRegistrationsById
+
 }
 
 // Public object that exposes the ShareMobility service
