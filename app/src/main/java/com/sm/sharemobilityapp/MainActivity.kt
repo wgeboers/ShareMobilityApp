@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.sm.sharemobilityapp.databinding.ActivityMainBinding
 import com.sm.sharemobilityapp.overview.OverviewViewModel
+import com.sm.sharemobilityapp.network.UserInfo
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -25,6 +26,22 @@ class MainActivity : AppCompatActivity() {
 
         binding.getCarsBtn.setOnClickListener {
             overviewViewModel.getCars()
+        }
+
+        binding.getUserID.setOnClickListener {
+            //overviewViewModel.getUser(1L)
+            //overviewViewModel.getLogin("TestCarUser2", "letmein2")
+                val userInfo = UserInfo(
+                    "CAR_USER",
+                    null,
+                    "User1",
+                    "Letmein",
+                    "Piet",
+                    "Bab",
+                    "Straat 2, 2987CP Alba",
+                    0
+                )
+            overviewViewModel.postUserInfo(userInfo)
         }
     }
 }

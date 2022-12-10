@@ -34,11 +34,42 @@ class OverviewViewModel : ViewModel() {
         }
     }
 
+    fun getUser(id: Long) {
+        viewModelScope.launch {
+            try {
+                val result = ShareMobilityApi.retrofitService.getUser(id)
+                _status.value = result.toString()
+            } catch (e: java.lang.Exception) {
+                _status.value = "Failure: ${e.message}"
+            }
+        }
+    }
+
+    fun getLogin(username: String, password: String) {
+        viewModelScope.launch {
+            try {
+                _status.value = ShareMobilityApi.retrofitService.getLogin(username, password).toString()
+            } catch (e: java.lang.Exception) {
+                _status.value = "Failure: ${e.message}"
+            }
+        }
+    }
+
     fun getCars() {
         viewModelScope.launch {
             try {
                 val listCars = ShareMobilityApi.retrofitService.getCars()
                 _status.value = listCars.toString()
+            } catch (e: java.lang.Exception) {
+                _status.value = "Failure: ${e.message}"
+            }
+        }
+    }
+
+    fun postUserInfo(userInfo: UserInfo) {
+        viewModelScope.launch {
+            try {
+               _status.value = ShareMobilityApi.retrofitService.postUser(userInfo).toString()
             } catch (e: java.lang.Exception) {
                 _status.value = "Failure: ${e.message}"
             }
