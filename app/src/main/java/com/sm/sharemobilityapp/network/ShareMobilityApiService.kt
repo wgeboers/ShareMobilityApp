@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
-private const val BASE_URL ="http://192.168.1.134:8080/"
+private const val BASE_URL ="http://192.168.183.102:8080/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -37,7 +37,7 @@ interface ShareMobilityApiService {
     @PUT(value = "users/{id}")
     suspend fun putUser(@Body userInfo: UserInfo, @Path("id") userId: Long): UserInfo
 
-
+    // Cars
     @GET("cars")
     suspend fun getCars() : List<CarInfo>
 
@@ -56,8 +56,40 @@ interface ShareMobilityApiService {
     @PUT(value = "cars/{id}")
     suspend fun putCar(@Body carInfo: CarInfo, @Path("id") carId: Long): CarInfo
 
+    @POST(value = "cars")
+    suspend fun postCar(@Body carInfo: CarInfo)
+
+    // Registration
     @GET("carsByOwner/cars_owned/{id}")
-    suspend fun getAllRegistrationsById
+    suspend fun getAllRegistrationsById(@Path("id") id: Long): Registration
+
+    @POST(value = "carsByOwner")
+    suspend fun postRegistration(@Body registration: Registration): Registration
+
+    @DELETE("carsByowner")
+    suspend fun deleteRegistration(@Body registration: Registration)
+
+    // Reservation
+    @GET("reservation")
+    suspend fun getAllReservations(): List<Reservation>
+
+    @GET("reservaton/{id}")
+    suspend fun getReservation(id: Long): Reservation
+
+    @GET("reservation/byCar/{id")
+    suspend fun getReservationByCarId(id: Long): List<Reservation>
+
+    @GET("reservation/byUser")
+    suspend fun getReservationByUser(id: Long): List<Reservation>
+
+    @DELETE("reservation/{id}")
+    suspend fun deleteReservation(@Path("id") id: Long)
+
+    @PUT(value = "reservation/{id)")
+    suspend fun updateReservationbyId(@Path("id") id: Long, @Body reservation: Reservation): Reservation
+
+    @POST(value = "reservation")
+    suspend fun postReservation(@Body reservation: Reservation): Reservation
 
 }
 

@@ -1,4 +1,4 @@
-package com.sm.sharemobilityapp.overview
+package com.sm.sharemobilityapp.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -4,7 +4,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.sm.sharemobilityapp.databinding.ActivityMainBinding
-import com.sm.sharemobilityapp.overview.OverviewViewModel
+import com.sm.sharemobilityapp.ui.OverviewViewModel
 import com.sm.sharemobilityapp.network.UserInfo
 
 class MainActivity : AppCompatActivity() {
