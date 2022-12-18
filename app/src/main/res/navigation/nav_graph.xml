@@ -3,24 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/startFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.sm.sharemobilityapp.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+        android:id="@+id/startFragment"
+        android:name="com.sm.sharemobilityapp.StartFragment"
+        android:label="sharemobility"
+        tools:layout="@layout/fragment_start"
+    <action
+        android:id="@+id/action_homeFragment_to_loginFragment"
+        app:destination="" />
     </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.sm.sharemobilityapp.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+
 </navigation>

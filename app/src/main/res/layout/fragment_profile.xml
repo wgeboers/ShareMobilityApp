@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".profileFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/profile_person_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/profile_info_text"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:hint="Gebruikers informatie"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_person_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/profile_person_image"
+                app:layout_constraintTop_toTopOf="@+id/profile_person_image" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:text="@string/youre_cars"
+                app:layout_constraintEnd_toEndOf="@+id/profile_info_text"
+                app:layout_constraintStart_toStartOf="@+id/profile_person_image"
+                app:layout_constraintTop_toBottomOf="@+id/profile_person_image" />
+
+            <TextView
+                android:id="@+id/profile_rent_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/rented"
+                app:layout_constraintStart_toStartOf="@+id/button2"
+                app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="@+id/button2"
+                app:layout_constraintStart_toStartOf="@+id/profile_rent_text"
+                app:layout_constraintTop_toBottomOf="@+id/profile_rent_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

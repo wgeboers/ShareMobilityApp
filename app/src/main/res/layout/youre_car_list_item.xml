@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_slider"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/car1" />
+
+        <TextView
+            android:id="@+id/brand_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Merk + Type"
+            app:layout_constraintStart_toStartOf="@+id/image_slider"
+            app:layout_constraintTop_toBottomOf="@+id/image_slider" />
+
+        <TextView
+            android:id="@+id/price_per_day_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Prijs per dag"
+            app:layout_constraintEnd_toEndOf="@+id/image_slider"
+            app:layout_constraintTop_toBottomOf="@+id/image_slider" />
+
+        <Button
+            android:id="@+id/usage_cost_button"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/usage_cost"
+            app:layout_constraintEnd_toStartOf="@+id/Ttco"
+            app:layout_constraintStart_toStartOf="@+id/brand_text"
+            app:layout_constraintTop_toBottomOf="@+id/brand_text" />
+
+        <Button
+            android:id="@+id/Ttco"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:text="@string/tco"
+            android:layout_marginLeft="40dp"
+            app:layout_constraintEnd_toEndOf="@+id/price_per_day_text"
+            app:layout_constraintTop_toBottomOf="@+id/price_per_day_text"
+            app:layout_constraintStart_toEndOf="@+id/usage_cost_button"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

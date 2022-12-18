@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".startFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <android.widget.SearchView
+                android:id="@+id/start_search_view"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:iconifiedByDefault="false"
+                android:queryHint="@string/city"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/start_filter_results"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/amount_of_results"
+                app:layout_constraintBottom_toTopOf="@+id/start_recycler_view"
+                app:layout_constraintStart_toStartOf="@+id/start_search_view"
+                app:layout_constraintTop_toBottomOf="@+id/start_search_view" />
+
+            <Button
+                android:id="@+id/start_button"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:drawableEnd="@drawable/ic_filter"
+                android:text="@string/filters"
+                app:layout_constraintEnd_toEndOf="@+id/start_search_view"
+                app:layout_constraintTop_toBottomOf="@+id/start_search_view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/start_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/start_button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
