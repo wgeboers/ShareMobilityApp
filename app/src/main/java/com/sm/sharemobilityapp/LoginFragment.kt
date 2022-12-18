@@ -5,13 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.databinding.FragmentLoginBinding
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -40,8 +36,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.homeButton.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.homeFragment)
+        binding.loginLoginButton.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.startFragment)
         }
     }
 
