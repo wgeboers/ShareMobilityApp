@@ -80,7 +80,7 @@ class LoginFragment : Fragment() {
             val username = binding.usernamETxt.text.toString()
             val password = binding.passwordETxt.text.toString()
             val userInfo  = loginUser(username, password)
-            binding.userinfoTxtView.text = userInfo?.firstname.toString()
+            binding.userinfoTxtView.text = userInfo?.firstname ?: "Geen gebruiker gevonden"
             Log.d("Naam waarde", naam)
 
             // Convert via Elvis operator?
