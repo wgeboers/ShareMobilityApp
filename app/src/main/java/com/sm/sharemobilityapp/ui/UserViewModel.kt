@@ -6,39 +6,33 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.sm.sharemobilityapp.data.User
 import com.sm.sharemobilityapp.data.UserDao
+import com.sm.sharemobilityapp.network.UserInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserViewModel(private val userDao: UserDao): ViewModel() {
 
-    private fun insertUser(userType: String, username: String, password: String) {
+    private fun insertUser(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
-            val userInfo = User(
-                type = userType,
-                username = username,
-                password = password,
-                firstname = "Piet",
-                lastname = "Klaas",
-                address = "Straat",
-            )
-            userDao.insert(userInfo)
+            userDao.insert(user)
         }
     }
 
-    private fun getNewUserEntry(userType: String, username: String, password: String) : User {
+    private fun getNewUserEntry(userInfo: UserInfo) : User {
         return User(
-             type = userType,
-             username = username,
-             password = password,
-             firstname = "Piet",
-             lastname = "Klaas",
-             address = "Straat",
+             id = userInfo.id!!,
+             type = userInfo.type.toString(),
+             username = userInfo.username.toString(),
+             password = userInfo.password.toString(),
+             firstname = userInfo.firstname.toString(),
+             lastname = userInfo.lastname.toString(),
+             address = userInfo.address.toString(),
         )
     }
 
-    fun addNewUser(userType: String, username: String, password: String) {
-        //val newUser = getNewUserEntry(userType, username, password)
-        insertUser(userType, username, password)
+    fun addNewUser(userInfo: UserInfo) {
+        val newUser = getNewUserEntry(userInfo)
+        insertUser(newUser)
     }
 }
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sm.sharemobilityapp.network.ShareMobilityApi
 import com.sm.sharemobilityapp.network.UserInfo
 import kotlinx.coroutines.launch
+import com.sm.sharemobilityapp.data.User
 
 class OverviewViewModel : ViewModel() {
 
@@ -14,6 +15,12 @@ class OverviewViewModel : ViewModel() {
 
     val status: LiveData<String>
         get() = _status
+
+   // lateinit var loginUser: UserInfo
+
+    private val _userInfo = MutableLiveData<UserInfo>()
+    val userInfo: LiveData<UserInfo>
+        get() = _userInfo
 
 //    init {
 //        getUsers()
@@ -24,9 +31,6 @@ class OverviewViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val listResult = ShareMobilityApi.retrofitService.getUsers()
-                _status.value = listResult.toString()
-               // _status.value = "Succes: ${listResult.size} users retrieved.\n"
-               // _status.value += listResult.joinToString(separator = "\r\n")
                 _status.value = listResult.toString()
             } catch (e: java.lang.Exception) {
                 _status.value = "Failure: ${e.message}"
@@ -48,9 +52,10 @@ class OverviewViewModel : ViewModel() {
     fun getLogin(username: String, password: String) {
         viewModelScope.launch {
             try {
-                _status.value = ShareMobilityApi.retrofitService.getLogin(username, password).toString()
+                _userInfo.value = ShareMobilityApi.retrofitService.getLogin(username, password)
             } catch (e: java.lang.Exception) {
-                _status.value = "Failure: ${e.message}"
+                //TO DO: what kind of error/message
+               // loginUser = "Failure: ${e.message}"
             }
         }
     }

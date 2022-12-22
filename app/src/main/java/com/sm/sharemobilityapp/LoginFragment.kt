@@ -8,11 +8,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.fragment.navArgs
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.navArgs
 import com.sm.sharemobilityapp.databinding.FragmentLoginBinding
 import com.sm.sharemobilityapp.ui.UserViewModel
 import com.sm.sharemobilityapp.ui.UserViewModelFactory
 import com.sm.sharemobilityapp.data.*
+import com.sm.sharemobilityapp.ui.OverviewViewModel
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
+import com.sm.sharemobilityapp.network.UserInfo
+import android.util.Log
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,9 +40,15 @@ class LoginFragment : Fragment() {
     private lateinit var loginTextView: TextView
     lateinit var user: User
 
-    private fun addNewUser() {
-        viewModel.addNewUser("CAR_USER", "Test", "letmein")
+    private fun loginUser(username: String, password: String): UserInfo? {
+        overviewViewModel.getLogin("TestCarUser2", "letmein2")
+        Log.d("loginFragment", "loginUser called")
+        Log.d("LoginFragment", overviewViewModel.userInfo.value?.firstname.toString())
+        return overviewViewModel.userInfo.value
     }
+
+    private val overviewViewModel: OverviewViewModel by viewModels()
+
 
     private val viewModel: UserViewModel by activityViewModels {
         UserViewModelFactory(
@@ -45,6 +57,9 @@ class LoginFragment : Fragment() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        overviewViewModel.status.observe(this) {
+            binding.userinfoTxtView.text = overviewViewModel.userInfo.value.toString()
+        }
         super.onCreate(savedInstanceState)
     }
 
@@ -59,11 +74,21 @@ class LoginFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        loginTextView = binding.loginTxtView
-        val saveButton = binding.saveButton.setOnClickListener{
-            addNewUser()
-        }
+        val userInfoTextView = binding.userinfoTxtView
+        val saveButton = binding.loginButton.setOnClickListener{
+            var naam: String = "leeg"
+            val username = binding.usernamETxt.text.toString()
+            val password = binding.passwordETxt.text.toString()
+            val userInfo  = loginUser(username, password)
+            binding.userinfoTxtView.text = userInfo?.firstname.toString()
+            Log.d("Naam waarde", naam)
 
+            // Convert via Elvis operator?
+            if (userInfo != null) {
+                viewModel.addNewUser(userInfo)
+            }
+
+        }
     }
 
 

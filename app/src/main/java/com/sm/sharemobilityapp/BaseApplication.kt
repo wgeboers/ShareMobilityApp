@@ -23,7 +23,6 @@ import com.sm.sharemobilityapp.data.SMRoomDatabase
  * instance of the [SMRoomDatabase]
  */
 class BaseApplication : Application() {
-
     val database: SMRoomDatabase by lazy {
         SMRoomDatabase.getDatabase(this)
     }
