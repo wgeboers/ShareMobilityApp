@@ -2,7 +2,6 @@ package com.sm.sharemobilityapp.network
 
 import com.squareup.moshi.Json
 
-
 data class UserInfo(
 
 	@Json(name="id")
@@ -28,5 +27,4 @@ data class UserInfo(
 
 	@Json(name="bonusPoints")
 	val bonuspoints: Int = 0
-
 )
