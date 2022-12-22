@@ -27,12 +27,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/amount_of_results"
-                app:layout_constraintBottom_toTopOf="@+id/start_recycler_view"
+                app:layout_constraintBottom_toTopOf="@+id/recycler_view"
                 app:layout_constraintStart_toStartOf="@+id/start_search_view"
                 app:layout_constraintTop_toBottomOf="@+id/start_search_view" />
 
             <Button
-                android:id="@+id/start_button"
+                android:id="@+id/filter_button"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:drawableEnd="@drawable/ic_filter"
@@ -41,13 +41,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/start_search_view" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/start_recycler_view"
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
                 app:layoutManager="LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/start_button" />
+                app:layout_constraintTop_toBottomOf="@+id/filter_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

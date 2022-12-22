@@ -2,13 +2,86 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/startFragment">
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/home">
 
     <fragment
-        android:id="@+id/startFragment"
-        android:name="com.sm.sharemobilityapp.StartFragment"
-        android:label="sharemobility"
-        tools:layout="@layout/fragment_start"/>
-
+        android:id="@+id/home"
+        android:name="com.sm.sharemobilityapp.fragment_start"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/action_fragment_start_to_fragment_filter"
+            app:destination="@id/fragment_filter" />
+        <action
+            android:id="@+id/action_fragment_start_to_fragment_car_rental_details"
+            app:destination="@id/fragment_car_rental_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_filter"
+        android:name="com.sm.sharemobilityapp.fragment_filter"
+        android:label="fragment_filter"
+        tools:layout="@layout/fragment_filter">
+        <action
+            android:id="@+id/action_fragment_filter_to_fragment_start"
+            app:destination="@id/home" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.sm.sharemobilityapp.fragment_profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_fragment_profile_to_fragment_your_cars"
+            app:destination="@id/fragment_your_cars" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_login"
+        android:name="com.sm.sharemobilityapp.fragment_login"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_fragment_login_to_fragment_registration"
+            app:destination="@id/fragment_registration" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_registration"
+        android:name="com.sm.sharemobilityapp.fragment_registration"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration">
+        <action
+            android:id="@+id/action_fragment_registration_to_fragment_login"
+            app:destination="@id/fragment_login" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_your_cars"
+        android:name="com.example.wordsapp.fragment_your_cars"
+        android:label="fragment_your_cars"
+        tools:layout="@layout/fragment_your_cars">
+        <action
+            android:id="@+id/action_fragment_your_cars_to_fragment_add_car"
+            app:destination="@id/fragment_add_car" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_add_car"
+        android:name="com.sm.sharemobilityapp.fragment_add_car"
+        android:label="fragment_add_car"
+        tools:layout="@layout/fragment_add_car"/>
+    <fragment
+        android:id="@+id/fragment_car_rental_details"
+        android:name="com.sm.sharemobilityapp.fragment_car_rental_details"
+        android:label="fragment_car_rental_details"
+        tools:layout="@layout/fragment_car_rental_details">
+        <action
+            android:id="@+id/action_fragment_car_rental_details_to_fragment_rent"
+            app:destination="@id/fragment_rent" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_rent"
+        android:name="com.sm.sharemobilityapp.fragment_rent"
+        android:label="fragment_rent"
+        tools:layout="@layout/fragment_rent"/>
+    <action android:id="@+id/action_global_fragment_start" app:destination="@id/home" />
+    <action android:id="@+id/action_global_fragment_profile" app:destination="@id/profile" />
+    <action android:id="@+id/action_global_fragment_login" app:destination="@id/fragment_login" />
 </navigation>
