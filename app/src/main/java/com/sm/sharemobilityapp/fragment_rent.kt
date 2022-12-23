@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.databinding.FragmentRentBinding
 
 class fragment_rent : Fragment() {
@@ -18,6 +19,12 @@ class fragment_rent : Fragment() {
     ): View? {
         _binding = FragmentRentBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.rentButton.setOnClickListener {
+                view -> view.findNavController().navigate(R.id.action_global_fragment_start)
+        }
     }
 
     override fun onDestroyView() {

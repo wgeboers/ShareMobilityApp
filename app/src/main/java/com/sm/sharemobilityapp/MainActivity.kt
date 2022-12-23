@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        //odnerstaande val loggedIn is tijdelijk voor het ontwikkelen
-        val loggedIn = false
+        //onderstaande val loggedIn is tijdelijk voor het ontwikkelen
+        val loggedIn = true
         if (loggedIn)  {
             binding.bottomNavigationView.setOnItemSelectedListener {
                 when(it.itemId) {

@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.sm.sharemobilityapp.adapter.ItemAdapter
+import com.sm.sharemobilityapp.adapter.RentedItemAdapter
+import com.sm.sharemobilityapp.data.Datasource
 import com.sm.sharemobilityapp.databinding.FragmentProfileBinding
 
 class fragment_profile : Fragment() {
@@ -22,6 +25,11 @@ class fragment_profile : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val myDataset = Datasource().loadCars()
+        val recyclerView = binding.recyclerView
+        recyclerView.adapter = RentedItemAdapter(this, myDataset)
+        recyclerView.setHasFixedSize(true)
+
         binding.youreCarsButton.setOnClickListener {
                 view -> view.findNavController().navigate(R.id.fragment_your_cars)
         }

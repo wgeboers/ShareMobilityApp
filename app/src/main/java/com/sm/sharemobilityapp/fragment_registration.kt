@@ -25,6 +25,10 @@ class fragment_registration : Fragment() {
         binding.registrationExistingaccount.setOnClickListener {
                 view -> view.findNavController().navigate(R.id.fragment_login)
         }
+
+        binding.registrationRegistrationButton.setOnClickListener {
+                view -> view.findNavController().navigate(R.id.action_global_fragment_start)
+        }
     }
 
     override fun onDestroyView() {

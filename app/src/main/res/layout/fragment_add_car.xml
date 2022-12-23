@@ -19,7 +19,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_car"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/car_icon_description" />
 
             <TextView
                 android:id="@+id/add_car_main_text"
@@ -140,7 +141,8 @@
                     android:id="@+id/add_car_fuel_autocomplete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColorHint="#757575" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -311,7 +313,8 @@
                     android:layout_height="match_parent"
                     android:hint="@string/purchase_price"
                     android:inputType="numberDecimal"
-                    android:lines="1" />
+                    android:lines="1"
+                    android:textColorHint="#757575" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

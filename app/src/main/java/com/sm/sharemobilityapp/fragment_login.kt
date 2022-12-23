@@ -25,6 +25,10 @@ class fragment_login : Fragment() {
         binding.notYetAccountButton.setOnClickListener {
                 view -> view.findNavController().navigate(R.id.fragment_registration)
         }
+
+        binding.loginLoginButton.setOnClickListener {
+                view -> view.findNavController().navigate(R.id.action_global_fragment_start)
+        }
     }
 
     override fun onDestroyView() {

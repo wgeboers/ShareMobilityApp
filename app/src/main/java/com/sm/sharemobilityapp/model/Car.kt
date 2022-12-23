@@ -7,5 +7,7 @@ data class Car(
     val make: String,
     val model: String,
     val pricePerDay: Double,
-    val totalPrice: Double
+    val totalPrice: Double,
+    val rentedStartDate: String,
+    val rentedEndDate: String
     )

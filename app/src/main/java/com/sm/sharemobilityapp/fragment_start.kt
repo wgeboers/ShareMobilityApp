@@ -2,6 +2,7 @@ package com.sm.sharemobilityapp
 
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -33,6 +34,9 @@ class fragment_start : Fragment() {
         val recyclerView = binding.recyclerView
         recyclerView.adapter = ItemAdapter(this, myDataset)
         recyclerView.setHasFixedSize(true)
+
+        val amountOfResult: TextView = view.findViewById(R.id.start_filter_results_amount)
+        amountOfResult.text = myDataset.size.toString()
 
         binding.filterButton.setOnClickListener {
             view -> view.findNavController().navigate(R.id.fragment_filter)

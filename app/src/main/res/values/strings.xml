@@ -3,7 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="city">Stad</string>
-    <string name="amount_of_results">Aantal resultaten</string>
+    <string name="amount_of_results">Aantal resultaten:</string>
     <string name="filters">Filters</string>
     <string name="main">Algemeen</string>
     <string name="brand">Merk</string>
@@ -51,4 +51,28 @@
     <string name="rate">Beoordelen</string>
     <string name="open">Open</string>
     <string name="close">Sluiten</string>
+    <string name="euroSign">€</string>
+    <string name="car_icon_description">car icon</string>
+
+    <!--dit is dummy data-->
+    <string-array name="brands">
+        <item>Audi</item>
+        <item>BWM</item>
+        <item>Vovlo</item>
+    </string-array>
+    <string-array name="model">
+        <item>A4</item>
+        <item>V70</item>
+        <item>i8</item>
+    </string-array>
+    <string-array name="types">
+        <item>Brandstof</item>
+        <item>Electriciteit</item>
+        <item>Waterstof</item>
+    </string-array>
+    <string-array name="fuels">
+        <item>Benzine</item>
+        <item>Diesel</item>
+        <item>LPG</item>
+    </string-array>
 </resources>
