@@ -1,3 +1,78 @@
 <resources>
     <string name="app_name">ShareMobilityApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="city">Stad</string>
+    <string name="amount_of_results">Aantal resultaten:</string>
+    <string name="filters">Filters</string>
+    <string name="main">Algemeen</string>
+    <string name="brand">Merk</string>
+    <string name="model">Model</string>
+    <string name="license_plate">Kenteken</string>
+    <string name="km">Kilometer stand</string>
+    <string name="type">Type</string>
+    <string name="fuel_type">Brandstof type</string>
+    <string name="years_owned">Hoeveel jaar in bezit</string>
+    <string name="location">Locatie</string>
+    <string name="street">Straat</string>
+    <string name="street_number">nr</string>
+    <string name="street_number_addition">Toevoeging</string>
+    <string name="zipcode">Postcode</string>
+    <string name="financial">Financieel</string>
+    <string name="purchase_price">Aanschaf waarde</string>
+    <string name="price_per_hour">Prijs per uur</string>
+    <string name="add_car">Aanbieden</string>
+    <string name="price_per_day">Prijs per dag</string>
+    <string name="from">van</string>
+    <string name="till">tot</string>
+    <string name="add">Toevoegen</string>
+    <string name="required">Verplicht</string>
+    <string name="email">E-Mail</string>
+    <string name="password">Wachtwoord</string>
+    <string name="forgot_password">Wachtwoord vergeten?</string>
+    <string name="login">Inloggen</string>
+    <string name="no_account_yet">Nog geen account?</string>
+    <string name="youre_cars">Uw auto\'s</string>
+    <string name="rented">Gehuurd</string>
+    <string name="firstname">Voornaam</string>
+    <string name="lastname">Achternaam</string>
+    <string name="registrate">Registreren</string>
+    <string name="already_got_account">Ik heb al een account</string>
+    <string name="accept_terms_and_conditions">Akkoord algemene voorwaarden</string>
+    <string name="rent">Huren</string>
+    <string name="total_price">Totaal prijs</string>
+    <string name="tco">TCO</string>
+    <string name="usage_cost">Verbruikkosten</string>
+    <string name="home">Home</string>
+    <string name="profile">Profiel</string>
+    <string name="logout">Uitloggen</string>
+    <string name="communicate">Communicatie</string>
+    <string name="share">Delen</string>
+    <string name="rate">Beoordelen</string>
+    <string name="open">Open</string>
+    <string name="close">Sluiten</string>
+    <string name="euroSign">€</string>
+    <string name="car_icon_description">car icon</string>
+
+    <!--dit is dummy data-->
+    <string-array name="brands">
+        <item>Audi</item>
+        <item>BWM</item>
+        <item>Vovlo</item>
+    </string-array>
+    <string-array name="model">
+        <item>A4</item>
+        <item>V70</item>
+        <item>i8</item>
+    </string-array>
+    <string-array name="types">
+        <item>Brandstof</item>
+        <item>Electriciteit</item>
+        <item>Waterstof</item>
+    </string-array>
+    <string-array name="fuels">
+        <item>Benzine</item>
+        <item>Diesel</item>
+        <item>LPG</item>
+    </string-array>
 </resources>
