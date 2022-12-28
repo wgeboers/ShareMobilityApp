@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -14,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
+import com.sm.sharemobilityapp.adapter.ItemAdapter
 import com.sm.sharemobilityapp.adapter.MarkerInfoWindowAdapter
 import com.sm.sharemobilityapp.data.Datasource
 import com.sm.sharemobilityapp.databinding.FragmentMapBinding
@@ -52,6 +55,22 @@ class fragment_map : Fragment() {
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val myDataset = Datasource().loadCars()
+
+        val amountOfResult: TextView = view.findViewById(R.id.start_filter_results_amount)
+        amountOfResult.text = myDataset.size.toString()
+
+        binding.filterButton.setOnClickListener {
+                view -> view.findNavController().navigate(R.id.fragment_filter)
+        }
+
+        binding.mapButton.setOnClickListener {
+                view -> view.findNavController().navigate(R.id.action_global_fragment_start)
+        }
+
     }
 
     private fun addClusteredMarkers(googleMap: GoogleMap) {

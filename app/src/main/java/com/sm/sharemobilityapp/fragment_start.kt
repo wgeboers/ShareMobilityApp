@@ -42,6 +42,10 @@ class fragment_start : Fragment() {
             view -> view.findNavController().navigate(R.id.fragment_filter)
         }
 
+        binding.mapButton.setOnClickListener {
+                view -> view.findNavController().navigate(R.id.fragment_map)
+        }
+
     }
 
     override fun onDestroyView() {

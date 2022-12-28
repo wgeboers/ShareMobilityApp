@@ -39,9 +39,6 @@ class MainActivity : AppCompatActivity() {
                     R.id.profile -> {
                         navHostFragment.navController.navigate(R.id.action_global_fragment_profile)
                     }
-                    R.id.map -> {
-                        navHostFragment.navController.navigate(R.id.action_global_fragment_map)
-                    }
                 }
                 true
             }
@@ -53,9 +50,6 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.profile -> {
                         navHostFragment.navController.navigate(R.id.action_global_fragment_login)
-                    }
-                    R.id.map -> {
-                        navHostFragment.navController.navigate(R.id.action_global_fragment_map)
                     }
                 }
                 true
