@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
 import com.sm.sharemobilityapp.adapter.MarkerInfoWindowAdapter
@@ -40,9 +42,13 @@ class fragment_map : Fragment() {
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
         mapFragment.getMapAsync { googleMap ->
+            googleMap.setOnMapLoadedCallback {
+                val bounds = LatLngBounds.builder()
+                cars.forEach { bounds.include(LatLng(it.latitude, it.longitude)) }
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 50))
+            }
+
             addClusteredMarkers(googleMap)
-            //addMarkers(googleMap)
-            //googleMap.setInfoWindowAdapter(MarkerInfoWindowAdapter(requireActivity()))
         }
 
         return view
@@ -60,28 +66,18 @@ class fragment_map : Fragment() {
         clusterManager.addItems(cars)
         clusterManager.cluster()
 
+        googleMap.setOnCameraMoveStartedListener {
+            clusterManager.markerCollection.markers.forEach {it.alpha = 0.3f}
+            clusterManager.clusterMarkerCollection.markers.forEach { it.alpha = 0.3f }
+        }
+
         googleMap.setOnCameraIdleListener {
+            clusterManager.markerCollection.markers.forEach {it.alpha = 1.0f}
+            clusterManager.clusterMarkerCollection.markers.forEach { it.alpha = 1.0f }
+
             clusterManager.onCameraIdle()
         }
     }
-
-//    private fun addMarkers(googleMap: GoogleMap) {
-//        cars.forEach{ car ->
-//            val location = LatLng(car.latitude, car.longitude)
-//            val marker = googleMap.addMarker(
-//                MarkerOptions()
-//                    .title(car.make+" "+car.model)
-//                    .position(location)
-//                    .icon(carIcon)
-//            )
-//            marker?.tag = car
-//        }
-//    }
-
-//    private val carIcon: BitmapDescriptor by lazy {
-//        val color = ContextCompat.getColor(requireActivity(), R.color.colorPrimary)
-//        BitmapHelper.vectorToBitmap(requireActivity(), R.drawable.ic_car, color)
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

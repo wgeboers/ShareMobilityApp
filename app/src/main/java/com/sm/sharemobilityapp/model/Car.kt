@@ -16,5 +16,5 @@ data class Car(
     ) : ClusterItem {
     override fun getPosition(): LatLng = LatLng(latitude, longitude)
     override fun getTitle(): String = make
-    override fun getSnippet(): String = "test"
+    override fun getSnippet(): String = model
     }

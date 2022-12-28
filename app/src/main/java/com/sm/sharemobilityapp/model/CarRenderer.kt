@@ -9,7 +9,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
-import com.sm.sharemobilityapp.BitmapHelper
+import com.sm.sharemobilityapp.data.BitmapHelper
 import com.sm.sharemobilityapp.R
 
 
