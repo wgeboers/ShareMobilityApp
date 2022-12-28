@@ -40,6 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:text="@string/usage_cost"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toStartOf="@+id/Ttco"
             app:layout_constraintStart_toStartOf="@+id/brand_text"
             app:layout_constraintTop_toBottomOf="@+id/brand_text" />
@@ -50,6 +51,7 @@
             android:layout_height="40dp"
             android:text="@string/tco"
             android:layout_marginLeft="40dp"
+            android:backgroundTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="@+id/price_per_day_text"
             app:layout_constraintTop_toBottomOf="@+id/price_per_day_text"
             app:layout_constraintStart_toEndOf="@+id/usage_cost_button"/>

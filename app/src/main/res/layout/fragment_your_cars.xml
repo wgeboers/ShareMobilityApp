@@ -35,6 +35,7 @@
                 android:id="@+id/add_car"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
+                android:backgroundTint="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="@+id/recycler_view"
                 app:layout_constraintStart_toStartOf="@+id/recycler_view"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_view"

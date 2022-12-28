@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bottom_nav_item">#FFFFFF</color>
+    <color name="bottomNavigationView">#454545</color>
+    <color name="colorPrimary">#00547A</color>
+    <color name="dropDownTextColor">#FFFFFF</color>
+</resources>

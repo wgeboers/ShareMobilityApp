@@ -18,6 +18,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_car"
+                app:tint="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:contentDescription="@string/car_icon_description" />
@@ -37,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="11dp"
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/add_car_main_icon"
                 app:layout_constraintTop_toBottomOf="@+id/add_car_main_text">
@@ -56,7 +57,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="11dp"
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="@+id/add_car_make"
                 app:layout_constraintStart_toStartOf="@+id/add_car_make"
                 app:layout_constraintTop_toBottomOf="@+id/add_car_make">
@@ -75,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="11dp"
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="@+id/add_car_model"
                 app:layout_constraintStart_toStartOf="@+id/add_car_model"
                 app:layout_constraintTop_toBottomOf="@+id/add_car_model">
@@ -94,7 +95,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="11dp"
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="@+id/add_car_licens_plate"
                 app:layout_constraintStart_toStartOf="@+id/add_car_licens_plate"
                 app:layout_constraintTop_toBottomOf="@+id/add_car_licens_plate">
@@ -167,6 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="11dp"
+                app:tint="@color/colorPrimary"
                 android:src="@drawable/ic_map"
                 app:layout_constraintStart_toStartOf="@+id/add_car_main_icon"
                 app:layout_constraintTop_toBottomOf="@+id/add_car_years_owned" />
@@ -203,7 +205,7 @@
                 android:layout_width="60dp"
                 android:layout_height="0dp"
                 android:paddingStart="11dp"
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@+id/add_car_street"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/add_car_street_number_addition"
@@ -224,7 +226,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:paddingStart="11dp"
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@+id/add_car_street_number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/add_car_street_number"
@@ -244,7 +246,7 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="11dp"
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/add_car_city"
                 app:layout_constraintStart_toStartOf="@+id/add_car_street"
@@ -264,7 +266,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="11dp"
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/add_car_zipcode"
                 app:layout_constraintTop_toBottomOf="@+id/add_car_street">
@@ -283,6 +285,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="11dp"
+                app:tint="@color/colorPrimary"
                 android:src="@drawable/ic_cash"
                 app:layout_constraintStart_toStartOf="@+id/add_car_location_icon"
                 app:layout_constraintTop_toBottomOf="@+id/add_car_zipcode" />
@@ -302,7 +305,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="11dp"
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/add_car_price_icon"
                 app:layout_constraintTop_toBottomOf="@+id/add_car_price_icon">
@@ -322,7 +325,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="11dp"
-                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="@+id/add_car_value"
                 app:layout_constraintStart_toStartOf="@+id/add_car_value"
                 app:layout_constraintTop_toBottomOf="@+id/add_car_value">
@@ -341,6 +344,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="@string/add_car"
                 app:layout_constraintEnd_toEndOf="@+id/add_car_price_per_hour"
                 app:layout_constraintStart_toStartOf="@+id/add_car_price_icon"
