@@ -94,4 +94,9 @@
     <action android:id="@+id/action_global_fragment_start" app:destination="@id/home" />
     <action android:id="@+id/action_global_fragment_profile" app:destination="@id/profile" />
     <action android:id="@+id/action_global_fragment_login" app:destination="@id/fragment_login" />
+    <fragment
+        android:id="@+id/fragment_map"
+        android:name="com.sm.sharemobilityapp.fragment_map"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" /><action android:id="@+id/action_global_fragment_map" app:destination="@id/fragment_map"/>
 </navigation>

@@ -1,6 +1,7 @@
 package com.sm.sharemobilityapp.model
 
-import android.media.Image
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.clustering.ClusterItem
 
 data class Car(
     val image: Int,
@@ -9,5 +10,11 @@ data class Car(
     val pricePerDay: Double,
     val totalPrice: Double,
     val rentedStartDate: String,
-    val rentedEndDate: String
-    )
+    val rentedEndDate: String,
+    val latitude: Double,
+    val longitude: Double,
+    ) : ClusterItem {
+    override fun getPosition(): LatLng = LatLng(latitude, longitude)
+    override fun getTitle(): String = make
+    override fun getSnippet(): String = "test"
+    }

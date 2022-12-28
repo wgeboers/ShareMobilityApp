@@ -10,4 +10,5 @@
     <color name="bottom_nav_selected_item">#FFFFFF</color>
     <color name="bottom_nav_item">#7E7473</color>
     <color name="bottomNavigationView">#4E4D4D</color>
+    <color name="colorPrimary">#9C27B0</color>
 </resources>
