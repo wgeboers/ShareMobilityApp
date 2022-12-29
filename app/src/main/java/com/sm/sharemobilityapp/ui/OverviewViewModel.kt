@@ -8,6 +8,7 @@ import com.sm.sharemobilityapp.network.ShareMobilityApi
 import com.sm.sharemobilityapp.network.UserInfo
 import kotlinx.coroutines.launch
 import com.sm.sharemobilityapp.data.User
+import com.sm.sharemobilityapp.network.CarInfo
 
 class OverviewViewModel : ViewModel() {
 
@@ -21,6 +22,10 @@ class OverviewViewModel : ViewModel() {
     private val _userInfo = MutableLiveData<UserInfo>()
     val userInfo: LiveData<UserInfo>
         get() = _userInfo
+
+    private val _carInfo = MutableLiveData<List<CarInfo>>()
+    val carInfo: LiveData<List<CarInfo>>
+        get() = _carInfo
 
 //    init {
 //        getUsers()
@@ -63,8 +68,19 @@ class OverviewViewModel : ViewModel() {
     fun getCars() {
         viewModelScope.launch {
             try {
-                val listCars = ShareMobilityApi.retrofitService.getCars()
-                _status.value = listCars.toString()
+               _carInfo.value = ShareMobilityApi.retrofitService.getCars()
+            } catch (e: java.lang.Exception) {
+                _status.value = "Failure: ${e.message}"
+            }
+        }
+    }
+
+    fun getCarbyId(id: Long) {
+        viewModelScope.launch {
+            try {
+                //_items.value = _items.value?.plus(item) ?: listOf(item)
+
+                _carInfo.value = _carInfo.value?.plus(ShareMobilityApi.retrofitService.getCar(id))
             } catch (e: java.lang.Exception) {
                 _status.value = "Failure: ${e.message}"
             }
