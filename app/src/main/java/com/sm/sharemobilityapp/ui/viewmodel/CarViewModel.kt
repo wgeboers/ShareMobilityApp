@@ -1,4 +1,4 @@
-package com.sm.sharemobilityapp.ui
+package com.sm.sharemobilityapp.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

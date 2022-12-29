@@ -1,4 +1,4 @@
-package com.sm.sharemobilityapp.ui
+package com.sm.sharemobilityapp.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.sm.sharemobilityapp.network.ShareMobilityApi
 import com.sm.sharemobilityapp.network.UserInfo
 import kotlinx.coroutines.launch
-import com.sm.sharemobilityapp.data.User
 import com.sm.sharemobilityapp.network.CarInfo
 
 class OverviewViewModel : ViewModel() {

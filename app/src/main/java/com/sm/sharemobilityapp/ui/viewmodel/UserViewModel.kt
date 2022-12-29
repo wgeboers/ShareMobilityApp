@@ -1,14 +1,10 @@
-package com.sm.sharemobilityapp.ui
+package com.sm.sharemobilityapp.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.CreationExtras
-import com.sm.sharemobilityapp.data.Car
-import com.sm.sharemobilityapp.data.CarDao
 import com.sm.sharemobilityapp.data.User
 import com.sm.sharemobilityapp.data.UserDao
-import com.sm.sharemobilityapp.network.CarInfo
 import com.sm.sharemobilityapp.network.UserInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.sm.sharemobilityapp
+package com.sm.sharemobilityapp.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,18 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.fragment.navArgs
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
-import androidx.navigation.fragment.navArgs
 import com.sm.sharemobilityapp.databinding.FragmentLoginBinding
 import com.sm.sharemobilityapp.data.*
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import com.sm.sharemobilityapp.network.UserInfo
 import android.util.Log
-import androidx.lifecycle.viewModelScope
+import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.ui.*
+import com.sm.sharemobilityapp.ui.viewmodel.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
