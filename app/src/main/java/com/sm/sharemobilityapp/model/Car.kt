@@ -1,8 +1,13 @@
 package com.sm.sharemobilityapp.model
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import android.media.Image
 
-data class Car(@StringRes val stringResourceId: Int, @DrawableRes val imageResourceId: Int) {
-
-}
+data class Car(
+    val image: Int,
+    val make: String,
+    val model: String,
+    val pricePerDay: Double,
+    val totalPrice: Double,
+    val rentedStartDate: String,
+    val rentedEndDate: String
+    )
