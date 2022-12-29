@@ -1,4 +1,4 @@
-package com.sm.sharemobilityapp
+package com.sm.sharemobilityapp.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.sm.sharemobilityapp.databinding.FragmentRentBinding
+import com.sm.sharemobilityapp.R
+import com.sm.sharemobilityapp.databinding.FragmentRegistrationBinding
 
-class fragment_rent : Fragment() {
-    private var _binding: FragmentRentBinding? = null
+class RegistrationFragment : Fragment() {
+    private var _binding: FragmentRegistrationBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,12 +18,16 @@ class fragment_rent : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentRentBinding.inflate(inflater, container, false)
+        _binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.rentButton.setOnClickListener {
+        binding.registrationExistingaccount.setOnClickListener {
+                view -> view.findNavController().navigate(R.id.fragment_login)
+        }
+
+        binding.registrationRegistrationButton.setOnClickListener {
                 view -> view.findNavController().navigate(R.id.action_global_fragment_start)
         }
     }

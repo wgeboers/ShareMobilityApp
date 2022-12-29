@@ -1,4 +1,4 @@
-package com.sm.sharemobilityapp
+package com.sm.sharemobilityapp.ui
 
 import android.os.Bundle
 import android.view.*
@@ -6,11 +6,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.sm.sharemobilityapp.adapter.ItemAdapter
+import com.sm.sharemobilityapp.R
+import com.sm.sharemobilityapp.ui.adapter.ItemAdapter
 import com.sm.sharemobilityapp.data.Datasource
 import com.sm.sharemobilityapp.databinding.FragmentStartBinding
 
-class fragment_start : Fragment() {
+class StartFragment : Fragment() {
     private var _binding: FragmentStartBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView

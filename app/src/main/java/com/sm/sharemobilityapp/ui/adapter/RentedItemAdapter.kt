@@ -1,4 +1,4 @@
-package com.sm.sharemobilityapp.adapter
+package com.sm.sharemobilityapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.fragment_profile
+import com.sm.sharemobilityapp.ui.ProfileFragment
 import com.sm.sharemobilityapp.model.Car
 
 class RentedItemAdapter(
-    private val context: fragment_profile,
+    private val context: ProfileFragment,
     private val dataset: List<Car>
 ) : RecyclerView.Adapter<RentedItemAdapter.ItemViewHolder>() {
 
@@ -28,7 +28,7 @@ class RentedItemAdapter(
         return ItemViewHolder(adapterLayout)
     }
 
-    override fun onBindViewHolder(holder: RentedItemAdapter.ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
         holder.imageView.setImageResource(item.image)
         holder.startDateTextView.text = item.rentedStartDate

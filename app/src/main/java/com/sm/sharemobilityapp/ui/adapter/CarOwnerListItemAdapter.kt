@@ -1,4 +1,4 @@
-package com.sm.sharemobilityapp.adapter
+package com.sm.sharemobilityapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,13 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.fragment_your_cars
+import com.sm.sharemobilityapp.ui.CarOwnerFragment
 import com.sm.sharemobilityapp.model.Car
 
-class YoureCarListItemAdapter(
-    private val context: fragment_your_cars,
+class CarOwnerListItemAdapter(
+    private val context: CarOwnerFragment,
     private val dataset: List<Car>
-) : RecyclerView.Adapter<YoureCarListItemAdapter.ItemViewHolder>() {
+) : RecyclerView.Adapter<CarOwnerListItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.image_slider)

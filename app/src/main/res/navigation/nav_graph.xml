@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.sm.sharemobilityapp.fragment_start"
+        android:name="com.sm.sharemobilityapp.ui.StartFragment"
         android:label="fragment_start"
         tools:layout="@layout/fragment_start">
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_filter"
-        android:name="com.sm.sharemobilityapp.fragment_filter"
+        android:name="com.sm.sharemobilityapp.ui.FilterFragment"
         android:label="fragment_filter"
         tools:layout="@layout/fragment_filter">
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.sm.sharemobilityapp.fragment_profile"
+        android:name="com.sm.sharemobilityapp.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_login"
-        android:name="com.sm.sharemobilityapp.fragment_login"
+        android:name="com.sm.sharemobilityapp.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_registration"
-        android:name="com.sm.sharemobilityapp.fragment_registration"
+        android:name="com.sm.sharemobilityapp.ui.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration">
         <action
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_your_cars"
-        android:name="com.sm.sharemobilityapp.fragment_your_cars"
+        android:name="com.sm.sharemobilityapp.ui.CarOwnerFragment"
         android:label="fragment_your_cars"
         tools:layout="@layout/fragment_your_cars">
         <action
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_add_car"
-        android:name="com.sm.sharemobilityapp.fragment_add_car"
+        android:name="com.sm.sharemobilityapp.ui.AddCarFragment"
         android:label="fragment_add_car"
         tools:layout="@layout/fragment_add_car">
         <action
@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_car_rental_details"
-        android:name="com.sm.sharemobilityapp.fragment_car_rental_details"
+        android:name="com.sm.sharemobilityapp.ui.CarRentalFragment"
         android:label="fragment_car_rental_details"
         tools:layout="@layout/fragment_car_rental_details">
         <action
@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_rent"
-        android:name="com.sm.sharemobilityapp.fragment_rent"
+        android:name="com.sm.sharemobilityapp.ui.RentFragment"
         android:label="fragment_rent"
         tools:layout="@layout/fragment_rent"/>
     <action android:id="@+id/action_global_fragment_start" app:destination="@id/home" />

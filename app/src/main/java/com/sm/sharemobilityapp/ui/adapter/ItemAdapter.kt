@@ -1,4 +1,4 @@
-package com.sm.sharemobilityapp.adapter
+package com.sm.sharemobilityapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.fragment_start
+import com.sm.sharemobilityapp.ui.StartFragment
 import com.sm.sharemobilityapp.model.Car
 
 class ItemAdapter(
-    private val context: fragment_start,
+    private val context: StartFragment,
     private val dataset: List<Car>
     ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
