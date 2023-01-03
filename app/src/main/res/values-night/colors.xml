@@ -4,4 +4,5 @@
     <color name="bottomNavigationView">#454545</color>
     <color name="colorPrimary">#00547A</color>
     <color name="dropDownTextColor">#FFFFFF</color>
+    <color name="lastKnownLocationIcon">#8A0000</color>
 </resources>

@@ -57,6 +57,12 @@
     <string name="search">Zoek nu</string>
     <string name="Rent">Huren</string>
     <string name="radius">Radius</string>
+    <string name="LastKnownLocationIconTitle">Jij</string>
+    <string name="NoLocationPermissionDescription">Zonder het accepteren van de permissies kunnen wij uw locatie niet tonen. Wilt u alsnog de permissie toekennen?</string>
+    <string name="Yes">Ja</string>
+    <string name="No">Nee</string>
+    <string name="EnableGpsWarning">GPS aanzetten</string>
+    <string name="CannotDetermineLocation">Kan de locatie niet vinden</string>
 
     <!--dit is dummy data-->
     <string-array name="brands">
