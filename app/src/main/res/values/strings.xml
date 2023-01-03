@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ShareMobilityApp</string>
+    <string name="app_name">Share Mobility</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="city">Stad</string>
@@ -53,6 +53,16 @@
     <string name="close">Sluiten</string>
     <string name="euroSign">€</string>
     <string name="car_icon_description">car icon</string>
+    <string name="map">Map</string>
+    <string name="search">Zoek nu</string>
+    <string name="Rent">Huren</string>
+    <string name="radius">Radius</string>
+    <string name="LastKnownLocationIconTitle">Jij</string>
+    <string name="NoLocationPermissionDescription">Zonder het accepteren van de permissies kunnen wij uw locatie niet tonen. Wilt u alsnog de permissie toekennen?</string>
+    <string name="Yes">Ja</string>
+    <string name="No">Nee</string>
+    <string name="EnableGpsWarning">GPS aanzetten</string>
+    <string name="CannotDetermineLocation">Kan de locatie niet vinden</string>
 
     <!--dit is dummy data-->
     <string-array name="brands">
@@ -74,5 +84,13 @@
         <item>Benzine</item>
         <item>Diesel</item>
         <item>LPG</item>
+    </string-array>
+    <string-array name="radius">
+        <item>5 KM</item>
+        <item>10 KM</item>
+        <item>15 KM</item>
+        <item>25 KM</item>
+        <item>50 KM</item>
+        <item>>50 KM</item>
     </string-array>
 </resources>

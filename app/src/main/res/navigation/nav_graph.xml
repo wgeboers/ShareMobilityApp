@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_fragment_start_to_fragment_car_rental_details"
             app:destination="@id/fragment_car_rental_details" />
+        <action
+            android:id="@+id/action_home_to_fragment_map"
+            app:destination="@id/fragment_map" />
     </fragment>
     <fragment
         android:id="@+id/fragment_filter"
@@ -61,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_your_cars"
-        android:name="com.sm.sharemobilityapp.ui.CarOwnerFragment"
+        android:name="com.sm.sharemobilityapp.ui.YourCarsFragment"
         android:label="fragment_your_cars"
         tools:layout="@layout/fragment_your_cars">
         <action
@@ -79,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_car_rental_details"
-        android:name="com.sm.sharemobilityapp.ui.CarRentalFragment"
+        android:name="com.sm.sharemobilityapp.ui.CarRentalDetailsFragment"
         android:label="fragment_car_rental_details"
         tools:layout="@layout/fragment_car_rental_details">
         <action
@@ -94,4 +97,13 @@
     <action android:id="@+id/action_global_fragment_start" app:destination="@id/home" />
     <action android:id="@+id/action_global_fragment_profile" app:destination="@id/profile" />
     <action android:id="@+id/action_global_fragment_login" app:destination="@id/fragment_login" />
+    <fragment
+        android:id="@+id/fragment_map"
+        android:name="com.sm.sharemobilityapp.ui.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_fragment_map_self"
+            app:destination="@id/fragment_map" />
+    </fragment>
 </navigation>

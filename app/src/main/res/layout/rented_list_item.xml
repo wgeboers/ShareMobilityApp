@@ -23,8 +23,10 @@
             android:id="@+id/rented_start_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:tint="@color/colorPrimary"
             android:minHeight="48dp"
             android:src="@drawable/ic_date"
+            android:backgroundTint="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_slider" />
 
@@ -42,8 +44,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
+            app:tint="@color/colorPrimary"
             android:minHeight="48dp"
             android:src="@drawable/ic_date"
+            android:backgroundTint="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@id/rented_end_date_text"
             app:layout_constraintStart_toEndOf="@+id/rented_start_date_text"
             app:layout_constraintTop_toTopOf="@+id/rented_start_date" />
@@ -62,7 +66,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
+            app:tint="@color/colorPrimary"
             android:src="@drawable/ic_location"
+            android:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="@+id/rented_end_date_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rented_end_date_text" />
