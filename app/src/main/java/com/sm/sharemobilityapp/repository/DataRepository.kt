@@ -10,7 +10,7 @@ class DataRepository(private val database: SMRoomDatabase) {
     suspend fun refreshUser() {
         withContext(Dispatchers.IO) {
             val user = ShareMobilityApi.retrofitService.getUsers()
-            database.userDao.insertAll(user.asDataBaseModel())
+            //database.userDao.insertAll(user.asDataBaseModel())
         }
     }
 }

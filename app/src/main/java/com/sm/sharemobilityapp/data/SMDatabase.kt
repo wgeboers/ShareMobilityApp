@@ -13,6 +13,7 @@ abstract class SMRoomDatabase : RoomDatabase() {
 //    abstract fun carDao(): CarDao
 
     abstract val userDao: UserDao
+    abstract val carDao: CarDao
 
     companion object {
         private var INSTANCE: SMRoomDatabase? = null
