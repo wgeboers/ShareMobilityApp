@@ -20,7 +20,8 @@ private val retrofit = Retrofit.Builder()
 interface ShareMobilityApiService {
 
     @GET("users")
-    suspend fun getUsers(): List<UserInfo>
+//    suspend fun getUsers(): List<UserInfo>    @GET("users")
+    suspend fun getUsers(): NetworkUserContainer
 
     @GET("users/{id}")
     suspend fun getUser(@Path("id") userId: Long): UserInfo

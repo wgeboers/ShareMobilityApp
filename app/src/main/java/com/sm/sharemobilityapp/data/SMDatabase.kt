@@ -9,8 +9,10 @@ import com.sm.sharemobilityapp.data.User
 @Database(entities = [User::class, Car::class, Reservation::class, Image::class], version = 4, exportSchema = false)
 abstract class SMRoomDatabase : RoomDatabase() {
 
-    abstract fun userDao(): UserDao
-    abstract fun carDao(): CarDao
+//    abstract fun userDao(): UserDao
+//    abstract fun carDao(): CarDao
+
+    abstract val userDao: UserDao
 
     companion object {
         private var INSTANCE: SMRoomDatabase? = null

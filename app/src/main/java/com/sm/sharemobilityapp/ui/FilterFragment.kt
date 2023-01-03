@@ -9,10 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.databinding.FragmentFilterBinding
+import com.sm.sharemobilityapp.repository.DataRepository
+import com.sm.sharemobilityapp.data.SMRoomDatabase
 
 class FilterFragment : Fragment() {
     private var _binding: FragmentFilterBinding? = null
     private val binding get() = _binding!!
+    private val dataRepository: DataRepository()
 
     override fun onCreateView(
         inflater: LayoutInflater,

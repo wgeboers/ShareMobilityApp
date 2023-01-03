@@ -13,7 +13,7 @@ class UserViewModel(private val userDao: UserDao): ViewModel() {
 
     private fun insertUser(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
-            userDao.insert(user)
+            //userDao.insert(user)
         }
     }
 
