@@ -31,7 +31,7 @@ class ProfileFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
 
         binding.youreCarsButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.fragment_your_cars)
+                view -> view.findNavController().navigate(R.id.action_fragment_profile_to_fragment_your_cars)
         }
     }
 

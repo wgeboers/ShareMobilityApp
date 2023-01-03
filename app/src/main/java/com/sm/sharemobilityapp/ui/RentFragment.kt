@@ -24,7 +24,7 @@ class RentFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.rentButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.action_global_fragment_start)
+                view -> view.findNavController().navigate(R.id.action_fragment_rent_to_home)
         }
     }
 

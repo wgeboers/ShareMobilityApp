@@ -57,7 +57,7 @@ class FilterFragment : Fragment() {
         binding.filterRadiusAutocomplete.setAdapter(radiusArrayAdapter)
 
         binding.filterButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.action_global_fragment_start)
+                view -> view.findNavController().navigate(R.id.action_fragment_filter_to_fragment_start)
         }
     }
 

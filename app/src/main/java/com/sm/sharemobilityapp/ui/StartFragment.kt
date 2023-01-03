@@ -43,11 +43,11 @@ class StartFragment : Fragment() {
         amountOfResult.text = myDataset.size.toString()
 
         binding.filterButton.setOnClickListener {
-            view -> view.findNavController().navigate(R.id.fragment_filter)
+            view -> view.findNavController().navigate(R.id.action_fragment_start_to_fragment_filter)
         }
 
         binding.mapButton.setOnClickListener {
-            view -> view.findNavController().navigate(R.id.fragment_map)
+            view -> view.findNavController().navigate(R.id.action_home_to_fragment_map)
         }
 
     }

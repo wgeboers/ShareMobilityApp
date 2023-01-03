@@ -93,7 +93,11 @@
         android:id="@+id/fragment_rent"
         android:name="com.sm.sharemobilityapp.ui.RentFragment"
         android:label="fragment_rent"
-        tools:layout="@layout/fragment_rent"/>
+        tools:layout="@layout/fragment_rent">
+        <action
+            android:id="@+id/action_fragment_rent_to_home"
+            app:destination="@id/home" />
+    </fragment>
     <action android:id="@+id/action_global_fragment_start" app:destination="@id/home" />
     <action android:id="@+id/action_global_fragment_profile" app:destination="@id/profile" />
     <action android:id="@+id/action_global_fragment_login" app:destination="@id/fragment_login" />
@@ -103,7 +107,10 @@
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
         <action
-            android:id="@+id/action_fragment_map_self"
-            app:destination="@id/fragment_map" />
+            android:id="@+id/action_fragment_map_to_fragment_filter"
+            app:destination="@id/fragment_filter" />
+        <action
+            android:id="@+id/action_fragment_map_to_home2"
+            app:destination="@id/home" />
     </fragment>
 </navigation>

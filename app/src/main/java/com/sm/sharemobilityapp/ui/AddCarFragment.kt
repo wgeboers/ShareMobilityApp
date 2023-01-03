@@ -47,7 +47,7 @@ class AddCarFragment : Fragment() {
         binding.addCarFuelAutocomplete.setAdapter(fuelArrayAdapter)
 
         binding.addCarButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.fragment_your_cars)
+                view -> view.findNavController().navigate(R.id.action_fragment_add_car_to_fragment_your_cars)
         }
     }
 

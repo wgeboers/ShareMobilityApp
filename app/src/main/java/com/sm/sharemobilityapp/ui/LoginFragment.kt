@@ -24,11 +24,11 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.notYetAccountButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.fragment_registration)
+                view -> view.findNavController().navigate(R.id.action_fragment_login_to_fragment_registration)
         }
 
         binding.loginLoginButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.action_global_fragment_start)
+                view -> view.findNavController().navigate(R.id.action_fragment_login_to_home)
         }
     }
 

@@ -78,11 +78,11 @@ class MapFragment : Fragment() {
         amountOfResult.text = myDataset.size.toString()
 
         binding.filterButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.fragment_filter)
+                view -> view.findNavController().navigate(R.id.action_fragment_map_to_fragment_filter)
         }
 
         binding.mapButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.action_global_fragment_start)
+                view -> view.findNavController().navigate(R.id.action_fragment_map_to_home2)
         }
 
     }

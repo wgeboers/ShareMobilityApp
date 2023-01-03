@@ -24,7 +24,7 @@ class CarRentalDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.rentButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.fragment_rent)
+                view -> view.findNavController().navigate(R.id.action_fragment_car_rental_details_to_fragment_rent)
         }
     }
 
