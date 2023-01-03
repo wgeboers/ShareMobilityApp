@@ -126,7 +126,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="@string/rent"
+                android:text="@string/Rent"
                 app:layout_constraintEnd_toEndOf="@+id/rent_terms_and_conditions"
                 app:layout_constraintStart_toStartOf="@+id/rent_terms_and_conditions"
                 app:layout_constraintTop_toBottomOf="@+id/rent_terms_button" />
