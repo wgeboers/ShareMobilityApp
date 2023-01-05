@@ -15,8 +15,6 @@ import com.sm.sharemobilityapp.repository.DataRepository
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    // Datarepository testing
-    private val DataRepository = DataRepository(SMRoomDatabase.getDatabase(application as BaseApplication))
 
     override fun onCreateView(
         inflater: LayoutInflater,
