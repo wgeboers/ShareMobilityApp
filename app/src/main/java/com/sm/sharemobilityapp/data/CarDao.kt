@@ -8,6 +8,9 @@ interface CarDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE) // Ignore if primary key already exists
     suspend fun insert(car: Car)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE) // Ignore if primary key already exists
+    suspend fun insertAll(car: List<Car>)
+
     @Update
     suspend fun update(car: Car)
 

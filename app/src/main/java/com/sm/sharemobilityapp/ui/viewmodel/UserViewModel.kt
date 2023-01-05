@@ -19,6 +19,10 @@ class UserViewModel(private val userDao: UserDao): ViewModel() {
     val userlist: LiveData<List<User>>
         get() = _userlist
 
+    private val _carlist = MutableLiveData<List<Car>>()
+    val carlist: LiveData<List<Car>>
+        get() = _carlist
+
     /**
      * Event triggered for network error. This is private to avoid exposing a
      * way to set this value to observers.
@@ -51,6 +55,21 @@ class UserViewModel(private val userDao: UserDao): ViewModel() {
         viewModelScope.launch {
             try {
                 dataRepository.refreshUsers()
+                _eventNetworkError.value = false
+                _isNetworkErrorShown.value = false
+
+            } catch (networkError: IOException) {
+                // Show a Toast error message and hide the progress bar.
+                if(userlist.value.isNullOrEmpty())
+                    _eventNetworkError.value = true
+            }
+        }
+    }
+
+    fun getCarsByModelFromDataFromRepository() {
+        viewModelScope.launch {
+            try {
+                dataRepository.getCarsByModel("Audi")
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
 

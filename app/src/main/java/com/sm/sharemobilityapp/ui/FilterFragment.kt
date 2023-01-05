@@ -15,6 +15,8 @@ import com.sm.sharemobilityapp.databinding.FragmentFilterBinding
 import com.sm.sharemobilityapp.repository.DataRepository
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModelFactory
+import com.sm.sharemobilityapp.ui.viewmodel.UserViewModel
+import com.sm.sharemobilityapp.ui.viewmodel.UserViewModelFactory
 
 class FilterFragment : Fragment() {
     private var _binding: FragmentFilterBinding? = null
@@ -26,6 +28,12 @@ class FilterFragment : Fragment() {
     private val carViewModel: CarViewModel by activityViewModels {
         CarViewModelFactory(
             (activity?.application as BaseApplication).database.carDao()
+        )
+    }
+
+    private val userViewModel: UserViewModel by activityViewModels {
+        UserViewModelFactory(
+            (activity?.application as BaseApplication).database.userDao()
         )
     }
 
@@ -71,8 +79,12 @@ class FilterFragment : Fragment() {
         binding.filterModelAutocomplete.setAdapter(modelArrayAdapter)
         binding.filterRadiusAutocomplete.setAdapter(radiusArrayAdapter)
 
+//        binding.filterButton.setOnClickListener {
+//                view -> view.findNavController().navigate(R.id.action_fragment_filter_to_fragment_start)
+//        }
         binding.filterButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.action_fragment_filter_to_fragment_start)
+            userViewModel.refreshDataFromRepository()
+            userViewModel.getCarsByModelFromDataFromRepository()
         }
     }
 
