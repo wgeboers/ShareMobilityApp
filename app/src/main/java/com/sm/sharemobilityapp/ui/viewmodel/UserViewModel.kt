@@ -3,13 +3,18 @@ package com.sm.sharemobilityapp.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.sm.sharemobilityapp.BaseApplication
+import com.sm.sharemobilityapp.data.SMRoomDatabase
 import com.sm.sharemobilityapp.data.User
 import com.sm.sharemobilityapp.data.UserDao
 import com.sm.sharemobilityapp.network.UserInfo
+import com.sm.sharemobilityapp.repository.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserViewModel(private val userDao: UserDao): ViewModel() {
+    
+    val dataRepository = DataRepository(SMRoomDatabase.getDatabase(BaseApplication()))
 
 
     private fun insertUser(user: User) {

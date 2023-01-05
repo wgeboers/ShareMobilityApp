@@ -3,12 +3,16 @@ package com.sm.sharemobilityapp.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.data.Car
 import com.sm.sharemobilityapp.data.CarDao
+import com.sm.sharemobilityapp.data.SMRoomDatabase
+import com.sm.sharemobilityapp.repository.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CarViewModel(private val carDao: CarDao): ViewModel() {
+    val dataRepository = DataRepository(SMRoomDatabase.getDatabase(BaseApplication()))
 
     fun insertCar(car: Car) {
         viewModelScope.launch(Dispatchers.IO) {
