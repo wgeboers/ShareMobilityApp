@@ -1,6 +1,7 @@
 package com.sm.sharemobilityapp.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.sm.sharemobilityapp.data.Car
 import com.sm.sharemobilityapp.data.SMRoomDatabase
 import com.sm.sharemobilityapp.data.User
@@ -8,11 +9,12 @@ import com.sm.sharemobilityapp.network.CarInfo
 import com.sm.sharemobilityapp.network.ShareMobilityApi
 import com.sm.sharemobilityapp.network.UserInfo
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import java.util.logging.Logger
 
 class DataRepository (private val database: SMRoomDatabase){
-    //private var listUsers: List<User> = emptyList()
+    val Cars: Flow<List<Car>> = database.carDao().getCars()
 
     suspend fun refreshUsers() {
         withContext(Dispatchers.IO) {
@@ -45,7 +47,7 @@ class DataRepository (private val database: SMRoomDatabase){
             val carList = ShareMobilityApi.retrofitService.getCars()
             Log.d("CarList", carList.toString())
             val cars = prepareCars(carList)
-            Log.d("users", cars.toString().toString())
+            Log.d("Cars converted", cars.toString().toString())
             database.carDao().insertAll(cars)
         }
     }
