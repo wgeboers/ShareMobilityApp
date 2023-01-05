@@ -85,6 +85,7 @@ class FilterFragment : Fragment() {
         binding.filterButton.setOnClickListener {
             userViewModel.refreshDataFromRepository()
             userViewModel.getCarsByModelFromDataFromRepository()
+
         }
     }
 

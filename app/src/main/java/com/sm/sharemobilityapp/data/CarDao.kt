@@ -23,9 +23,15 @@ interface CarDao {
     @Query("SELECT * from car")
     fun getCars(): Flow<List<Car>>
 
-    @Query("SELECT * from car where modelval like :model")
-    fun getCarByModel(model: String): Flow<List<Car>>
+    @Query("SELECT * from car where modelval LIKE :model")
+    fun getCarsByModel(model: String): Flow<List<Car>>
 
-    @Query("SELECT * from car where makeval like :make")
-    fun getCarByMake(make: String): Flow<List<Car>>
+    @Query("SELECT * from car where makeval LIKE :make")
+    fun getCarsByMake(make: String): Flow<List<Car>>
+
+    @Query("SELECT * from car where makeval LIKE :make and modelval LIKE :model")
+    fun getCarsByModelAndMake(model: String, make: String): Flow<List<Car>>
+
+    @Query("DELETE FROM car")
+    fun deleteAllCars()
 }

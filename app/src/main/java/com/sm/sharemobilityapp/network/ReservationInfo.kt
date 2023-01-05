@@ -2,7 +2,7 @@ package com.sm.sharemobilityapp.network
 
 import com.squareup.moshi.Json
 
-data class Reservation(
+data class ReservationInfo(
 
 	@Json(name="id")
 	val id: Long,

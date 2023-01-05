@@ -8,6 +8,9 @@ interface ReservationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE) // Ignore if primary key already exists
     suspend fun insert(reservation: Reservation)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(reservations: List<Reservation>)
+
     @Update
     suspend fun update(reservation: Reservation)
 

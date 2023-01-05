@@ -54,7 +54,7 @@ class UserViewModel(private val userDao: UserDao): ViewModel() {
     fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
-                dataRepository.refreshUsers()
+                dataRepository.getAllUsers(true)
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
 
@@ -69,7 +69,7 @@ class UserViewModel(private val userDao: UserDao): ViewModel() {
     fun getCarsByModelFromDataFromRepository() {
         viewModelScope.launch {
             try {
-                dataRepository.getCarsByModel("Audi")
+                dataRepository.getCarsByModel("Audi", true)
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
 

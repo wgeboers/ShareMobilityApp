@@ -45,10 +45,10 @@ interface ShareMobilityApiService {
     suspend fun getCar(@Path("id") carId: Long): CarInfo
 
     @GET("cars/{make}")
-    suspend fun getCarbyMake(@Path("make") carMake: String): CarInfo
+    suspend fun getCarbyMake(@Path("make") carMake: String): List<CarInfo>
 
     @GET("cars/{model}")
-    suspend fun getCarbyModel(@Path("model") carModel: String): CarInfo
+    suspend fun getCarbyModel(@Path("model") carModel: String): List<CarInfo>
 
     @DELETE("cars/{id}")
     suspend fun deleteCar(@Path("id") carId: Long)
@@ -61,7 +61,7 @@ interface ShareMobilityApiService {
 
     // Registration
     @GET("carsByOwner/cars_owned/{id}")
-    suspend fun getAllRegistrationsById(@Path("id") id: Long): Registration
+    suspend fun getAllRegistrationsById(@Path("id") id: Long): List<Registration>
 
     @POST(value = "carsByOwner")
     suspend fun postRegistration(@Body registration: Registration): Registration
@@ -71,25 +71,25 @@ interface ShareMobilityApiService {
 
     // Reservation
     @GET("reservation")
-    suspend fun getAllReservations(): List<Reservation>
+    suspend fun getAllReservations(): List<ReservationInfo>
 
     @GET("reservaton/{id}")
-    suspend fun getReservation(id: Long): Reservation
+    suspend fun getReservation(id: Long): ReservationInfo
 
     @GET("reservation/byCar/{id")
-    suspend fun getReservationByCarId(id: Long): List<Reservation>
+    suspend fun getReservationByCarId(id: Long): List<ReservationInfo>
 
     @GET("reservation/byUser")
-    suspend fun getReservationByUser(id: Long): List<Reservation>
+    suspend fun getReservationByUser(id: Long): List<ReservationInfo>
 
     @DELETE("reservation/{id}")
     suspend fun deleteReservation(@Path("id") id: Long)
 
     @PUT(value = "reservation/{id)")
-    suspend fun updateReservationbyId(@Path("id") id: Long, @Body reservation: Reservation): Reservation
+    suspend fun updateReservationbyId(@Path("id") id: Long, @Body reservation: ReservationInfo): ReservationInfo
 
     @POST(value = "reservation")
-    suspend fun postReservation(@Body reservation: Reservation): Reservation
+    suspend fun postReservation(@Body reservation: ReservationInfo): ReservationInfo
 
 }
 

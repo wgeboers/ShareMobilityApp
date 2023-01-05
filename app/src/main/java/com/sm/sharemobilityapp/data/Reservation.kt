@@ -8,9 +8,9 @@ import java.sql.Timestamp
 @Entity(tableName = "reservation")
 data class Reservation (
     @PrimaryKey
-    val id: Int,
-    val carId: Long,
-    val userId: Long,
+    val id: Long,
+    val carId: Int,
+    val userId: Int,
     val startReservation: String,
     val endReservation: String
 )
