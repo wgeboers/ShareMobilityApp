@@ -16,7 +16,7 @@ interface CarDao {
 
     @Delete
     suspend fun delete(car: Car)
-
+    
     @Query("SELECT * from car WHERE id = :id")
     fun getCar(id: Long): Flow<Car>
 

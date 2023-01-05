@@ -14,7 +14,8 @@ import kotlinx.coroutines.withContext
 import java.util.logging.Logger
 
 class DataRepository (private val database: SMRoomDatabase){
-    val Cars: Flow<List<Car>> = database.carDao().getCars()
+    val cars: Flow<List<Car>> = database.carDao().getCars()
+    val users: Flow<List<User>> = database.userDao().getUsers()
 
     suspend fun refreshUsers() {
         withContext(Dispatchers.IO) {
@@ -26,6 +27,15 @@ class DataRepository (private val database: SMRoomDatabase){
         }
     }
 
+    suspend fun getAllUsers() {
+        withContext(Dispatchers.IO) {
+            val usersInfo = ShareMobilityApi.retrofitService.getUsers()
+            val users = prepareUsers(usersInfo)
+            database.userDao().insertAll(users)
+        }
+    }
+
+        // Convert UserInfo to database user
     private fun prepareUsers(userInfo: List<UserInfo>): List<User> {
         var listUsers: List<User> = userInfo.map {
             User (
@@ -52,6 +62,15 @@ class DataRepository (private val database: SMRoomDatabase){
         }
     }
 
+    suspend fun getAllCars() {
+        withContext(Dispatchers.IO) {
+            val carList = ShareMobilityApi.retrofitService.getCars()
+            val cars = prepareCars(carList)
+            database.carDao().insertAll(cars)
+        }
+    }
+
+    // convert CarInfo to database Car
     private fun prepareCars(carInfo: List<CarInfo>): List<Car> {
         var carUsers: List<Car> = carInfo.map {
             Car (
@@ -74,4 +93,5 @@ class DataRepository (private val database: SMRoomDatabase){
         }
         return carUsers
     }
+
 }
