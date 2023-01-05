@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 
 class UserViewModel(private val userDao: UserDao): ViewModel() {
 
+
     private fun insertUser(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
             userDao.insert(user)
