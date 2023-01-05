@@ -6,12 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.R
+import com.sm.sharemobilityapp.data.SMRoomDatabase
 import com.sm.sharemobilityapp.databinding.FragmentLoginBinding
+import com.sm.sharemobilityapp.repository.DataRepository
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+    // Datarepository testing
+    private val DataRepository = DataRepository(SMRoomDatabase.getDatabase(application as BaseApplication))
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -14,6 +14,9 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE) // Ignore if primary key already exists
     suspend fun insert(user: User)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(user: List<User>)
+
     @Update
     suspend fun update(user: User)
 
