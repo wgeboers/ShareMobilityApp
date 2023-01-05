@@ -15,6 +15,9 @@ import java.io.IOException
 class UserViewModel(private val userDao: UserDao): ViewModel() {
     
     val dataRepository = DataRepository(SMRoomDatabase.getDatabase(BaseApplication()))
+    private val _userlist = MutableLiveData<List<User>>()
+    val userlist: LiveData<List<User>>
+        get() = _userlist
 
     /**
      * Event triggered for network error. This is private to avoid exposing a
