@@ -1,9 +1,8 @@
 package com.sm.sharemobilityapp.ui.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.sm.sharemobilityapp.BaseApplication
+import com.sm.sharemobilityapp.data.Car
 import com.sm.sharemobilityapp.data.SMRoomDatabase
 import com.sm.sharemobilityapp.data.User
 import com.sm.sharemobilityapp.data.UserDao
@@ -11,11 +10,54 @@ import com.sm.sharemobilityapp.network.UserInfo
 import com.sm.sharemobilityapp.repository.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class UserViewModel(private val userDao: UserDao): ViewModel() {
     
     val dataRepository = DataRepository(SMRoomDatabase.getDatabase(BaseApplication()))
 
+    /**
+     * Event triggered for network error. This is private to avoid exposing a
+     * way to set this value to observers.
+     */
+    private var _eventNetworkError = MutableLiveData<Boolean>(false)
+
+    /**
+     * Event triggered for network error. Views should use this to get access
+     * to the data.
+     */
+    val eventNetworkError: LiveData<Boolean>
+        get() = _eventNetworkError
+
+    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
+
+    /**
+     * Flag to display the error message. Views should use this to get access
+     * to the data.
+     */
+    val isNetworkErrorShown: LiveData<Boolean>
+        get() = _isNetworkErrorShown
+
+//    fun insertCar(car: Car) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            carDao.insert(car)
+//        }
+//    }
+
+    fun refreshDataFromRepository() {
+        viewModelScope.launch {
+            try {
+                dataRepository.refreshUsers()
+                _eventNetworkError.value = false
+                _isNetworkErrorShown.value = false
+
+            } catch (networkError: IOException) {
+                // Show a Toast error message and hide the progress bar.
+                if(userlist.value.isNullOrEmpty())
+                    _eventNetworkError.value = true
+            }
+        }
+    }
 
     private fun insertUser(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
