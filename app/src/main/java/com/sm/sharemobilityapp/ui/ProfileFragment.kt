@@ -5,15 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.ui.adapter.RentedItemAdapter
 import com.sm.sharemobilityapp.data.Datasource
 import com.sm.sharemobilityapp.databinding.FragmentProfileBinding
+import com.sm.sharemobilityapp.ui.viewmodel.UserViewModel
+import com.sm.sharemobilityapp.ui.viewmodel.UserViewModelFactory
+import java.util.logging.Logger
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+    private val userViewModel: UserViewModel by activityViewModels() {
+        UserViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,10 +35,28 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val myDataset = Datasource().loadCars()
         val recyclerView = binding.recyclerView
-        recyclerView.adapter = RentedItemAdapter(this, myDataset)
         recyclerView.setHasFixedSize(true)
+
+        val navController = findNavController()
+        userViewModel.userInfo.observe(viewLifecycleOwner) {
+            user ->
+            if(user != null) {
+                //do nothing
+            } else {
+                navController.navigate(R.id.fragment_login)
+            }
+        }
+
+        val currentBackStackEntry = navController.currentBackStackEntry!!
+        val savedStateHandle = currentBackStackEntry.savedStateHandle
+        savedStateHandle.getLiveData<Boolean>(LoginFragment.LOGIN_SUCCESSFUL)
+            .observe(currentBackStackEntry) { success ->
+                if(!success) {
+                    navController.navigate(R.id.fragment_login)
+                }
+            }
+
 
         binding.youreCarsButton.setOnClickListener {
                 view -> view.findNavController().navigate(R.id.fragment_your_cars)

@@ -75,6 +75,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     // To use Kotlin Symbol Processing (KSP)
     //ksp "androidx.room:room-compiler:$room_version"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1'
 
 
 }

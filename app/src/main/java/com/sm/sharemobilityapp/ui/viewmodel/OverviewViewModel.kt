@@ -27,7 +27,7 @@ class OverviewViewModel : ViewModel() {
         get() = _carInfo
 
 //    init {
-//        getUsers()
+//        getLogin("abcd", "1234")
 //    }
 
 
@@ -53,16 +53,16 @@ class OverviewViewModel : ViewModel() {
         }
     }
 
-    fun getLogin(username: String, password: String) {
-        viewModelScope.launch {
-            try {
-                _userInfo.value = ShareMobilityApi.retrofitService.getLogin(username, password)
-            } catch (e: java.lang.Exception) {
-                //TO DO: what kind of error/message
-               // loginUser = "Failure: ${e.message}"
-            }
-        }
-    }
+//    fun getLogin(username: String, password: String) {
+//        viewModelScope.launch {
+//            try {
+//                _userInfo.value = ShareMobilityApi.retrofitService.getLogin(username, password)
+//            } catch (e: java.lang.Exception) {
+//                //TO DO: what kind of error/message
+//               // loginUser = "Failure: ${e.message}"
+//            }
+//        }
+//    }
 
     fun getCars() {
         viewModelScope.launch {

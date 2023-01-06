@@ -2,11 +2,13 @@ package com.sm.sharemobilityapp.network
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.ResponseBody
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
-private const val BASE_URL ="http://192.168.1.135:8080/"
+private const val BASE_URL ="http://10.0.0.2:8080/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -25,6 +27,9 @@ interface ShareMobilityApiService {
     @GET("users/{id}")
     suspend fun getUser(@Path("id") userId: Long): UserInfo
 
+    @GET("users/{id}")
+    suspend fun getUserWithResponse(@Path("id") userId: Long): Response<UserInfo>
+
     @GET("users/login")
     suspend fun getLogin(@Query("username") username: String, @Query("password") password: String): UserInfo
 
@@ -33,6 +38,9 @@ interface ShareMobilityApiService {
 
     @DELETE("users/{id}")
     suspend fun deleteUser(@Path("id") userId: Long)
+
+    @DELETE("users/{id}")
+    suspend fun deleteUserWithResponse(@Path("id") userId: Long): Response<ResponseBody>
 
     @PUT(value = "users/{id}")
     suspend fun putUser(@Body userInfo: UserInfo, @Path("id") userId: Long): UserInfo

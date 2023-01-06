@@ -1,11 +1,10 @@
 package com.sm.sharemobilityapp.ui.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.sm.sharemobilityapp.data.Car
 import com.sm.sharemobilityapp.data.CarDao
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class CarViewModel(private val carDao: CarDao): ViewModel() {
@@ -15,6 +14,10 @@ class CarViewModel(private val carDao: CarDao): ViewModel() {
             carDao.insert(car)
         }
     }
+
+    var carsFlow : Flow<List<Car>> = carDao.getCars()
+
+    var carsLiveData : LiveData<List<Car>> = carDao.getCars().asLiveData()
 }
 
 class CarViewModelFactory(private val carDao: CarDao) : ViewModelProvider.Factory {

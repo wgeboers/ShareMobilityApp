@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
+import com.sm.sharemobilityapp.databinding.FragmentStartBinding
 import com.sm.sharemobilityapp.ui.StartFragment
 import com.sm.sharemobilityapp.model.Car
 

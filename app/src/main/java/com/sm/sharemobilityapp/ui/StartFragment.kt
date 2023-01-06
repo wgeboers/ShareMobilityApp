@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
@@ -32,7 +33,7 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val myDataset = Datasource().loadCars()
-        val recyclerView = binding.recyclerView
+        recyclerView = binding.recyclerView
         recyclerView.adapter = ItemAdapter(this, myDataset)
         recyclerView.setHasFixedSize(true)
 

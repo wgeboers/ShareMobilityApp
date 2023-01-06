@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.sm.sharemobilityapp.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -21,32 +19,46 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        //onderstaande val loggedIn is tijdelijk voor het ontwikkelen
-        val loggedIn = true
-        if (loggedIn)  {
-            binding.bottomNavigationView.setOnItemSelectedListener {
-                when(it.itemId) {
-                    R.id.home -> {
-                        navHostFragment.navController.navigate(R.id.action_global_fragment_start)
-                    }
-                    R.id.profile -> {
-                        navHostFragment.navController.navigate(R.id.action_global_fragment_profile)
-                    }
+
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.home -> {
+                    navHostFragment.navController.navigate(R.id.action_global_fragment_start)
                 }
-                true
-            }
-        } else {
-            binding.bottomNavigationView.setOnItemSelectedListener {
-                when(it.itemId) {
-                    R.id.home -> {
-                        navHostFragment.navController.navigate(R.id.action_global_fragment_start)
-                    }
-                    R.id.profile -> {
-                        navHostFragment.navController.navigate(R.id.action_global_fragment_login)
-                    }
+                R.id.profile -> {
+                    navHostFragment.navController.navigate(R.id.action_global_fragment_profile)
                 }
-                true
+                R.id.login -> {
+                    navHostFragment.navController.navigate(R.id.action_global_fragment_login)
+                }
             }
+            true
         }
+//        val loggedIn = true
+//        if (loggedIn)  {
+//            binding.bottomNavigationView.setOnItemSelectedListener {
+//                when(it.itemId) {
+//                    R.id.home -> {
+//                        navHostFragment.navController.navigate(R.id.action_global_fragment_start)
+//                    }
+//                    R.id.profile -> {
+//                        navHostFragment.navController.navigate(R.id.action_global_fragment_profile)
+//                    }
+//                }
+//                true
+//            }
+//        } else {
+//            binding.bottomNavigationView.setOnItemSelectedListener {
+//                when(it.itemId) {
+//                    R.id.home -> {
+//                        navHostFragment.navController.navigate(R.id.action_global_fragment_start)
+//                    }
+//                    R.id.profile -> {
+//                        navHostFragment.navController.navigate(R.id.action_global_fragment_login)
+//                    }
+//                }
+//                true
+//            }
+//        }
     }
 }

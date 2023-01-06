@@ -9,4 +9,7 @@
         android:id="@+id/profile"
         android:icon="@drawable/ic_profile"/>
 
+    <item android:title="Login"
+        android:id="@+id/login"
+        android:icon="@drawable/ic_login" />
 </menu>
