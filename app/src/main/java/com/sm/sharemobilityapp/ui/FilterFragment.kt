@@ -83,7 +83,7 @@ class FilterFragment : Fragment() {
 //                view -> view.findNavController().navigate(R.id.action_fragment_filter_to_fragment_start)
 //        }
         binding.filterButton.setOnClickListener {
-            userViewModel.refreshDataFromRepository()
+            //userViewModel.refreshDataFromRepository()
             userViewModel.getCarsByModelFromDataFromRepository()
 
         }

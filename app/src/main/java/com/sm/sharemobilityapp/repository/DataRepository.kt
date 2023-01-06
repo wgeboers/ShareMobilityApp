@@ -17,20 +17,18 @@ class DataRepository (private val database: SMRoomDatabase){
 
 
     //--> Start data User
-    suspend fun refreshUsers() {
+    suspend fun getLogin(username: String, password: String): UserInfo {
+        var userInfo = UserInfo();
         withContext(Dispatchers.IO) {
-            val usersInfo = ShareMobilityApi.retrofitService.getUsers()
-            Log.d("Datarep", usersInfo.toString())
-            val users = prepareUsers(usersInfo)
-            Log.d("users", users.toString().toString())
-            database.userDao().insertAll(users)
+            userInfo = ShareMobilityApi.retrofitService.getLogin(username, password)
         }
+        return userInfo
     }
 
     suspend fun getAllUsers(refesh: Boolean): Flow<List<User>> {
         if (refesh) {
             withContext(Dispatchers.IO) {
-                val usersInfo = ShareMobilityApi.retrofitService.getUsers()
+                val usersInfo: List<UserInfo>? = ShareMobilityApi.retrofitService.getUsers()
                 val users = prepareUsers(usersInfo)
                 database.userDao().deleteAll()
                 database.userDao().insertAll(users)
@@ -46,9 +44,21 @@ class DataRepository (private val database: SMRoomDatabase){
         }
     }
 
+    suspend fun updateUser(userInfo: UserInfo, userId: Long) {
+        withContext(Dispatchers.IO) {
+            ShareMobilityApi.retrofitService.putUser(userInfo, userId)
+        }
+    }
+
+    suspend fun deleteUser(id: Long) {
+        withContext(Dispatchers.IO) {
+            ShareMobilityApi.retrofitService.deleteUser(id)
+        }
+    }
+
     // map UserInfo to database user
-    private fun prepareUsers(userInfo: List<UserInfo>): List<User> {
-        var listUsers: List<User> = userInfo.map {
+    private fun prepareUsers(userInfo: List<UserInfo>?): List<User> {
+        var listUsers: List<User> = userInfo?.map {
             User (
                 id = it.id,
                 type = it.type,
@@ -59,37 +69,58 @@ class DataRepository (private val database: SMRoomDatabase){
                 address = it.address,
                 bonusPoints = it.bonuspoints
                     )
-        }
+        } ?: listOf<User>()
         return listUsers
     }
-
     //--> End data Users
 
     //--> Start data Car
+    suspend fun getAllCars() {
+        withContext(Dispatchers.IO) {
+            database.carDao().deleteAllCars()
+            val carList: List<CarInfo> = ShareMobilityApi.retrofitService.getCars()
+            // CarInfo can contain an Owner, extract the owner
+            val ownerList: List<UserInfo> = carList.map {
+                UserInfo(
+                    id = it.carOwner?.id,
+                    type = it.carOwner?.type,
+                    username = it.carOwner?.username,
+                    password = it.carOwner?.password,
+                    firstname = it.carOwner?.password,
+                    lastname = it.carOwner?.lastname,
+                    address = it.carOwner?.address,
+                    bonuspoints = it.carOwner?.bonuspoints ?: 0
+                )
+            }
+            val users = prepareUsers(ownerList)
+            database.userDao().insertAll(users)
+            val cars = prepareCars(carList)
+            database.carDao().insertAll(cars)
+        }
+    }
+
+    suspend fun insertCars(cars: List<Car>) {
+        withContext(Dispatchers.IO) {
+            database.carDao().insertAll(cars)
+        }
+    }
+
     suspend fun getCarsByModel(model: String, refesh: Boolean): Flow<List<Car>> {
         if (refesh) {
             withContext(Dispatchers.IO) {
-                val carList = ShareMobilityApi.retrofitService.getCars()
-                Log.d("CarList", carList.toString())
-                val cars = prepareCars(carList)
-                Log.d("Cars converted", cars.toString().toString())
-                database.carDao().deleteAllCars()
-                database.carDao().insertAll(cars)
+                getAllCars()
             }
         }
-        return database.carDao().getCars()
+        return database.carDao().getCarsByModel(model)
     }
 
     suspend fun getCarsByMake(make: String, refesh: Boolean): Flow<List<Car>> {
         if (refesh) {
             withContext(Dispatchers.IO) {
-                val carList = ShareMobilityApi.retrofitService.getCarbyMake(make)
-                val cars = prepareCars(carList)
-                database.carDao().deleteAllCars()
-                database.carDao().insertAll(cars)
+                getAllCars()
             }
         }
-        return database.carDao().getCars()
+        return database.carDao().getCarsByMake(make)
     }
 
     suspend fun getCarsByModelAndMake(model: String, make: String, refesh: Boolean): Flow<List<Car>> {
@@ -104,24 +135,21 @@ class DataRepository (private val database: SMRoomDatabase){
         return database.carDao().getCarsByModelAndMake(model, make)
     }
 
-    suspend fun getAllCars() {
+    suspend fun insertCar(carInfo: CarInfo) {
         withContext(Dispatchers.IO) {
-            database.carDao().deleteAllCars()
-            val carList = ShareMobilityApi.retrofitService.getCars()
-            val cars = prepareCars(carList)
-            database.carDao().insertAll(cars)
+            ShareMobilityApi.retrofitService.postCar(carInfo)
         }
     }
 
-    suspend fun insertCars(cars: List<Car>) {
+    suspend fun deleteCar(id: Long) {
         withContext(Dispatchers.IO) {
-            database.carDao().insertAll(cars)
+            ShareMobilityApi.retrofitService.deleteCar(id)
         }
     }
 
     // map CarInfo to database Car
     private fun prepareCars(carInfo: List<CarInfo>): List<Car> {
-        var carUsers: List<Car> = carInfo.map {
+        var carUsers: List<Car> = carInfo.map{
             Car (
                 id = it.id,
                 licensePlate = it.licensePlate,
@@ -129,24 +157,36 @@ class DataRepository (private val database: SMRoomDatabase){
                 makeval = it.make,
                 modelval = it.model,
                 mileageval = it.mileage,
-                hourlyRate = it.hourlyRate.toString().toDouble(),
-                longitude = it.longitude.toString().toDouble(),
-                latitude = it.latitude.toString().toDouble(),
+                hourlyRate = it.hourlyRate,
+                longitude = it.longitude,
+                latitude = it.latitude,
                 termsOfPickup = it.termsOfPickup,
                 termsOfReturn = it.termsOfReturn,
                 purchasePriceval = it.purchasePrice,
                 amountOfYearsOwned = it.amountOfYearsOwned,
-                usageCostsPerKm = it.usageCostsPerKm.toString().toDouble(),
-                totalCostOfOwnership = it.totalCostOfOwnership.toString().toDouble()
+                usageCostsPerKm = it.usageCostsPerKm,
+                totalCostOfOwnership = it.totalCostOfOwnership
             )
         }
+
+        var carOwners: List<User> = carInfo.map {
+            User(
+                id = it.carOwner?.id,
+                type = it.carOwner?.type,
+                username = it.carOwner?.username,
+                password = it.carOwner?.password,
+                firstname = it.carOwner?.password,
+                lastname = it.carOwner?.lastname,
+                address = it.carOwner?.address,
+                bonusPoints = it.carOwner?.bonuspoints ?: 0
+            )
+        }
+        //database.userDao().insertAll(carOwners)
         return carUsers
     }
-
     //--> End data Car
 
     //--> Start data Reservation
-
     suspend fun getAllReservations(refesh: Boolean): Flow<List<Reservation>> {
         if (refesh) {
             withContext(Dispatchers.IO) {
@@ -174,11 +214,9 @@ class DataRepository (private val database: SMRoomDatabase){
         }
         return reservations
     }
-
     //--> End data reservation
 
     //--> Start data registration
-
     suspend fun getRegistrationByOwnerId(id: Long): List<Registration> {
         return ShareMobilityApi.retrofitService.getAllRegistrationsById(id)
     }

@@ -51,6 +51,12 @@ class UserViewModel(private val userDao: UserDao): ViewModel() {
 //        }
 //    }
 
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataRepository.getAllCars()
+        }
+    }
+
     fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
