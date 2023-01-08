@@ -27,4 +27,5 @@ data class UserInfo(
 
 	@Json(name="bonusPoints")
 	val bonuspoints: Int = 0
+
 )

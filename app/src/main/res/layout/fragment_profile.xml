@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".profileFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.sm.sharemobilityapp.ui.viewmodel.UserViewModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -33,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="@+id/profile_person_image" />
 
             <Button
-                android:id="@+id/youre_cars_button"
+                android:id="@+id/your_cars_button"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:text="@string/youre_cars"
@@ -47,8 +53,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="@string/rented"
-                app:layout_constraintStart_toStartOf="@+id/youre_cars_button"
-                app:layout_constraintTop_toBottomOf="@+id/youre_cars_button" />
+                app:layout_constraintStart_toStartOf="@+id/your_cars_button"
+                app:layout_constraintTop_toBottomOf="@+id/your_cars_button" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -56,7 +62,7 @@
                 android:layout_height="match_parent"
                 android:scrollbars="vertical"
                 app:layoutManager="LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="@+id/youre_cars_button"
+                app:layout_constraintEnd_toEndOf="@+id/your_cars_button"
                 app:layout_constraintStart_toStartOf="@+id/profile_rent_text"
                 app:layout_constraintTop_toBottomOf="@+id/profile_rent_text" />
 

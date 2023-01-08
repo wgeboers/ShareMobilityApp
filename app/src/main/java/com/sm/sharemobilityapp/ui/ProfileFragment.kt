@@ -21,7 +21,7 @@ import java.util.logging.Logger
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private val userViewModel: UserViewModel by activityViewModels() {
+    private val userViewModel: UserViewModel by activityViewModels {
         UserViewModelFactory()
     }
 
@@ -35,19 +35,15 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         val recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
 
-        val navController = findNavController()
-        userViewModel.userInfo.observe(viewLifecycleOwner) {
-            user ->
-            if(user != null) {
-                //do nothing
-            } else {
-                navController.navigate(R.id.fragment_login)
-            }
+        binding?.apply {
+            viewModel = userViewModel
         }
 
+        val navController = findNavController()
         val currentBackStackEntry = navController.currentBackStackEntry!!
         val savedStateHandle = currentBackStackEntry.savedStateHandle
         savedStateHandle.getLiveData<Boolean>(LoginFragment.LOGIN_SUCCESSFUL)
@@ -58,7 +54,7 @@ class ProfileFragment : Fragment() {
             }
 
 
-        binding.youreCarsButton.setOnClickListener {
+        binding.yourCarsButton.setOnClickListener {
                 view -> view.findNavController().navigate(R.id.fragment_your_cars)
         }
     }

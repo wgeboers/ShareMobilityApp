@@ -33,6 +33,9 @@ interface ShareMobilityApiService {
     @GET("users/login")
     suspend fun getLogin(@Query("username") username: String, @Query("password") password: String): UserInfo
 
+    @GET("users/login")
+    suspend fun loginWithResponse(@Query("username") username: String, @Query("password") password: String): Response<UserInfo>
+
     @POST(value = "users")
     suspend fun postUser(@Body userInfo: UserInfo): UserInfo
 
@@ -74,14 +77,14 @@ interface ShareMobilityApiService {
     @POST(value = "carsByOwner")
     suspend fun postRegistration(@Body registration: Registration): Registration
 
-    @DELETE("carsByowner")
+    @DELETE("carsByOwner")
     suspend fun deleteRegistration(@Body registration: Registration)
 
     // Reservation
     @GET("reservation")
     suspend fun getAllReservations(): List<Reservation>
 
-    @GET("reservaton/{id}")
+    @GET("reservation/{id}")
     suspend fun getReservation(id: Long): Reservation
 
     @GET("reservation/byCar/{id")
@@ -94,7 +97,7 @@ interface ShareMobilityApiService {
     suspend fun deleteReservation(@Path("id") id: Long)
 
     @PUT(value = "reservation/{id)")
-    suspend fun updateReservationbyId(@Path("id") id: Long, @Body reservation: Reservation): Reservation
+    suspend fun updateReservationById(@Path("id") id: Long, @Body reservation: Reservation): Reservation
 
     @POST(value = "reservation")
     suspend fun postReservation(@Body reservation: Reservation): Reservation
