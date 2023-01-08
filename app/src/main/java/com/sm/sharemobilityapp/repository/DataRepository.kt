@@ -1,10 +1,7 @@
 package com.sm.sharemobilityapp.repository
 
 import android.util.Log
-import com.sm.sharemobilityapp.data.Car
-import com.sm.sharemobilityapp.data.SMRoomDatabase
-import com.sm.sharemobilityapp.data.User
-import com.sm.sharemobilityapp.data.Reservation
+import com.sm.sharemobilityapp.data.*
 import com.sm.sharemobilityapp.network.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -88,7 +85,7 @@ class DataRepository (private val database: SMRoomDatabase){
             // CarInfo can contain an Owner, extract the owner
             val ownerList: List<UserInfo> = carList.map {
                 UserInfo(
-                    id = it.carOwner?.id,
+                    id = it.carOwner?.id ?: null,
                     type = it.carOwner?.type,
                     username = it.carOwner?.username,
                     password = it.carOwner?.password,
@@ -98,8 +95,20 @@ class DataRepository (private val database: SMRoomDatabase){
                     bonuspoints = it.carOwner?.bonuspoints ?: 0
                 )
             }
+            val imageList: List<Image> = carList.map {
+                Image(
+                    carID = it.id,
+                    pathImage = it.carImages.toString()
+                )
+            }
+            database.imageDao().deleteAll()
+            database.imageDao().insertAll(imageList)
             val users = prepareUsers(ownerList)
-            database.userDao().insertAll(users)
+            Log.d("users data", users.toString())
+            database.userDao().deleteAll()
+            if (users.get(0).id != null) {
+                database.userDao().insertAll(users)
+            }
             val cars = prepareCars(carList)
             database.carDao().insertAll(cars)
         }
@@ -191,7 +200,6 @@ class DataRepository (private val database: SMRoomDatabase){
                 bonusPoints = it.carOwner?.bonuspoints ?: 0
             )
         }
-        //database.userDao().insertAll(carOwners)
         return carUsers
     }
     //--> End data Car

@@ -8,27 +8,19 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.data.SMRoomDatabase
 import com.sm.sharemobilityapp.databinding.FragmentFilterBinding
-import com.sm.sharemobilityapp.repository.DataRepository
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModelFactory
 import com.sm.sharemobilityapp.ui.viewmodel.UserViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.UserViewModelFactory
-import kotlinx.coroutines.flow.collect
 import java.util.concurrent.TimeUnit
 
 class FilterFragment : Fragment() {
     private var _binding: FragmentFilterBinding? = null
     private val binding get() = _binding!!
-
-    // Datarepository testing
-    //private val DataRepository = DataRepository(SMRoomDatabase.getDatabase(BaseApplication()))
 
     private val carViewModel: CarViewModel by activityViewModels {
         CarViewModelFactory(
@@ -84,8 +76,9 @@ class FilterFragment : Fragment() {
         binding.filterModelAutocomplete.setAdapter(modelArrayAdapter)
         binding.filterRadiusAutocomplete.setAdapter(radiusArrayAdapter)
 
-        binding.filterButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.action_fragment_filter_to_fragment_start)
+        binding.filterButton.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_fragment_filter_to_fragment_start)
+            userViewModel.refreshDataFromRepository()
         }
     }
 

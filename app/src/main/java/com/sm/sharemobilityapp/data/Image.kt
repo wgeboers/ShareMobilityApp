@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "image")
 data class Image (
-    @PrimaryKey
-    val id: Int,
-    val carID: Long,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val carID: Int?,
     val pathImage: String
     )

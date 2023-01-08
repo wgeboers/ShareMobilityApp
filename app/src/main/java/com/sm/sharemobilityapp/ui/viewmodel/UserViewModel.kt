@@ -17,9 +17,11 @@ import java.io.IOException
 class UserViewModel(private val userDao: UserDao): ViewModel() {
     
     val dataRepository = DataRepository(SMRoomDatabase.getDatabase(BaseApplication()))
-    private val _userlist = MutableLiveData<List<User>>()
-    val userlist: LiveData<List<User>>
-        get() = _userlist
+
+    val carListUsingFlow: LiveData<List<Car>> = dataRepository.cars.asLiveData()
+
+    val modelList: LiveData<List<String>> = dataRepository.models.asLiveData()
+
 
     private val _carlist = MutableLiveData<List<Car>>()
     val carlist: LiveData<List<Car>>
