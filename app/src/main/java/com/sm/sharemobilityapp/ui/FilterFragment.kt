@@ -1,12 +1,15 @@
 package com.sm.sharemobilityapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.R
@@ -17,6 +20,8 @@ import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModelFactory
 import com.sm.sharemobilityapp.ui.viewmodel.UserViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.UserViewModelFactory
+import kotlinx.coroutines.flow.collect
+import java.util.concurrent.TimeUnit
 
 class FilterFragment : Fragment() {
     private var _binding: FragmentFilterBinding? = null
@@ -79,13 +84,8 @@ class FilterFragment : Fragment() {
         binding.filterModelAutocomplete.setAdapter(modelArrayAdapter)
         binding.filterRadiusAutocomplete.setAdapter(radiusArrayAdapter)
 
-//        binding.filterButton.setOnClickListener {
-//                view -> view.findNavController().navigate(R.id.action_fragment_filter_to_fragment_start)
-//        }
         binding.filterButton.setOnClickListener {
-            //userViewModel.refreshDataFromRepository()
-            userViewModel.getCarsByModelFromDataFromRepository()
-
+                view -> view.findNavController().navigate(R.id.action_fragment_filter_to_fragment_start)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.sm.sharemobilityapp.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.data.Car
@@ -9,6 +10,7 @@ import com.sm.sharemobilityapp.data.UserDao
 import com.sm.sharemobilityapp.network.UserInfo
 import com.sm.sharemobilityapp.repository.DataRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -21,93 +23,26 @@ class UserViewModel(private val userDao: UserDao): ViewModel() {
 
     private val _carlist = MutableLiveData<List<Car>>()
     val carlist: LiveData<List<Car>>
-        get() = _carlist
-
-    /**
-     * Event triggered for network error. This is private to avoid exposing a
-     * way to set this value to observers.
-     */
-    private var _eventNetworkError = MutableLiveData<Boolean>(false)
-
-    /**
-     * Event triggered for network error. Views should use this to get access
-     * to the data.
-     */
-    val eventNetworkError: LiveData<Boolean>
-        get() = _eventNetworkError
-
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
-
-    /**
-     * Flag to display the error message. Views should use this to get access
-     * to the data.
-     */
-    val isNetworkErrorShown: LiveData<Boolean>
-        get() = _isNetworkErrorShown
-
-//    fun insertCar(car: Car) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            carDao.insert(car)
-//        }
-//    }
-
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-            dataRepository.getAllCars()
-        }
-    }
+        get() = dataRepository.cars.asLiveData()
 
     fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
-                dataRepository.getAllUsers(true)
-                _eventNetworkError.value = false
-                _isNetworkErrorShown.value = false
-
+                dataRepository.getAllCars()
             } catch (networkError: IOException) {
                 // Show a Toast error message and hide the progress bar.
-                if(userlist.value.isNullOrEmpty())
-                    _eventNetworkError.value = true
+                Log.d("UserViewModel", networkError.message.toString())
             }
         }
     }
 
-    fun getCarsByModelFromDataFromRepository() {
+    fun printModels() {
         viewModelScope.launch {
-            try {
-                dataRepository.getCarsByModel("Audi", true)
-                _eventNetworkError.value = false
-                _isNetworkErrorShown.value = false
-
-            } catch (networkError: IOException) {
-                // Show a Toast error message and hide the progress bar.
-                if(userlist.value.isNullOrEmpty())
-                    _eventNetworkError.value = true
+            dataRepository.getCarsByFilter("Hyundai", "ix0", 0.0, 9000.0).collect() {
+                value -> Log.d("Cars filtered", value.toString())
             }
+
         }
-    }
-
-    private fun insertUser(user: User) {
-        viewModelScope.launch(Dispatchers.IO) {
-            userDao.insert(user)
-        }
-    }
-
-    private fun getNewUserEntry(userInfo: UserInfo) : User {
-        return User(
-             id = userInfo.id!!,
-             type = userInfo.type.toString(),
-             username = userInfo.username.toString(),
-             password = userInfo.password.toString(),
-             firstname = userInfo.firstname.toString(),
-             lastname = userInfo.lastname.toString(),
-             address = userInfo.address.toString(),
-        )
-    }
-
-    fun addNewUser(userInfo: UserInfo) {
-        val newUser = getNewUserEntry(userInfo)
-        insertUser(newUser)
     }
 }
 

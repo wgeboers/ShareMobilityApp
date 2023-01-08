@@ -11,10 +11,16 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class DataRepository (private val database: SMRoomDatabase){
-    val cars: Flow<List<Car>> = database.carDao().getCars()
-    val users: Flow<List<User>> = database.userDao().getUsers()
-    val reservations: Flow<List<Reservation>> = database.reservationDao().getReservations()
-
+    val cars: Flow<List<Car>>
+        get() = database.carDao().getCars()
+    val users: Flow<List<User>>
+        get() = database.userDao().getUsers()
+    val reservations: Flow<List<Reservation>>
+        get() = database.reservationDao().getReservations()
+    val models: Flow<List<String>>
+        get() = database.carDao().getDistinctModels()
+    val makes: Flow<List<String>>
+        get() = database.carDao().getDistinctMakes()
 
     //--> Start data User
     suspend fun getLogin(username: String, password: String): UserInfo {
@@ -145,6 +151,10 @@ class DataRepository (private val database: SMRoomDatabase){
         withContext(Dispatchers.IO) {
             ShareMobilityApi.retrofitService.deleteCar(id)
         }
+    }
+
+    fun getCarsByFilter(make: String, model: String, from: Double, to: Double) : Flow<List<Car>> {
+        return database.carDao().getCarsByFilter(make, model, from, to)
     }
 
     // map CarInfo to database Car

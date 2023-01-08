@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.sm.sharemobilityapp.databinding.ActivityMainBinding
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.model.Car
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -49,5 +50,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
         }
+
+
     }
 }
