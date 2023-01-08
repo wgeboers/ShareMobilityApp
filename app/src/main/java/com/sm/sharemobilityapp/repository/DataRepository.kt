@@ -1,5 +1,6 @@
 package com.sm.sharemobilityapp.repository
 
+import android.provider.ContactsContract.CommonDataKinds.Im
 import android.util.Log
 import com.sm.sharemobilityapp.data.*
 import com.sm.sharemobilityapp.network.*
@@ -83,32 +84,40 @@ class DataRepository (private val database: SMRoomDatabase){
             database.carDao().deleteAllCars()
             val carList: List<CarInfo> = ShareMobilityApi.retrofitService.getCars()
             // CarInfo can contain an Owner, extract the owner
-            val ownerList: List<UserInfo> = carList.map {
-                UserInfo(
-                    id = it.carOwner?.id ?: null,
-                    type = it.carOwner?.type,
-                    username = it.carOwner?.username,
-                    password = it.carOwner?.password,
-                    firstname = it.carOwner?.password,
-                    lastname = it.carOwner?.lastname,
-                    address = it.carOwner?.address,
-                    bonuspoints = it.carOwner?.bonuspoints ?: 0
-                )
-            }
-            val imageList: List<Image> = carList.map {
-                Image(
-                    carID = it.id,
-                    pathImage = it.carImages.toString()
-                )
+            val imageList: MutableList<Image> = mutableListOf()
+            val ownerList: MutableList<User> = mutableListOf()
+
+            // for every car extract owner and image data
+            for (car in carList) {
+                val imageInfoList = car.carImages
+                val id = car
+                imageInfoList.map {
+                    imageList.add (
+                        Image (
+                            carID = car.id,
+                            pathImage = it.imagePath
+                                )
+                            )
+                }
+                if (car.carOwner?.id != null) {
+                    ownerList.add(
+                        User(
+                            id = car.carOwner?.id,
+                            type = car.carOwner?.type,
+                            username = car.carOwner?.username,
+                            password = car.carOwner?.password,
+                            firstname = car.carOwner?.password,
+                            lastname = car.carOwner?.lastname,
+                            address = car.carOwner?.address,
+                            bonusPoints = car.carOwner?.bonuspoints ?: 0
+                        )
+                    )
+                }
             }
             database.imageDao().deleteAll()
             database.imageDao().insertAll(imageList)
-            val users = prepareUsers(ownerList)
-            Log.d("users data", users.toString())
             database.userDao().deleteAll()
-            if (users.get(0).id != null) {
-                database.userDao().insertAll(users)
-            }
+            database.userDao().insertAll(ownerList)
             val cars = prepareCars(carList)
             database.carDao().insertAll(cars)
         }

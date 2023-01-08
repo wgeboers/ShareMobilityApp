@@ -52,7 +52,7 @@ data class CarInfo(
 	val totalCostOfOwnership: Double? = null,
 
 	@Json(name="carImages")
-	val carImages: List<Any?>? = null,
+	val carImages: List<ImageInfo>,
 
 	@Json(name="fuelType")
 	val fuelType: String? = null,
