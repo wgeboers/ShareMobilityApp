@@ -13,10 +13,6 @@ class UserViewModel() : ViewModel() {
     val apiResponse: LiveData<String>
         get() = _apiResponse
 
-    private val allUsers = viewModelScope.launch {
-        ShareMobilityApi.retrofitService.getUsers()
-    }
-
 
     private val _userInfo = MutableLiveData<UserInfo>()
 
@@ -65,8 +61,19 @@ class UserViewModel() : ViewModel() {
 
         }
     }
+    /*
+    * Function to set values on the UI level in fragment_profile.xml for all relevant user info
+    * */
+    fun setUserFields() {
 
+    }
 
+    /*
+    *  Function to change values in the API based on fields changed in fragment_profile.xml
+    */
+    fun pushUserChangesToApi() {
+
+    }
 }
 
 class UserViewModelFactory() : ViewModelProvider.Factory{

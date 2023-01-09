@@ -54,6 +54,7 @@ class LoginFragment : Fragment() {
                     Toast.makeText(context, "Wrong username/password", Toast.LENGTH_SHORT).show()
                 } else {
                     //Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
+                    savedStateHandle[LOGIN_SUCCESSFUL] = true
                     findNavController().navigate(R.id.action_global_fragment_profile)
                 }
             }
@@ -67,6 +68,7 @@ class LoginFragment : Fragment() {
     }
 
     //Deprecated...
+    //DONT OBSERVE USERINFO, USE API RESPONSE TO CRAFT WHAT YOU NEED IN FRONT END
     private fun login(username: String, password: String) {
         userViewModel.login(username, password)
         userViewModel.userInfo.observe(viewLifecycleOwner) { result ->
