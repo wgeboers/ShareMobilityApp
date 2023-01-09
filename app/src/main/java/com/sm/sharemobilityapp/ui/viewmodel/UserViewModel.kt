@@ -22,11 +22,6 @@ class UserViewModel(private val userDao: UserDao): ViewModel() {
 
     val modelList: LiveData<List<String>> = dataRepository.models.asLiveData()
 
-
-    private val _carlist = MutableLiveData<List<Car>>()
-    val carlist: LiveData<List<Car>>
-        get() = dataRepository.cars.asLiveData()
-
     fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
