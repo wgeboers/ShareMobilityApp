@@ -23,7 +23,7 @@ class UserViewModel() : ViewModel() {
     fun getUser(id: Long) {
         viewModelScope.launch {
             val result = ShareMobilityApi.retrofitService.getUser(id)
-            //_apiResponse.value = result.toString()
+            _userInfo.value = result
         }
     }
 

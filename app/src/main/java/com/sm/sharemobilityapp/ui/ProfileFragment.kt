@@ -24,7 +24,8 @@ import java.util.logging.Logger
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private val userViewModel: UserViewModel by viewModels {
+
+    private val userViewModel: UserViewModel by activityViewModels {
         UserViewModelFactory()
     }
 
@@ -39,35 +40,29 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val recyclerView = binding.recyclerView
-        recyclerView.setHasFixedSize(true)
+//        val recyclerView = binding.recyclerView
+//        recyclerView.setHasFixedSize(true)
 
-        binding?.apply {
+        binding.apply {
             viewModel = userViewModel
         }
 
         userViewModel.userInfo.observe(viewLifecycleOwner) { response ->
             if(response != null) {
-                Toast.makeText(context, "${response}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "$response", Toast.LENGTH_SHORT).show()
+                binding.profileName.setText(response.firstname + " " + response.lastname)
+                binding.profileAddress.setText(response.address)
+                binding.profileEmail.setText("What the fuck no email address???")
+                binding.profilePassword.setText("Enter a new password")
             } else {
-                findNavController().navigate(R.id.action_global_fragment_login)
+                Toast.makeText(context, "What the fuck?", Toast.LENGTH_SHORT).show()
+                //findNavController().navigate(R.id.action_global_fragment_login)
             }
         }
 
-//        val navController = findNavController()
-//        val currentBackStackEntry = navController.currentBackStackEntry!!
-//        val savedStateHandle = currentBackStackEntry.savedStateHandle
-//        savedStateHandle.getLiveData<Boolean>(MainActivity.LOGIN_SUCCESSFUL)
-//            .observe(currentBackStackEntry) { success ->
-//                if(!success) {
-//                    navController.navigate(R.id.fragment_login)
-//                }
-//            }
-
-
-        binding.yourCarsButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.fragment_your_cars)
-        }
+//        binding.yourCarsButton.setOnClickListener {
+//                view -> view.findNavController().navigate(R.id.fragment_your_cars)
+//        }
     }
 
     override fun onDestroyView() {

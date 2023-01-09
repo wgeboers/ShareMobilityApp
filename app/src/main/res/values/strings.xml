@@ -53,6 +53,7 @@
     <string name="close">Sluiten</string>
     <string name="euroSign">€</string>
     <string name="car_icon_description">car icon</string>
+    <string name="edit">Verander gegevens</string>
 
     <!--dit is dummy data-->
     <string-array name="brands">

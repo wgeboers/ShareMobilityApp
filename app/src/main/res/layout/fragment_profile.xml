@@ -14,58 +14,122 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="15dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:padding="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent">
 
-            <ImageView
-                android:id="@+id/profile_person_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/profile_name_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/profile_info_text"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginLeft="10dp"
-                android:hint="Gebruikers informatie"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_person_image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/profile_person_image"
-                app:layout_constraintTop_toTopOf="@+id/profile_person_image" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profile_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="text"
+                            android:lines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/your_cars_button"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:text="@string/youre_cars"
-                app:layout_constraintEnd_toEndOf="@+id/profile_info_text"
-                app:layout_constraintStart_toStartOf="@+id/profile_person_image"
-                app:layout_constraintTop_toBottomOf="@+id/profile_person_image" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/profile_address_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        app:layout_constraintStart_toStartOf="@id/profile_name"
+                        app:layout_constraintTop_toBottomOf="@id/profile_name">
 
-            <TextView
-                android:id="@+id/profile_rent_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="@string/rented"
-                app:layout_constraintStart_toStartOf="@+id/your_cars_button"
-                app:layout_constraintTop_toBottomOf="@+id/your_cars_button" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profile_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="text"
+                            android:lines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                app:layoutManager="LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="@+id/your_cars_button"
-                app:layout_constraintStart_toStartOf="@+id/profile_rent_text"
-                app:layout_constraintTop_toBottomOf="@+id/profile_rent_text" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/profile_email_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        app:layout_constraintStart_toStartOf="@id/profile_address"
+                        app:layout_constraintTop_toBottomOf="@id/profile_address">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profile_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/email"
+                            android:inputType="textEmailAddress"
+                            android:lines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/profile_password_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="16"
+                        app:layout_constraintStart_toStartOf="@id/profile_email"
+                        app:layout_constraintTop_toBottomOf="@id/profile_email"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/profile_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="textPassword"
+                            android:lines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/edit_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="50dp"
+                        android:text="@string/edit"
+                        app:layout_constraintStart_toStartOf="@id/profile_email"
+                        app:layout_constraintTop_toBottomOf="@id/profile_email" />
+
+                </LinearLayout>
+
+
+<!--            <Button-->
+<!--                android:id="@+id/your_cars_button"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:text="@string/youre_cars"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/profile_info_text"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/profile_person_image"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/profile_person_image" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/profile_rent_text"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="30dp"-->
+<!--                android:text="@string/rented"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/your_cars_button"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/your_cars_button" />-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/recycler_view"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:scrollbars="vertical"-->
+<!--                app:layoutManager="LinearLayoutManager"-->
+<!--                app:layout_constraintEnd_toEndOf="@+id/your_cars_button"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/profile_rent_text"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/profile_rent_text" />-->
+
     </ScrollView>
 </layout>

@@ -15,6 +15,9 @@ class MainActivityViewModel() : ViewModel() {
     val apiResponse: LiveData<String>
         get() = _apiResponse
 
+    private val _userId = MutableLiveData<Long>()
+    val userId: LiveData<Long>
+        get() = _userId
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
@@ -23,8 +26,25 @@ class MainActivityViewModel() : ViewModel() {
                 _loginSuccessful.value = true
             }
             _apiResponse.value = "${response.code()}"
+            if(response.body()?.id != null) {
+                _userId.value = response.body()?.id!!.toLong()
+            }
         }
     }
+
+    fun loginTest() {
+        viewModelScope.launch {
+            val response = ShareMobilityApi.retrofitService.loginWithResponse("wgeboers", "Welkom@120!")
+            if(response.isSuccessful) {
+                _loginSuccessful.value = true
+            }
+            _apiResponse.value = "${response.code()}"
+            if(response.body()?.id != null) {
+                _userId.value = response.body()?.id!!.toLong()
+            }
+        }
+    }
+
 }
 
 class MainActivityViewModelFactory() : ViewModelProvider.Factory{
