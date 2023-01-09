@@ -83,11 +83,10 @@ class DataRepository (private val database: SMRoomDatabase){
         withContext(Dispatchers.IO) {
             database.carDao().deleteAllCars()
             val carList: List<CarInfo> = ShareMobilityApi.retrofitService.getCars()
-            // CarInfo can contain an Owner, extract the owner
             val imageList: MutableList<Image> = mutableListOf()
             val ownerList: MutableList<User> = mutableListOf()
 
-            // for every car extract owner and image data
+            // CarInfo can contain an Owner and images, extract the owner and images
             for (car in carList) {
                 val imageInfoList = car.carImages
                 val id = car
@@ -197,18 +196,6 @@ class DataRepository (private val database: SMRoomDatabase){
             )
         }
 
-        var carOwners: List<User> = carInfo.map {
-            User(
-                id = it.carOwner?.id,
-                type = it.carOwner?.type,
-                username = it.carOwner?.username,
-                password = it.carOwner?.password,
-                firstname = it.carOwner?.password,
-                lastname = it.carOwner?.lastname,
-                address = it.carOwner?.address,
-                bonusPoints = it.carOwner?.bonuspoints ?: 0
-            )
-        }
         return carUsers
     }
     //--> End data Car
@@ -217,6 +204,7 @@ class DataRepository (private val database: SMRoomDatabase){
     suspend fun getAllReservations(refesh: Boolean): Flow<List<Reservation>> {
         if (refesh) {
             withContext(Dispatchers.IO) {
+                database.reservationDao().deleteAll()
                 val reservationInfo = ShareMobilityApi.retrofitService.getAllReservations()
                 database.reservationDao().insertAll(prepareReservation(reservationInfo))
             }
