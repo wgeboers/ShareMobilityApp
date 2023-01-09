@@ -19,15 +19,6 @@ class UserViewModel() : ViewModel() {
     val userInfo: LiveData<UserInfo>
     get() = _userInfo
 
-    fun login(username: String, password: String) {
-        viewModelScope.launch {
-            val response = ShareMobilityApi.retrofitService.loginWithResponse(username, password)
-            if(response.isSuccessful) {
-                _userInfo.value = response.body()
-            }
-            _apiResponse.value = "${response.code()}"
-        }
-    }
 
     fun getUser(id: Long) {
         viewModelScope.launch {
