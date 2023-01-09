@@ -57,7 +57,6 @@ data class Registration (
     @Json(name="fuelType")
     val fuelType: String? = null,
 
-
     @Json(name="efficiency")
     val efficiency: Any? = null
 )
