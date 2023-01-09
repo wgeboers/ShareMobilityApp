@@ -17,6 +17,7 @@ import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.ui.adapter.RentedItemAdapter
 import com.sm.sharemobilityapp.data.Datasource
 import com.sm.sharemobilityapp.databinding.FragmentProfileBinding
+import com.sm.sharemobilityapp.network.UserInfo
 import com.sm.sharemobilityapp.ui.viewmodel.UserViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.UserViewModelFactory
 import java.util.logging.Logger
@@ -52,14 +53,25 @@ class ProfileFragment : Fragment() {
                 Toast.makeText(context, "$response", Toast.LENGTH_SHORT).show()
                 binding.profileName.setText(response.firstname + " " + response.lastname)
                 binding.profileAddress.setText(response.address)
-                binding.profileEmail.setText("What the fuck no email address???")
-                binding.profilePassword.setText("Enter a new password")
+                binding.profileEmail.setText("wgeboers")
+                binding.profilePassword.setText("Welkom@120!")
             } else {
                 Toast.makeText(context, "What the fuck?", Toast.LENGTH_SHORT).show()
                 //findNavController().navigate(R.id.action_global_fragment_login)
             }
         }
 
+        binding.editButton.setOnClickListener {
+            val userInfo = UserInfo(null,
+                "CAR_OWNER",
+                binding.profileEmail.text.toString(),
+                binding.profilePassword.text.toString(),
+                binding.profileName.text!!.split(" ")[0],
+                binding.profileName.text!!.split(" ")[1],
+                binding.profileAddress.text.toString()
+            )
+            userViewModel.updateUser(userInfo)
+        }
 //        binding.yourCarsButton.setOnClickListener {
 //                view -> view.findNavController().navigate(R.id.fragment_your_cars)
 //        }

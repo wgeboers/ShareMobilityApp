@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 data class UserInfo(
 
 	@Json(name="id")
-	val id: Int? = null,
+	val id: Long? = null,
 
 	@Json(name="type")
 	val type: String? = null,

@@ -52,12 +52,13 @@ class UserViewModel() : ViewModel() {
 
         }
     }
-    /*
-    * Function to set values on the UI level in fragment_profile.xml for all relevant user info
-    * */
-    fun setUserFields() {
 
-    }
+    fun updateUser(userInfo: UserInfo) {
+        viewModelScope.launch {
+                ShareMobilityApi.retrofitService.putUser(userInfo, _userInfo.value!!.id!!)
+                _apiResponse.value = "updated item ${_userInfo.value!!.id!!}"
+            }
+        }
 
     /*
     *  Function to change values in the API based on fields changed in fragment_profile.xml

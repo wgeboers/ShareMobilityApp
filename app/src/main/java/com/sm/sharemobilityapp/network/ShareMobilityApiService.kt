@@ -46,7 +46,7 @@ interface ShareMobilityApiService {
     suspend fun deleteUserWithResponse(@Path("id") userId: Long): Response<ResponseBody>
 
     @PUT(value = "users/{id}")
-    suspend fun putUser(@Body userInfo: UserInfo, @Path("id") userId: Long): UserInfo
+    suspend fun putUser(@Body userInfo: UserInfo, @Path("id") userId: Long): Response<UserInfo>
 
     // Cars
     @GET("cars")
