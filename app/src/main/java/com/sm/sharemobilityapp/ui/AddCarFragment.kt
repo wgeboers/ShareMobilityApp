@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.net.toFile
@@ -21,9 +22,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.R
+import com.sm.sharemobilityapp.data.Car
 import com.sm.sharemobilityapp.databinding.FragmentAddCarBinding
+import com.sm.sharemobilityapp.network.CarInfo
+import com.sm.sharemobilityapp.network.ImageInfo
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModelFactory
+import com.sm.sharemobilityapp.utils.PhotoUtils
 import java.io.File
 import java.util.*
 import kotlin.math.roundToInt
@@ -81,12 +86,11 @@ class AddCarFragment : Fragment() {
         binding.addCarTypeAutocomplete.setAdapter(typeArrayAdapter)
         binding.addCarFuelAutocomplete.setAdapter(fuelArrayAdapter)
 
-        binding.addCarButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.action_fragment_add_car_to_fragment_your_cars)
+        binding.addCarButton.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_fragment_add_car_to_fragment_your_cars)
         }
-        binding.carPhoto.setImageDrawable(resources.getDrawable(R.drawable.ic_camera))
+
         binding.carCamera.setOnClickListener {
-           // updatePhoto(photoName)
             photoName = "IMG_${Date()}.JPG"
             val photoFile = File(requireContext().applicationContext.filesDir, photoName)
             val photoUri = FileProvider.getUriForFile(
@@ -96,6 +100,45 @@ class AddCarFragment : Fragment() {
             )
             takePhoto.launch(photoUri)
             Log.d("Fotofile", photoFile.toString())
+        }
+        val ownerID = 2
+        val longitude = 0.0
+        val latitude = 0.0
+        val termsOfPickup = "Filler"
+        val termsOfReturn = "Filler return"
+        val usageCostPerKm = 10.0
+        val totalCostOfOwnership = 3000.0
+        binding.addCarButton.setOnClickListener {
+            carViewModel.insertCar(
+                CarInfo(
+                    type = "ICE",
+                    licensePlate = "6-DFG-0",
+                    carOwner = null,
+                    make = "Hyundai",
+                    model = "i20",
+                    mileage = 10,
+                    hourlyRate = 9.0,
+                    longitude = longitude,
+                    latitude = latitude,
+                    termsOfPickup = termsOfPickup,
+                    termsOfReturn = termsOfReturn,
+                    purchasePrice = 10,
+                    amountOfYearsOwned = 10,
+                    usageCostsPerKm = usageCostPerKm,
+                    totalCostOfOwnership = totalCostOfOwnership,
+                    carImages = listOf(
+                        ImageInfo(
+                            imagePath = photoName.toString()
+                        )
+                    )
+                )
+            )
+        }
+
+        carViewModel.carinfo.observe(viewLifecycleOwner) { newCar ->
+            Log.d("ADDCAR", newCar.id.toString())
+            // TO DO
+            // post registration
         }
     }
 
@@ -112,11 +155,11 @@ class AddCarFragment : Fragment() {
 
             if (photoFile?.exists() == true) {
                 binding.carPhoto.doOnLayout { measuredView ->
-                    val scaledBitmap = getScaledBitmap(
+                    val scaledBitmap = PhotoUtils().getScaledBitmap(
 
                         photoFile.path,
-                        80,
-                        80
+                        binding.carPhoto.width,
+                        binding.carPhoto.height
                     )
                     binding.carPhoto.setImageBitmap(scaledBitmap)
                     binding.carPhoto.tag = photoFileName
@@ -127,30 +170,4 @@ class AddCarFragment : Fragment() {
             }
         }
     }
-
-
-    fun getScaledBitmap(path: String, destWidth: Int, destHeight: Int): Bitmap {
-        // Read in the dimensions of the image on disk
-        val options = BitmapFactory.Options()
-        options.inJustDecodeBounds = true
-        BitmapFactory.decodeFile(path, options)
-
-        val srcWidth = options.outWidth.toFloat()
-        val srcHeight = options.outHeight.toFloat()
-
-        // Figure out how much to scale down by
-        val sampleSize = if (srcHeight <= destHeight && srcWidth <= destWidth) {
-
-        } else {
-            val heightScale = srcHeight / destHeight
-            val widthScale = srcWidth / destWidth
-
-            minOf(heightScale, widthScale).roundToInt()
-        }
-
-        // Read in and create final bitmap
-        return BitmapFactory.decodeFile(path, BitmapFactory.Options().apply {
-            inSampleSize = sampleSize as Int
-        })
-    }
-        }
+}

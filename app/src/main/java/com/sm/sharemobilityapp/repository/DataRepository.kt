@@ -7,6 +7,7 @@ import com.sm.sharemobilityapp.network.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
 class DataRepository (private val database: SMRoomDatabase){
     val cars: Flow<List<Car>>
@@ -158,10 +159,22 @@ class DataRepository (private val database: SMRoomDatabase){
         return database.carDao().getCarsByModelAndMake(model, make)
     }
 
-    suspend fun insertCar(carInfo: CarInfo) {
+//    suspend fun insertCar(carInfo: CarInfo) : CarInfo? {
+//        var returnInfo: Response<CarInfo>
+//        withContext(Dispatchers.IO) {
+//            returnInfo = ShareMobilityApi.retrofitService.postCar(carInfo)
+//        }
+//        Log.d("DATAREP", returnInfo.toString())
+//        return returnInfo.body()
+//    }
+
+    suspend fun insertCar(carInfo: CarInfo) : Response<CarInfo> {
+        var returnInfo: Response<CarInfo>
         withContext(Dispatchers.IO) {
-            ShareMobilityApi.retrofitService.postCar(carInfo)
+            returnInfo = ShareMobilityApi.retrofitService.postCar(carInfo)
         }
+        Log.d("DATAREP", returnInfo.toString())
+        return returnInfo
     }
 
     suspend fun deleteCar(id: Long) {

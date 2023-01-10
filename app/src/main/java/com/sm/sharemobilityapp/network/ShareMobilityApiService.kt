@@ -59,7 +59,7 @@ interface ShareMobilityApiService {
     suspend fun putCar(@Body carInfo: CarInfo, @Path("id") carId: Long): CarInfo
 
     @POST(value = "cars")
-    suspend fun postCar(@Body carInfo: CarInfo)
+    suspend fun postCar(@Body carInfo: CarInfo) : Response<CarInfo>
 
     // Registration
     @GET("carsByOwner/cars_owned/{id}")
