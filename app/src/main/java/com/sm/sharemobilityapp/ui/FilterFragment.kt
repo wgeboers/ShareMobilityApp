@@ -78,7 +78,6 @@ class FilterFragment : Fragment() {
 
         binding.filterButton.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_fragment_filter_to_fragment_start)
-            userViewModel.refreshDataFromRepository()
         }
     }
 
