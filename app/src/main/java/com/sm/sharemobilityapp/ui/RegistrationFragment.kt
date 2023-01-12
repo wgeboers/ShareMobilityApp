@@ -56,6 +56,7 @@ class RegistrationFragment : Fragment() {
             binding.registrationPasswordEditText.text.toString(),
             binding.registrationFirstnameEditText.text.toString(),
             binding.registrationSecondnameEditText.text.toString(),
+            binding.registrationAddressEditText.text.toString(),
             )
             registrationViewModel.registerUser(userInfo)
         }

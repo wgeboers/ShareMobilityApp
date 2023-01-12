@@ -11,9 +11,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="15dp">
+            android:padding="10dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/registration_firstname"
@@ -52,7 +52,24 @@
                     android:inputType="text"
                     android:lines="1" />
             </com.google.android.material.textfield.TextInputLayout>
-
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/registration_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="16"
+                app:helperText="@string/required"
+                app:helperTextTextColor="@android:color/holo_red_dark"
+                app:layout_constraintStart_toStartOf="@id/registration_secondname"
+                app:layout_constraintTop_toBottomOf="@id/registration_secondname" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/registration_address_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:lines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/registration_email"
                 android:layout_width="match_parent"
@@ -60,8 +77,8 @@
                 android:layout_marginTop="30dp"
                 app:helperText="@string/required"
                 app:helperTextTextColor="@android:color/holo_red_dark"
-                app:layout_constraintStart_toStartOf="@id/registration_secondname"
-                app:layout_constraintTop_toBottomOf="@id/registration_secondname">
+                app:layout_constraintStart_toStartOf="@id/registration_address"
+                app:layout_constraintTop_toBottomOf="@id/registration_address">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/registration_email_edit_text"

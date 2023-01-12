@@ -56,6 +56,7 @@
     <string name="edit">Verander gegevens</string>
     <string name="carowner">Verhuurder</string>
     <string name="caruser">Huurder</string>
+    <string name="registrtation_address">Adres</string>
 
     <!--dit is dummy data-->
     <string-array name="brands">
