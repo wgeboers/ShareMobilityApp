@@ -26,6 +26,7 @@ class FilterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val brands = resources.getStringArray(R.array.brands)
         val model = resources.getStringArray(R.array.model)
+        val radius = resources.getStringArray(R.array.radius)
 
         val brandArrayAdapter = activity?.let {
             ArrayAdapter<String>(
@@ -43,11 +44,20 @@ class FilterFragment : Fragment() {
             )
         }
 
+        val radiusArrayAdapter = activity?.let {
+            ArrayAdapter<String>(
+                it,
+                R.layout.dropwdown_item,
+                radius
+            )
+        }
+
         binding.filterBrandAutocomplete.setAdapter(brandArrayAdapter)
         binding.filterModelAutocomplete.setAdapter(modelArrayAdapter)
+        binding.filterRadiusAutocomplete.setAdapter(radiusArrayAdapter)
 
         binding.filterButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.action_global_fragment_start)
+                view -> view.findNavController().navigate(R.id.action_fragment_filter_to_fragment_start)
         }
     }
 

@@ -59,11 +59,13 @@
             <ImageButton
                 android:id="@+id/rent_start_date_picker"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:backgroundTint="@android:color/transparent"
+                app:tint="@color/colorPrimary"
                 android:src="@drawable/ic_date"
                 app:layout_constraintBottom_toBottomOf="@id/rent_start_date"
                 app:layout_constraintEnd_toEndOf="@id/rent_terms_and_conditions"
-                app:layout_constraintTop_toTopOf="@id/rent_start_date" />
+                app:layout_constraintTop_toTopOf="@+id/rent_start_date" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/rent_end_date"
@@ -86,7 +88,9 @@
             <ImageButton
                 android:id="@+id/rent_end_date_picker"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                app:tint="@color/colorPrimary"
+                android:layout_height="0dp"
                 android:src="@drawable/ic_date"
                 app:layout_constraintBottom_toBottomOf="@+id/rent_end_date"
                 app:layout_constraintEnd_toEndOf="@+id/rent_terms_and_conditions"
@@ -121,7 +125,8 @@
                 android:id="@+id/rent_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/rent"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/Rent"
                 app:layout_constraintEnd_toEndOf="@+id/rent_terms_and_conditions"
                 app:layout_constraintStart_toStartOf="@+id/rent_terms_and_conditions"
                 app:layout_constraintTop_toBottomOf="@+id/rent_terms_button" />

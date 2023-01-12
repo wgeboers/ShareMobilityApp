@@ -9,7 +9,7 @@ import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.databinding.FragmentCarRentalDetailsBinding
 
-class CarRentalFragment : Fragment() {
+class CarRentalDetailsFragment : Fragment() {
     private var _binding: FragmentCarRentalDetailsBinding? = null
     private val binding get() = _binding!!
 
@@ -24,7 +24,7 @@ class CarRentalFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.rentButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.fragment_rent)
+                view -> view.findNavController().navigate(R.id.action_fragment_car_rental_details_to_fragment_rent)
         }
     }
 

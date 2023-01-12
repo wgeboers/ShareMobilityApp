@@ -5,5 +5,5 @@
     android:layout_height="wrap_content"
     android:padding="15dp"
     android:text="@string/brand"
-    android:textColor="@color/black"
+    android:textColor="@color/dropDownTextColor"
     android:textSize="15dp" />

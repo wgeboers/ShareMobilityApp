@@ -11,6 +11,7 @@ import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.ui.adapter.ItemAdapter
 import com.sm.sharemobilityapp.data.Datasource
 import com.sm.sharemobilityapp.databinding.FragmentStartBinding
+import com.sm.sharemobilityapp.utils.GPSUtils
 
 class StartFragment : Fragment() {
     private var _binding: FragmentStartBinding? = null
@@ -32,6 +33,8 @@ class StartFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        GPSUtils.initPermissions(requireActivity())
+
         val myDataset = Datasource().loadCars()
         recyclerView = binding.recyclerView
         recyclerView.adapter = ItemAdapter(this, myDataset)
@@ -41,7 +44,11 @@ class StartFragment : Fragment() {
         amountOfResult.text = myDataset.size.toString()
 
         binding.filterButton.setOnClickListener {
-            view -> view.findNavController().navigate(R.id.fragment_filter)
+            view -> view.findNavController().navigate(R.id.action_fragment_start_to_fragment_filter)
+        }
+
+        binding.mapButton.setOnClickListener {
+            view -> view.findNavController().navigate(R.id.action_home_to_fragment_map)
         }
 
     }
