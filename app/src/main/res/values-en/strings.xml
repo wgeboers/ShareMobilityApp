@@ -62,4 +62,6 @@
     <string name="No">No</string>
     <string name="EnableGpsWarning">Enable GPS</string>
     <string name="CannotDetermineLocation">Cannot determine location</string>
+    <string name="Post201AddCar">Car successfully added</string>
+    <string name="PostFailureAddCar">Car not added, try again later</string>
 </resources>

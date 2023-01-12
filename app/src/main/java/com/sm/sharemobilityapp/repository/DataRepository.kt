@@ -249,6 +249,14 @@ class DataRepository (private val database: SMRoomDatabase){
         return ShareMobilityApi.retrofitService.getAllRegistrationsById(id)
     }
 
+    suspend fun postRegistration(carId: Int, ownerId: Int) : Response<Registration>{
+        Log.d("DATAREP", carId.toString() + ' ' + ownerId.toString())
+        return ShareMobilityApi.retrofitService.postRegistration(RegistrationDto(
+            carId = carId,
+            carOwnerId = ownerId
+        ))
+    }
+
    // suspend fun insertRegistration(re)
 
     //--> End data registration

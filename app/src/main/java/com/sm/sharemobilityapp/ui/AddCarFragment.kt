@@ -36,6 +36,7 @@ import kotlin.math.roundToInt
 class AddCarFragment : Fragment() {
     private var _binding: FragmentAddCarBinding? = null
     private val binding get() = _binding!!
+    private val userId = 1;
 
     private val carViewModel: CarViewModel by activityViewModels {
         CarViewModelFactory(
@@ -101,44 +102,18 @@ class AddCarFragment : Fragment() {
             takePhoto.launch(photoUri)
             Log.d("Fotofile", photoFile.toString())
         }
-        val ownerID = 2
-        val longitude = 0.0
-        val latitude = 0.0
-        val termsOfPickup = "Filler"
-        val termsOfReturn = "Filler return"
-        val usageCostPerKm = 10.0
-        val totalCostOfOwnership = 3000.0
         binding.addCarButton.setOnClickListener {
-            carViewModel.insertCar(
-                CarInfo(
-                    type = "ICE",
-                    licensePlate = "6-DFG-0",
-                    carOwner = null,
-                    make = "Hyundai",
-                    model = "i20",
-                    mileage = 10,
-                    hourlyRate = 9.0,
-                    longitude = longitude,
-                    latitude = latitude,
-                    termsOfPickup = termsOfPickup,
-                    termsOfReturn = termsOfReturn,
-                    purchasePrice = 10,
-                    amountOfYearsOwned = 10,
-                    usageCostsPerKm = usageCostPerKm,
-                    totalCostOfOwnership = totalCostOfOwnership,
-                    carImages = listOf(
-                        ImageInfo(
-                            imagePath = photoName.toString()
-                        )
-                    )
-                )
-            )
+            insertCar()
         }
 
         carViewModel.carinfo.observe(viewLifecycleOwner) { newCar ->
             Log.d("ADDCAR", newCar.id.toString())
-            // TO DO
-            // post registration
+            carViewModel.insertRegistration(newCar.id!!, userId)
+        }
+
+        carViewModel.isNetworkMessage.observe(viewLifecycleOwner) { text ->
+            Log.d("AddCAR", text)
+            showToast(text)
         }
     }
 
@@ -169,5 +144,47 @@ class AddCarFragment : Fragment() {
                 binding.carPhoto.tag = null
             }
         }
+    }
+
+    private fun insertCar() {
+
+        // For testing
+        val ownerID = 2
+        val longitude = 0.0
+        val latitude = 0.0
+        val termsOfPickup = "Filler"
+        val termsOfReturn = "Filler return"
+        val usageCostPerKm = 10.0
+        val totalCostOfOwnership = 3000.0
+
+        carViewModel.insertCar(
+            CarInfo(
+                type = "ICE",
+                licensePlate = "6-DFG-21",
+                carOwner = null,
+                make = "Hyundai",
+                model = "i20",
+                mileage = 10,
+                hourlyRate = 9.0,
+                longitude = longitude,
+                latitude = latitude,
+                termsOfPickup = termsOfPickup,
+                termsOfReturn = termsOfReturn,
+                purchasePrice = 10,
+                amountOfYearsOwned = 10,
+                usageCostsPerKm = usageCostPerKm,
+                totalCostOfOwnership = totalCostOfOwnership,
+                carImages = listOf(
+                    ImageInfo(
+                        imagePath = photoName.toString()
+                    )
+                )
+            )
+        )
+    }
+
+    private fun showToast(message: String) {
+        val toast = Toast.makeText(activity?.application?.applicationContext, message, Toast.LENGTH_SHORT)
+        toast.show()
     }
 }

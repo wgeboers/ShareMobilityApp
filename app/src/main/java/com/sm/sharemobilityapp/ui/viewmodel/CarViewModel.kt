@@ -8,6 +8,8 @@ import com.sm.sharemobilityapp.data.Car
 import com.sm.sharemobilityapp.data.CarDao
 import com.sm.sharemobilityapp.data.SMRoomDatabase
 import com.sm.sharemobilityapp.network.CarInfo
+import com.sm.sharemobilityapp.network.Registration
+import com.sm.sharemobilityapp.network.ReservationInfo
 import com.sm.sharemobilityapp.repository.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,9 +24,9 @@ class CarViewModel(private val carDao: CarDao): ViewModel() {
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
-    private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
-    val isNetworkErrorShown: LiveData<Boolean>
-        get() = _isNetworkErrorShown
+    private var _isNetworkMessage = MutableLiveData<String>()
+    val isNetworkMessage: LiveData<String>
+        get() = _isNetworkMessage
 
     val carinfo: LiveData<CarInfo>
         get() = _carInfo
@@ -36,10 +38,20 @@ class CarViewModel(private val carDao: CarDao): ViewModel() {
                 if (response.code() == 201) {
                     _carInfo.postValue(response.body())
                 }
-                _eventNetworkError.value = false
-                _isNetworkErrorShown.value = false
-            }catch (networkError: IOException) {
-                _eventNetworkError.value = true
+                _isNetworkMessage.value = response.code().toString()
+            } catch (networkError: IOException) {
+                    _isNetworkMessage.value = networkError.message
+            }
+        }
+    }
+
+    fun insertRegistration(carId: Int, ownerId: Int) {
+        viewModelScope.launch {
+            try {
+                val response = dataRepository.postRegistration(carId, ownerId)
+                _isNetworkMessage.value = response.code().toString()
+            } catch (networkError: IOException) {
+                _isNetworkMessage.value = networkError.message
             }
         }
     }

@@ -66,7 +66,7 @@ interface ShareMobilityApiService {
     suspend fun getAllRegistrationsById(@Path("id") id: Long): List<Registration>
 
     @POST(value = "carsByOwner")
-    suspend fun postRegistration(@Body registration: Registration): Registration
+    suspend fun postRegistration(@Body registrationDto: RegistrationDto): Response<Registration>
 
     @DELETE("carsByowner")
     suspend fun deleteRegistration(@Body registration: Registration)
@@ -91,7 +91,7 @@ interface ShareMobilityApiService {
     suspend fun updateReservationbyId(@Path("id") id: Long, @Body reservation: ReservationInfo): ReservationInfo
 
     @POST(value = "reservation")
-    suspend fun postReservation(@Body reservation: ReservationInfo): ReservationInfo
+    suspend fun postReservation(@Body reservation: ReservationInfo): Response<ReservationInfo>
 
 }
 

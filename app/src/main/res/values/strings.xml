@@ -61,6 +61,9 @@
     <string name="No">Nee</string>
     <string name="EnableGpsWarning">GPS aanzetten</string>
     <string name="CannotDetermineLocation">Kan de locatie niet vinden</string>
+    <string name="Post201AddCar">"Auto succesvol toegevoegd"</string>
+    <string name="PostFailureAddCar">"Auto is niet toegevoegd, probeer het later nogmaals"</string>
+
 
     <!--dit is dummy data-->
     <string-array name="brands">
