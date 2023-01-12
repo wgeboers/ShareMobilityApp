@@ -62,4 +62,9 @@
     <string name="No">No</string>
     <string name="EnableGpsWarning">Enable GPS</string>
     <string name="CannotDetermineLocation">Cannot determine location</string>
+    <string name="edit">edit</string>
+    <string name="carowner">owner</string>
+    <string name="caruser">renter</string>
+    <string name="registration_address">address</string>
+    <string name="rent">rent</string>
 </resources>

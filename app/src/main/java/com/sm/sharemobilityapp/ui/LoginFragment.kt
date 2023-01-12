@@ -50,8 +50,8 @@ class LoginFragment : Fragment() {
          * !!! REMOVE LOGINTEST WHEN DONE TESTING, ONLY USED TO EASILY TEST PROFILE/THINGS AFTER LOGGING IN!!!
          */
         binding.loginLoginButton.setOnClickListener {
-            //mainActivityViewModel.login(binding.loginEmailEditText.text.toString(),binding.loginPasswordEditText.text.toString())
-            mainActivityViewModel.loginTest()
+            mainActivityViewModel.login(binding.loginEmailEditText.text.toString(),binding.loginPasswordEditText.text.toString())
+            //mainActivityViewModel.loginTest()
             mainActivityViewModel.userId.observe(viewLifecycleOwner) {
                 if (it != null) {
                     userViewModel.getUser(it)
