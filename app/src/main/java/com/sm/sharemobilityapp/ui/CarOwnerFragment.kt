@@ -24,6 +24,9 @@ class CarOwnerFragment : Fragment() {
         CarOwnerListViewModelFactory()
     }
 
+    /*
+    *  The logged in userid is needed to get the cars from the API, which is saved in MAVM
+     */
     private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
         MainActivityViewModelFactory()
     }
