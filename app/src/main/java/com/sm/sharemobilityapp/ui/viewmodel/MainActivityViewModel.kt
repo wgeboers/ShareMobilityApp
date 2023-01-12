@@ -4,6 +4,10 @@ import androidx.lifecycle.*
 import com.sm.sharemobilityapp.network.ShareMobilityApi
 import kotlinx.coroutines.launch
 
+/*
+    Used to handle login & saves a logged in user's data
+    other fragment that DO NOT use UserViewModel but DO NEED access to a USER's data.
+ */
 class MainActivityViewModel : ViewModel() {
 
     private val _loginSuccessful = MutableLiveData<Boolean>()

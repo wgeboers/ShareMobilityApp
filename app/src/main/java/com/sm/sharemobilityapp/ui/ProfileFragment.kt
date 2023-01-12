@@ -40,19 +40,26 @@ class ProfileFragment : Fragment() {
             viewModel = userViewModel
         }
 
+        /*
+         * Load profile of the logged user
+         */
         userViewModel.userInfo.observe(viewLifecycleOwner) { response ->
             if(response != null) {
                 Toast.makeText(context, "$response", Toast.LENGTH_SHORT).show()
                 binding.profileName.setText(response.firstname + " " + response.lastname)
                 binding.profileAddress.setText(response.address)
-                binding.profileEmail.setText("wgeboers")
-                binding.profilePassword.setText("Welkom@120!")
+                binding.profileEmail.setText(response.username)
+                binding.profilePassword.setText(response.password)
             } else {
                 Toast.makeText(context, "What the fuck?", Toast.LENGTH_SHORT).show()
                 //findNavController().navigate(R.id.action_global_fragment_login)
             }
         }
 
+        /*
+         * Edit profile of the logged user
+         * !!!ID AND TYPE HAVE TO BE NULL, BECAUSE ONCE CREATED THEY SHOULD NOT BE CHANGED!!!
+         */
         binding.editButton.setOnClickListener {
             val userInfo = UserInfo(null,
                 null,
