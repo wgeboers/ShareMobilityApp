@@ -161,6 +161,7 @@ class DataRepository (private val database: SMRoomDatabase){
 
     suspend fun insertCar(carInfo: CarInfo) : Response<CarInfo> {
         var returnInfo: Response<CarInfo>
+        Log.d("ADDCAR carINfo", carInfo.toString())
         withContext(Dispatchers.IO) {
             returnInfo = ShareMobilityApi.retrofitService.postCar(carInfo)
         }

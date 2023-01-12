@@ -6,6 +6,10 @@ import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Point
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -113,7 +117,13 @@ class AddCarFragment : Fragment() {
 
         carViewModel.isNetworkMessage.observe(viewLifecycleOwner) { text ->
             Log.d("AddCAR", text)
-            showToast(text)
+            if (text.get(0) == '5') {
+                showToast("Something went wrong, please try again later.")
+            } else if (text.get(0) == '4') {
+                showToast("Something went wrong, please check your input.")
+            } else if (text.get(0) == '2') {
+                showToast("Action successful")
+            }
         }
     }
 
@@ -149,31 +159,30 @@ class AddCarFragment : Fragment() {
     private fun insertCar() {
 
         // For testing, values need binding
-        val ownerID = 2
+        val ownerID = 27
         val longitude = 0.0
         val latitude = 0.0
         val termsOfPickup = "Filler"
         val termsOfReturn = "Filler return"
-        val usageCostPerKm = 10.0
-        val totalCostOfOwnership = 3000.0
 
         carViewModel.insertCar(
             CarInfo(
-                type = "ICE",
-                licensePlate = "6-DFG-21",
+                type = binding.addCarTypeAutocomplete.text.toString(),
+                licensePlate = binding.addCarLicensePlateAutocomplete.text.toString(),
                 carOwner = null,
-                make = "Hyundai",
-                model = "i20",
-                mileage = 10,
-                hourlyRate = 9.0,
+                make = binding.addCarMakeAutocomplete.text.toString(),
+                model = binding.addCarModelAutocomplete.text.toString(),
+                mileage = binding.addCarKmAutocomplete.text.toString().toInt(),
+                hourlyRate = binding.addCarPricePerHourAutocomplete.text.toString().toDouble(),
                 longitude = longitude,
                 latitude = latitude,
                 termsOfPickup = termsOfPickup,
                 termsOfReturn = termsOfReturn,
-                purchasePrice = 10,
-                amountOfYearsOwned = 10,
-                usageCostsPerKm = usageCostPerKm,
-                totalCostOfOwnership = totalCostOfOwnership,
+                purchasePrice = binding.addCarValueAutocomplete.text.toString().toInt(),
+                amountOfYearsOwned = binding.addCarYearsOwnedAutocomplete.text.toString().toInt(),
+                usageCostsPerKm = 0.0,
+                totalCostOfOwnership = 0.0,
+                fuelType = binding.addCarFuelAutocomplete.text.toString(),
                 carImages = listOf(
                     ImageInfo(
                         imagePath = photoName.toString()
@@ -184,7 +193,7 @@ class AddCarFragment : Fragment() {
     }
 
     private fun showToast(message: String) {
-        val toast = Toast.makeText(activity?.application?.applicationContext, message, Toast.LENGTH_SHORT)
+        val toast = Toast.makeText(activity?.application?.applicationContext, message, Toast.LENGTH_LONG)
         toast.show()
     }
 }

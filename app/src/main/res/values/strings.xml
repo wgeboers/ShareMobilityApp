@@ -77,13 +77,13 @@
         <item>i8</item>
     </string-array>
     <string-array name="types">
-        <item>Brandstof</item>
-        <item>Electriciteit</item>
-        <item>Waterstof</item>
+        <item>ICE</item>
+        <item>BEV</item>
+        <item>FCEV</item>
     </string-array>
     <string-array name="fuels">
-        <item>Benzine</item>
-        <item>Diesel</item>
+        <item>GASOLINE</item>
+        <item>DIESEL</item>
         <item>LPG</item>
     </string-array>
     <string-array name="radius">
