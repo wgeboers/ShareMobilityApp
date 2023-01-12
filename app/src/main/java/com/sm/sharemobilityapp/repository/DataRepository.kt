@@ -159,15 +159,6 @@ class DataRepository (private val database: SMRoomDatabase){
         return database.carDao().getCarsByModelAndMake(model, make)
     }
 
-//    suspend fun insertCar(carInfo: CarInfo) : CarInfo? {
-//        var returnInfo: Response<CarInfo>
-//        withContext(Dispatchers.IO) {
-//            returnInfo = ShareMobilityApi.retrofitService.postCar(carInfo)
-//        }
-//        Log.d("DATAREP", returnInfo.toString())
-//        return returnInfo.body()
-//    }
-
     suspend fun insertCar(carInfo: CarInfo) : Response<CarInfo> {
         var returnInfo: Response<CarInfo>
         withContext(Dispatchers.IO) {
