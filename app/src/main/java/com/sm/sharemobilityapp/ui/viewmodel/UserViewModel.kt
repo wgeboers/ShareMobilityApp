@@ -59,13 +59,6 @@ class UserViewModel() : ViewModel() {
                 _apiResponse.value = "updated item ${_userInfo.value!!.id!!}"
             }
         }
-
-    /*
-    *  Function to change values in the API based on fields changed in fragment_profile.xml
-    */
-    fun pushUserChangesToApi() {
-
-    }
 }
 
 class UserViewModelFactory() : ViewModelProvider.Factory{

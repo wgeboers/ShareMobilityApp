@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".registrationFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -93,6 +93,22 @@
                     android:inputType="textPassword"
                     android:lines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_type"
+                android:orientation="vertical">
+                <RadioButton android:id="@+id/car_owner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/carowner"
+                    />
+                <RadioButton android:id="@+id/car_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/caruser"
+                    />
+            </RadioGroup>
 
             <Button
                 android:id="@+id/registration_registration_button"
@@ -112,5 +128,5 @@
                 android:text="@string/already_got_account" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

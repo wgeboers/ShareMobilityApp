@@ -63,7 +63,7 @@ class ProfileFragment : Fragment() {
 
         binding.editButton.setOnClickListener {
             val userInfo = UserInfo(null,
-                "CAR_OWNER",
+                null,
                 binding.profileEmail.text.toString(),
                 binding.profilePassword.text.toString(),
                 binding.profileName.text!!.split(" ")[0],

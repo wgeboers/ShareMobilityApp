@@ -54,6 +54,8 @@
     <string name="euroSign">€</string>
     <string name="car_icon_description">car icon</string>
     <string name="edit">Verander gegevens</string>
+    <string name="carowner">Verhuurder</string>
+    <string name="caruser">Huurder</string>
 
     <!--dit is dummy data-->
     <string-array name="brands">

@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.sm.sharemobilityapp.network.ShareMobilityApi
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel() : ViewModel() {
+class MainActivityViewModel : ViewModel() {
 
     private val _loginSuccessful = MutableLiveData<Boolean>()
     val loginSuccessful: LiveData<Boolean>
