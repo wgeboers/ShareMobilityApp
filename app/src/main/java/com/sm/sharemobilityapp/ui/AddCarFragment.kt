@@ -148,7 +148,7 @@ class AddCarFragment : Fragment() {
 
     private fun insertCar() {
 
-        // For testing
+        // For testing, values need binding
         val ownerID = 2
         val longitude = 0.0
         val latitude = 0.0
