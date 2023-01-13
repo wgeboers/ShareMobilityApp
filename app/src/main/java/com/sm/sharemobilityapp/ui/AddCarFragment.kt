@@ -1,15 +1,5 @@
 package com.sm.sharemobilityapp.ui
 
-import android.app.Activity
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Point
-import android.location.Address
-import android.location.Geocoder
-import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,14 +9,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
-import androidx.core.net.toFile
 import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.data.Car
 import com.sm.sharemobilityapp.databinding.FragmentAddCarBinding
 import com.sm.sharemobilityapp.network.CarInfo
 import com.sm.sharemobilityapp.network.ImageInfo
@@ -37,7 +25,6 @@ import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModelFactory
 import com.sm.sharemobilityapp.utils.PhotoUtils
 import java.io.File
 import java.util.*
-import kotlin.math.roundToInt
 
 class AddCarFragment : Fragment() {
     private var _binding: FragmentAddCarBinding? = null
@@ -109,7 +96,7 @@ class AddCarFragment : Fragment() {
                 photoFile
             )
             takePhoto.launch(photoUri)
-            Log.d("Fotofile", photoFile.toString())
+            Log.d("Fotofile", photoFile.path.toString())
         }
         binding.addCarButton.setOnClickListener {
             if (!checkInputFields()) {
@@ -134,7 +121,6 @@ class AddCarFragment : Fragment() {
                 showToast("Something went wrong, please check your input.")
             } else if (text.get(0) != '2') {
                 showToast("Something went wrong, please check your input.")
-
             }
         }
 
@@ -163,7 +149,6 @@ class AddCarFragment : Fragment() {
             if (photoFile?.exists() == true) {
                 binding.carPhoto.doOnLayout { measuredView ->
                     val scaledBitmap = PhotoUtils().getScaledBitmap(
-
                         photoFile.path,
                         binding.carPhoto.width,
                         binding.carPhoto.height
@@ -179,12 +164,8 @@ class AddCarFragment : Fragment() {
     }
 
     private fun insertCar() {
-
-        // For testing, values need binding
         val longitude = 0.0
         val latitude = 0.0
-        val termsOfPickup = "Filler"
-        val termsOfReturn = "Filler return"
 
         carViewModel.insertCar(
             CarInfo(

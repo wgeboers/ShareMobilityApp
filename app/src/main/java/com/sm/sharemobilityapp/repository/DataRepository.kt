@@ -161,11 +161,9 @@ class DataRepository (private val database: SMRoomDatabase){
 
     suspend fun insertCar(carInfo: CarInfo) : Response<CarInfo> {
         var returnInfo: Response<CarInfo>
-        Log.d("ADDCAR carINfo", carInfo.toString())
         withContext(Dispatchers.IO) {
             returnInfo = ShareMobilityApi.retrofitService.postCar(carInfo)
         }
-        Log.d("DATAREP", returnInfo.toString())
         return returnInfo
     }
 
@@ -248,8 +246,6 @@ class DataRepository (private val database: SMRoomDatabase){
             carOwnerId = ownerId
         ))
     }
-
-   // suspend fun insertRegistration(re)
 
     //--> End data registration
 }

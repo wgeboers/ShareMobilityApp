@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.R
@@ -22,17 +23,11 @@ class FilterFragment : Fragment() {
     private var _binding: FragmentFilterBinding? = null
     private val binding get() = _binding!!
 
-    private val carViewModel: CarViewModel by activityViewModels {
+    private val carViewModel: CarViewModel by viewModels {
         CarViewModelFactory(
             (activity?.application as BaseApplication).database.carDao()
         )
     }
-
-//    private val userViewModel: UserViewModel by activityViewModels {
-//        UserViewModelFactory(
-//            (activity?.application as BaseApplication).database.userDao()
-//        )
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

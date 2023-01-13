@@ -49,7 +49,6 @@
                     android:layout_height="match_parent"
                     android:hint="@string/brand"
                     android:inputType="text"
-                    android:text="Hyundai"
                     android:lines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,7 +68,6 @@
                     android:layout_height="match_parent"
                     android:hint="@string/model"
                     android:inputType="text"
-                    android:text="i20"
                     android:lines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +86,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/license_plate"
-                    android:text="91-ZJS-3"
                     android:inputType="text"
                     android:lines="1" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -108,7 +105,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/km"
-                    android:text="130567"
                     android:inputType="numberDecimal"
                     android:lines="1" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -265,7 +261,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/purchase_price"
-                    android:text="21000"
                     android:inputType="numberDecimal"
                     android:lines="1"
                     android:textColorHint="#757575" />
@@ -285,7 +280,6 @@
                     android:id="@+id/add_car_price_per_hour__autocomplete"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="100"
                     android:hint="@string/price_per_hour"
                     android:inputType="numberDecimal"
                     android:lines="1" />
@@ -294,7 +288,7 @@
         android:id="@+id/car_photo"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:src="@drawable/car1"
+        android:src="@drawable/ic_nophoto"
         android:padding="25dp"
         app:layout_constraintTop_toBottomOf="@id/add_car_price_per_hour"
         app:layout_constraintStart_toStartOf="parent"
