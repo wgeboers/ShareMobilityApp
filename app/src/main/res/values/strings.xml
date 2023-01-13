@@ -96,4 +96,8 @@
         <item>>50 KM</item>
     </string-array>
     <string name="euroSign">"€ "</string>
+    <string name="terms">Voorwaarden</string>
+    <string name="pickupTerms">Voorwaarden ophalen</string>
+    <string name="returnTerms">Voorwaarden terugbrengen</string>
+    <string name="rent">Huur</string>
 </resources>

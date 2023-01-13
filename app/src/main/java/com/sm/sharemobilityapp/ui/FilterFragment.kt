@@ -28,11 +28,11 @@ class FilterFragment : Fragment() {
         )
     }
 
-    private val userViewModel: UserViewModel by activityViewModels {
-        UserViewModelFactory(
-            (activity?.application as BaseApplication).database.userDao()
-        )
-    }
+//    private val userViewModel: UserViewModel by activityViewModels {
+//        UserViewModelFactory(
+//            (activity?.application as BaseApplication).database.userDao()
+//        )
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

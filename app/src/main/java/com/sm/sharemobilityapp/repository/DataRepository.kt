@@ -65,13 +65,13 @@ class DataRepository (private val database: SMRoomDatabase){
     private fun prepareUsers(userInfo: List<UserInfo>?): List<User> {
         var listUsers: List<User> = userInfo?.map {
             User (
-                id = it.id,
-                type = it.type,
-                username = it.username,
-                password = it.password,
-                firstname = it.password,
-                lastname = it.lastname,
-                address = it.address,
+                id = it.id!!,
+                type = it.type!!,
+                username = it.username?: "empty",
+                password = it.password?: "empty",
+                firstname = it.password?: "empty",
+                lastname = it.lastname?: "empty",
+                address = it.address?: "empty",
                 bonusPoints = it.bonuspoints
                     )
         } ?: listOf<User>()
@@ -102,13 +102,13 @@ class DataRepository (private val database: SMRoomDatabase){
                 if (car.carOwner?.id != null) {
                     ownerList.add(
                         User(
-                            id = car.carOwner?.id,
-                            type = car.carOwner?.type,
-                            username = car.carOwner?.username,
-                            password = car.carOwner?.password,
-                            firstname = car.carOwner?.password,
-                            lastname = car.carOwner?.lastname,
-                            address = car.carOwner?.address,
+                            id = car.carOwner.id,
+                            type = car.carOwner?.type ?: "empty",
+                            username = car.carOwner?.username ?: "empty",
+                            password = car.carOwner?.password ?: "empty",
+                            firstname = car.carOwner?.firstname ?: "empty",
+                            lastname = car.carOwner?.lastname ?: "empty",
+                            address = car.carOwner?.address ?: "empty",
                             bonusPoints = car.carOwner?.bonuspoints ?: 0
                         )
                     )
@@ -185,7 +185,7 @@ class DataRepository (private val database: SMRoomDatabase){
             Car (
                 id = it.id,
                 licensePlate = it.licensePlate,
-                carOwnerID = it.carOwner?.id ?: 0,
+                carOwnerID = it.carOwner?.id?.toInt() ?: 0,
                 makeval = it.make,
                 modelval = it.model,
                 mileageval = it.mileage,
@@ -196,8 +196,8 @@ class DataRepository (private val database: SMRoomDatabase){
                 termsOfReturn = it.termsOfReturn,
                 purchasePriceval = it.purchasePrice,
                 amountOfYearsOwned = it.amountOfYearsOwned,
-                usageCostsPerKm = it.usageCostsPerKm,
-                totalCostOfOwnership = it.totalCostOfOwnership
+                usageCostsPerKm = it.usageCostsPerKm ?: 0.0,
+                totalCostOfOwnership = it.totalCostOfOwnership ?: 0.0
             )
         }
 
@@ -227,7 +227,7 @@ class DataRepository (private val database: SMRoomDatabase){
             Reservation(
                 id = it.id,
                 carId = it.carInfo.id ?: 0,
-                userId = it.userInfo.id ?: 0,
+                userId = it.userInfo.id?.toInt() ?: 0,
                 startReservation = it.startReservation ?: "00:00:00 00-00-00",
                 endReservation = it.endReservation ?: "00:00:00 00-00-00"
             )

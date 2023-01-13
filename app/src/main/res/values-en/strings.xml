@@ -67,4 +67,7 @@
     <string name="caruser">renter</string>
     <string name="registration_address">address</string>
     <string name="rent">rent</string>
+    <string name="terms">Terms</string>
+    <string name="pickupTerms">Terms of pickup</string>
+    <string name="returnTerms">Terms of return</string>
 </resources>

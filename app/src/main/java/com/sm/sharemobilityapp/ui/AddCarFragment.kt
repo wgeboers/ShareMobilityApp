@@ -32,6 +32,8 @@ import com.sm.sharemobilityapp.network.CarInfo
 import com.sm.sharemobilityapp.network.ImageInfo
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModelFactory
+import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModel
+import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModelFactory
 import com.sm.sharemobilityapp.utils.PhotoUtils
 import java.io.File
 import java.util.*
@@ -40,12 +42,15 @@ import kotlin.math.roundToInt
 class AddCarFragment : Fragment() {
     private var _binding: FragmentAddCarBinding? = null
     private val binding get() = _binding!!
-    private val userId = 1;
 
     private val carViewModel: CarViewModel by activityViewModels {
         CarViewModelFactory(
             (activity?.application as BaseApplication).database.carDao()
         )
+    }
+
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
+        MainActivityViewModelFactory()
     }
 
     private val takePhoto = registerForActivityResult(
@@ -107,12 +112,18 @@ class AddCarFragment : Fragment() {
             Log.d("Fotofile", photoFile.toString())
         }
         binding.addCarButton.setOnClickListener {
-            insertCar()
+            if (!checkInputFields()) {
+                insertCar()
+            }
         }
 
         carViewModel.carinfo.observe(viewLifecycleOwner) { newCar ->
-            Log.d("ADDCAR", newCar.id.toString())
-            carViewModel.insertRegistration(newCar.id!!, userId)
+            val userId = mainActivityViewModel.userId.value?.toInt() ?: -1
+            if (userId != -1) {
+                carViewModel.insertRegistration(newCar.id!!, userId)
+            } else {
+                showToast("User not found, please (re)login.")
+            }
         }
 
         carViewModel.isNetworkMessage.observe(viewLifecycleOwner) { text ->
@@ -121,8 +132,19 @@ class AddCarFragment : Fragment() {
                 showToast("Something went wrong, please try again later.")
             } else if (text.get(0) == '4') {
                 showToast("Something went wrong, please check your input.")
+            } else if (text.get(0) != '2') {
+                showToast("Something went wrong, please check your input.")
+
+            }
+        }
+
+        carViewModel.isNetworkMessageRegistration.observe(viewLifecycleOwner) { text ->
+            if (text.get(0) == '5') {
+                showToast("Something went wrong, please try again later.")
+            } else if (text.get(0) == '4') {
+                showToast("Something went wrong, please check your input.")
             } else if (text.get(0) == '2') {
-                showToast("Action successful")
+                showToast("Registration succesvol")
             }
         }
     }
@@ -159,7 +181,6 @@ class AddCarFragment : Fragment() {
     private fun insertCar() {
 
         // For testing, values need binding
-        val ownerID = 27
         val longitude = 0.0
         val latitude = 0.0
         val termsOfPickup = "Filler"
@@ -176,12 +197,12 @@ class AddCarFragment : Fragment() {
                 hourlyRate = binding.addCarPricePerHourAutocomplete.text.toString().toDouble(),
                 longitude = longitude,
                 latitude = latitude,
-                termsOfPickup = termsOfPickup,
-                termsOfReturn = termsOfReturn,
+                termsOfPickup = binding.addCarPickuptermsAutocomplete.text.toString(),
+                termsOfReturn = binding.addCarReturntermsAutocomplete.text.toString(),
                 purchasePrice = binding.addCarValueAutocomplete.text.toString().toInt(),
                 amountOfYearsOwned = binding.addCarYearsOwnedAutocomplete.text.toString().toInt(),
-                usageCostsPerKm = 0.0,
-                totalCostOfOwnership = 0.0,
+                usageCostsPerKm = 2.0,
+                totalCostOfOwnership = 5.0,
                 fuelType = binding.addCarFuelAutocomplete.text.toString(),
                 carImages = listOf(
                     ImageInfo(
@@ -190,6 +211,57 @@ class AddCarFragment : Fragment() {
                 )
             )
         )
+    }
+
+    private fun checkInputFields() : Boolean {
+        val errorText = "This field is required"
+        var isEmpty = false
+
+        if (binding.addCarMakeAutocomplete.text!!.isEmpty()) {
+            binding.addCarMakeAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        if (binding.addCarModelAutocomplete.text!!.isEmpty()) {
+            binding.addCarModelAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        if (binding.addCarLicensePlateAutocomplete.text!!.isEmpty()) {
+            binding.addCarLicensePlateAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        if (binding.addCarKmAutocomplete.text!!.isEmpty()) {
+            binding.addCarKmAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        if (binding.addCarTypeAutocomplete.text!!.isEmpty()) {
+            binding.addCarTypeAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        if (binding.addCarFuelAutocomplete.text!!.isEmpty()) {
+            binding.addCarFuelAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        if (binding.addCarYearsOwnedAutocomplete.text!!.isEmpty()) {
+            binding.addCarYearsOwnedAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        if (binding.addCarPickuptermsAutocomplete.text!!.isEmpty()) {
+            binding.addCarPickuptermsAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        if (binding.addCarReturntermsAutocomplete.text!!.isEmpty()) {
+            binding.addCarReturntermsAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        if (binding.addCarValueAutocomplete.text!!.isEmpty()) {
+            binding.addCarValueAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        if (binding.addCarPricePerHourAutocomplete.text!!.isEmpty()) {
+            binding.addCarPricePerHourAutocomplete.setError(errorText)
+            isEmpty = true
+        }
+        return isEmpty
     }
 
     private fun showToast(message: String) {

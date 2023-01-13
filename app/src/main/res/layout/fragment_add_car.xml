@@ -183,112 +183,52 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="11dp"
-                android:text="@string/location"
+                android:text="@string/terms"
                 app:layout_constraintBottom_toBottomOf="@+id/add_car_location_icon"
                 app:layout_constraintStart_toEndOf="@+id/add_car_location_icon"
                 app:layout_constraintTop_toTopOf="@+id/add_car_location_icon" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_car_street"
+                android:id="@+id/add_car_pickupTerms"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/street"
+                android:hint="@string/pickupTerms"
                 android:paddingStart="11dp"
-                app:layout_constraintEnd_toStartOf="@+id/add_car_street_number"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/add_car_location_icon"
                 app:layout_constraintTop_toBottomOf="@+id/add_car_location_text">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_car_street_autocomplete"
+                    android:id="@+id/add_car_pickupterms_autocomplete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Korhoen"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_car_street_number"
-                android:layout_width="60dp"
-                android:layout_height="0dp"
-                android:paddingStart="11dp"
-                android:text="Korhoen"
-                app:helperTextTextColor="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/add_car_street"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/add_car_street_number_addition"
-                app:layout_constraintStart_toEndOf="@+id/add_car_street"
-                app:layout_constraintTop_toTopOf="@+id/add_car_street">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_car_street_number_autocomplete"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/street_number"
-                    android:text="16"
-                    android:inputType="number"
-                    android:lines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+
+
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_car_street_number_addition"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:paddingStart="11dp"
-                app:helperTextTextColor="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/add_car_street_number"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/add_car_street_number"
-                app:layout_constraintTop_toTopOf="@+id/add_car_street_number">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_car_street_number_addition_autocomplete"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/street_number_addition"
-                    android:inputType="text"
-                    android:lines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_car_zipcode"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:paddingStart="11dp"
-                app:helperTextTextColor="@color/colorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/add_car_city"
-                app:layout_constraintStart_toStartOf="@+id/add_car_street"
-                app:layout_constraintTop_toBottomOf="@+id/add_car_street">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_car_zipcode_autocomplete"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/zipcode"
-                    android:text="2986 CP"
-                    android:inputType="text"
-                    android:lines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_car_city"
+                android:id="@+id/add_car_returnTerms"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingStart="11dp"
                 app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/add_car_zipcode"
-                app:layout_constraintTop_toBottomOf="@+id/add_car_street">
+                app:layout_constraintStart_toStartOf="@+id/add_car_pickupTerms"
+                app:layout_constraintTop_toBottomOf="@+id/add_car_pickupTerms">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/add_car_city_autocomplete"
+                    android:id="@+id/add_car_returnterms_autocomplete"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/city"
-                    android:text="Ridderkerk"
+                    android:hint="@string/returnTerms"
                     android:inputType="text"
                     android:lines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
 
             <ImageView
                 android:id="@+id/add_car_price_icon"
@@ -298,7 +238,7 @@
                 app:tint="@color/colorPrimary"
                 android:src="@drawable/ic_cash"
                 app:layout_constraintStart_toStartOf="@+id/add_car_location_icon"
-                app:layout_constraintTop_toBottomOf="@+id/add_car_zipcode" />
+                app:layout_constraintTop_toBottomOf="@+id/add_car_returnTerms" />
 
             <TextView
                 android:id="@+id/add_car_price_per_day_text"

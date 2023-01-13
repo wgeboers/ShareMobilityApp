@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.home -> {
-                    navHostFragment.navController.navigate(R.id.action_global_fragment_start)
+                    navHostFragment.navController.navigate(R.id.fragment_add_car)
                 }
                 R.id.profile -> {
                     navHostFragment.navController.navigate(R.id.action_global_fragment_profile)

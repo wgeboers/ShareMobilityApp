@@ -30,10 +30,15 @@ class CarViewModel(private val carDao: CarDao): ViewModel() {
     val isNetworkMessage: LiveData<String>
         get() = _isNetworkMessage
 
+    private var _isNetworkMessageRegistration = MutableLiveData<String>()
+    val isNetworkMessageRegistration: LiveData<String>
+        get() = _isNetworkMessageRegistration
+
     val carinfo: LiveData<CarInfo>
         get() = _carInfo
 
     fun insertCar(carInfo: CarInfo) {
+        Log.d("CarVM Carinfo", carInfo.toString())
         viewModelScope.launch() {
             try {
                 val response = dataRepository.insertCar(carInfo)
@@ -51,9 +56,9 @@ class CarViewModel(private val carDao: CarDao): ViewModel() {
         viewModelScope.launch {
             try {
                 val response = dataRepository.postRegistration(carId, ownerId)
-                _isNetworkMessage.value = response.code().toString()
+                _isNetworkMessageRegistration.value = response.code().toString()
             } catch (networkError: IOException) {
-                _isNetworkMessage.value = networkError.message
+                _isNetworkMessageRegistration.value = networkError.message
             }
         }
     }
