@@ -22,8 +22,8 @@ class DataRepository (private val database: SMRoomDatabase){
         get() = database.carDao().getDistinctMakes()
 
     //--> Start data User
-    suspend fun getLogin(username: String, password: String): UserInfo {
-        var userInfo = UserInfo();
+    suspend fun getLogin(username: String, password: String): Response<UserInfo> {
+        var userInfo : Response<UserInfo>
         withContext(Dispatchers.IO) {
             userInfo = ShareMobilityApi.retrofitService.getLogin(username, password)
         }
@@ -63,7 +63,7 @@ class DataRepository (private val database: SMRoomDatabase){
 
     // map UserInfo to database user
     private fun prepareUsers(userInfo: List<UserInfo>?): List<User> {
-        var listUsers: List<User> = userInfo?.map {
+        val listUsers: List<User> = userInfo?.map {
             User (
                 id = it.id!!,
                 type = it.type!!,

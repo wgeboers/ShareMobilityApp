@@ -1,5 +1,6 @@
 package com.sm.sharemobilityapp.network
 
+import com.sm.sharemobilityapp.data.User
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.ResponseBody
@@ -32,7 +33,7 @@ interface ShareMobilityApiService {
     suspend fun getUserWithResponse(@Path("id") userId: Long): Response<UserInfo>
 
     @GET("users/login")
-    suspend fun getLogin(@Query("username") username: String, @Query("password") password: String): UserInfo
+    suspend fun getLogin(@Query("username") username: String, @Query("password") password: String): Response<UserInfo>
 
     @GET("users/login")
     suspend fun loginWithResponse(@Query("username") username: String, @Query("password") password: String): Response<UserInfo>
