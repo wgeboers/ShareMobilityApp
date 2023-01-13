@@ -1,70 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.sm.sharemobilityapp.ui.viewmodel.CarViewModel" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="15dp">
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/filter_button"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:text="@string/search"
-                android:backgroundTint="@color/colorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/start_filter_results"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/amount_of_results"
-                app:layout_constraintStart_toStartOf="@+id/filter_button"
-                app:layout_constraintEnd_toStartOf="@+id/start_filter_results_amount"
-                app:layout_constraintTop_toBottomOf="@+id/filter_button" />
-
-            <TextView
-                android:id="@+id/start_filter_results_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:layout_constraintStart_toEndOf="@+id/start_filter_results"
-                app:layout_constraintTop_toBottomOf="@+id/filter_button"
-                tools:text="5" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                app:layoutManager="LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/start_filter_results" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                android:padding="15dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="end|bottom">
+                <Button
+                    android:id="@+id/filter_button"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="@string/search"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/map_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_map"
-            app:tint="@color/white"
-            app:backgroundTint="@color/colorPrimary" />
-    </LinearLayout>
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/start_filter_results"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/amount_of_results"
+                    app:layout_constraintEnd_toStartOf="@+id/start_filter_results_amount"
+                    app:layout_constraintStart_toStartOf="@+id/filter_button"
+                    app:layout_constraintTop_toBottomOf="@+id/filter_button" />
+
+                <TextView
+                    android:id="@+id/start_filter_results_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@+id/start_filter_results"
+                    app:layout_constraintTop_toBottomOf="@+id/filter_button"
+                    tools:text="5" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/start_filter_results" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end|bottom"
+            android:orientation="vertical">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/map_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_map"
+                app:backgroundTint="@color/colorPrimary"
+                app:tint="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>
+

@@ -1,60 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="8dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="carInfo"
+            type="com.sm.sharemobilityapp.model.CarModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/image_slider"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/car1" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/brand_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Merk + Type"
-            app:layout_constraintStart_toStartOf="@+id/image_slider"
-            app:layout_constraintTop_toBottomOf="@+id/image_slider" />
+            <ImageView
+                android:id="@+id/image_slider"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/car1" />
 
-        <TextView
-            android:id="@+id/price_per_day_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Prijs per dag"
-            app:layout_constraintEnd_toEndOf="@+id/image_slider"
-            app:layout_constraintTop_toBottomOf="@+id/image_slider" />
+            <TextView
+                android:id="@+id/brand_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{carInfo.make}"
+                tools:text="@string/brand"
+                app:layout_constraintStart_toStartOf="@+id/image_slider"
+                app:layout_constraintTop_toBottomOf="@+id/image_slider" />
 
-        <Button
-            android:id="@+id/usage_cost_button"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/usage_cost"
-            android:backgroundTint="@color/colorPrimary"
-            app:layout_constraintEnd_toStartOf="@+id/Ttco"
-            app:layout_constraintStart_toStartOf="@+id/brand_text"
-            app:layout_constraintTop_toBottomOf="@+id/brand_text" />
+            <TextView
+                android:id="@+id/model_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{carInfo.model}"
+                android:paddingStart="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/brand_text"
+                app:layout_constraintStart_toEndOf="@+id/brand_text"
+                app:layout_constraintTop_toTopOf="@+id/brand_text"
+                tools:text="@string/model" />
 
-        <Button
-            android:id="@+id/Ttco"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@string/tco"
-            android:layout_marginLeft="40dp"
-            android:backgroundTint="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/price_per_day_text"
-            app:layout_constraintTop_toBottomOf="@+id/price_per_day_text"
-            app:layout_constraintStart_toEndOf="@+id/usage_cost_button"/>
+            <TextView
+                android:id="@+id/price_per_day_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Double.toString(carInfo.hourlyRate)}"
+                tools:text="@string/price_per_hour"
+                app:layout_constraintEnd_toEndOf="@+id/image_slider"
+                app:layout_constraintTop_toBottomOf="@+id/image_slider" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+            <Button
+                android:id="@+id/usage_cost_button"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:text="@string/usage_cost"
+                android:backgroundTint="@color/colorPrimary"
+                app:layout_constraintEnd_toStartOf="@+id/Ttco"
+                app:layout_constraintStart_toStartOf="@+id/brand_text"
+                app:layout_constraintTop_toBottomOf="@+id/brand_text" />
+
+            <Button
+                android:id="@+id/Ttco"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:text="@string/tco"
+                android:layout_marginLeft="40dp"
+                android:backgroundTint="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="@+id/price_per_day_text"
+                app:layout_constraintTop_toBottomOf="@+id/price_per_day_text"
+                app:layout_constraintStart_toEndOf="@+id/usage_cost_button"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

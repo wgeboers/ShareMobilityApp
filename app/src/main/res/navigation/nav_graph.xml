@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_fragment_filter_to_fragment_start"
             app:destination="@id/home" />
+        <action
+            android:id="@+id/action_fragment_filter_self"
+            app:destination="@id/fragment_filter" />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -88,6 +91,9 @@
         <action
             android:id="@+id/action_fragment_car_rental_details_to_fragment_rent"
             app:destination="@id/fragment_rent" />
+        <argument
+            android:name="carId"
+            app:argType="integer"/>
     </fragment>
     <fragment
         android:id="@+id/fragment_rent"
@@ -97,6 +103,9 @@
         <action
             android:id="@+id/action_fragment_rent_to_home"
             app:destination="@id/home" />
+        <action
+            android:id="@+id/action_fragment_rent_self"
+            app:destination="@id/fragment_rent" />
     </fragment>
     <action android:id="@+id/action_global_fragment_start" app:destination="@id/home" />
     <action android:id="@+id/action_global_fragment_profile" app:destination="@id/profile" />
@@ -107,10 +116,13 @@
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
         <action
+            android:id="@+id/action_fragment_map_to_home"
+            app:destination="@id/home" />
+        <action
             android:id="@+id/action_fragment_map_to_fragment_filter"
             app:destination="@id/fragment_filter" />
         <action
-            android:id="@+id/action_fragment_map_to_home2"
-            app:destination="@id/home" />
+            android:id="@+id/action_fragment_map_to_fragment_car_rental_details"
+            app:destination="@id/fragment_car_rental_details" />
     </fragment>
 </navigation>

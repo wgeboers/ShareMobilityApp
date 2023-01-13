@@ -13,4 +13,5 @@
     <color name="colorPrimary">#03a3eb</color>
     <color name="lastKnownLocationIcon">#FF0B0B</color>
     <color name="dropDownTextColor">#000000</color>
+    <color name="cardView">#D6D6D6</color>
 </resources>

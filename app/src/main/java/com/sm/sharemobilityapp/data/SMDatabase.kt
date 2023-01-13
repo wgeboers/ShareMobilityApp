@@ -1,32 +1,34 @@
 package com.sm.sharemobilityapp.data
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.sm.sharemobilityapp.data.User
+import androidx.room.*
+import com.sm.sharemobilityapp.data.car.Car
+import com.sm.sharemobilityapp.data.car.CarDao
+import com.sm.sharemobilityapp.data.reservation.Reservation
+import com.sm.sharemobilityapp.data.reservation.ReservationDao
+import com.sm.sharemobilityapp.data.user.User
+import com.sm.sharemobilityapp.data.user.UserDao
 
-@Database(entities = [User::class, Car::class, Reservation::class, Image::class], version = 4, exportSchema = false)
-abstract class SMRoomDatabase : RoomDatabase() {
+@Database(entities = [Car::class, Reservation::class, User::class], version = 6)
+abstract class SMRoomDatabase: RoomDatabase() {
+    abstract val carDao: CarDao
+    abstract val userDao: UserDao
+    abstract val reservationDao: ReservationDao
+}
 
-    abstract fun userDao(): UserDao
-    abstract fun carDao(): CarDao
+private lateinit var INSTANCE: SMRoomDatabase
 
-    companion object {
-        private var INSTANCE: SMRoomDatabase? = null
-
-        fun getDatabase(context: Context): SMRoomDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    SMRoomDatabase::class.java,
-                    "sm_database"
-                )
-                    .fallbackToDestructiveMigration()
-                    .build()
-                INSTANCE = instance
-                instance
-            }
+fun getDatabase(context: Context): SMRoomDatabase {
+    synchronized(SMRoomDatabase::class.java) {
+        if (!::INSTANCE.isInitialized) {
+            INSTANCE = Room.databaseBuilder(
+                context.applicationContext,
+                SMRoomDatabase::class.java,
+                "sm_database"
+            )
+                .fallbackToDestructiveMigration()
+                .build()
         }
     }
+    return INSTANCE
 }

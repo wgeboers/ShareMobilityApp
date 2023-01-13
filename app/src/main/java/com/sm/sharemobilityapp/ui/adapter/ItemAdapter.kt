@@ -1,49 +1,60 @@
 package com.sm.sharemobilityapp.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.ui.StartFragment
-import com.sm.sharemobilityapp.model.Car
+import com.sm.sharemobilityapp.data.car.Car
+import com.sm.sharemobilityapp.databinding.OfferListItemBinding
+import com.sm.sharemobilityapp.model.CarModel
+import com.sm.sharemobilityapp.ui.CarRentalDetailsFragmentDirections
+import com.sm.sharemobilityapp.ui.StartFragmentDirections
+import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
 
-class ItemAdapter(
-    private val context: StartFragment,
-    private val dataset: List<Car>
-    ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+class ItemAdapter() : RecyclerView.Adapter<ItemAdapter.CarViewHolder>() {
 
-    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.image_slider)
-        val brandTextView: TextView = view.findViewById(R.id.brand_text)
-        val pricePerDayTextView: TextView = view.findViewById(R.id.price_per_day_text)
-        val totalTextView: TextView = view.findViewById(R.id.total_price_text)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.offer_list_item, parent, false)
-
-        return ItemViewHolder(adapterLayout)
-    }
-
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset[position]
-        holder.imageView.setImageResource(item.image)
-        holder.brandTextView.text = item.make
-        holder.pricePerDayTextView.text = item.pricePerDay.toString()
-        holder.totalTextView.text = item.totalPrice.toString()
-
-        holder.imageView.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.fragment_car_rental_details)
+    var cars : List<CarModel> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
         }
 
-        //holder.textView.text = context.resources.getString(item.stringResourceId)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder {
+        val withDataBinding: OfferListItemBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            CarViewHolder.LAYOUT,
+            parent,
+            false
+        )
+        return (CarViewHolder(withDataBinding))
     }
 
-    override fun getItemCount() = dataset.size
+    override fun getItemCount() = cars.size
+
+    override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
+        holder.viewDataBinding.also {
+            it.carInfo = cars[position]
+            it.imageSlider.setOnClickListener {
+                val carId = cars[position].id
+                val directions = StartFragmentDirections.actionFragmentStartToFragmentCarRentalDetails(carId)
+                it.findNavController().navigate(directions)
+            }
+        }
+    }
+
+    class CarViewHolder(val viewDataBinding: OfferListItemBinding) :
+            RecyclerView.ViewHolder(viewDataBinding.root) {
+                companion object{
+                    @LayoutRes
+                    val LAYOUT = R.layout.offer_list_item
+                }
+            }
 
 }

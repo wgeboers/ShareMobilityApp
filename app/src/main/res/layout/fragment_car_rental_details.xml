@@ -4,86 +4,214 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".carRentalDetailsFragment">
 
+    <data>
+        <variable
+            name="carInfo"
+            type="com.sm.sharemobilityapp.model.CarModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="15dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/image_slider"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="220dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/car1"
                 tools:srcCompat="@drawable/car1" />
 
             <TextView
                 android:id="@+id/brand_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Merk + Type"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@{carInfo.make}"
+                tools:text="@string/brand"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image_slider" />
 
             <TextView
-                android:id="@+id/adres_text"
+                android:id="@+id/model_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="adres gegevens"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/brand_text" />
-
-            <ImageButton
-                android:id="@+id/map_drawable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_map"
-                android:backgroundTint="@android:color/transparent"
-                app:layout_constraintBottom_toBottomOf="@+id/adres_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:tint="@color/colorPrimary"
-                app:layout_constraintTop_toTopOf="@+id/brand_text" />
+                android:paddingStart="5dp"
+                android:text="@{carInfo.model}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/license_plate_text"
+                app:layout_constraintStart_toEndOf="@+id/brand_text"
+                app:layout_constraintTop_toTopOf="@+id/brand_text"
+                tools:text="@string/model" />
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:hint="Omschrijving en algemene voorwaarden"
-                app:layout_constraintEnd_toEndOf="@+id/map_drawable"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/adres_text"
-                app:layout_constraintTop_toBottomOf="@+id/adres_text" />
+                android:id="@+id/license_plate_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{carInfo.licensePlate}"
+                app:layout_constraintStart_toStartOf="@+id/brand_text"
+                app:layout_constraintTop_toBottomOf="@+id/brand_text"
+                tools:text="@string/license_plate" />
+
+            <TextView
+                android:id="@+id/price_per_hour_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="@string/price_per_hour"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/model_text" />
+
+            <TextView
+                android:id="@+id/price_per_day_text_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="5dp"
+                android:text="@string/euroSign"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/price_per_day_text"
+                app:layout_constraintEnd_toStartOf="@+id/price_per_day_text"
+                app:layout_constraintTop_toTopOf="@+id/price_per_day_text" />
 
             <TextView
                 android:id="@+id/price_per_day_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Prijs per dag"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                android:text="@{Double.toString(carInfo.hourlyRate)}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/price_per_hour_text"
+                app:layout_constraintTop_toBottomOf="@+id/price_per_hour_text"
+                tools:text="@string/price_per_hour" />
 
-            <TextView
-                android:id="@+id/total_price_text"
+            <ImageView
+                android:id="@+id/mileage_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Totaal prijs"
-                app:layout_constraintStart_toStartOf="@+id/price_per_day_text"
-                app:layout_constraintTop_toBottomOf="@+id/price_per_day_text" />
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_road"
+                app:layout_constraintStart_toStartOf="@+id/license_plate_text"
+                app:layout_constraintTop_toBottomOf="@+id/license_plate_text"
+                app:tint="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/mileage_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:text="@string/milage"
+                app:layout_constraintStart_toEndOf="@+id/mileage_icon"
+                app:layout_constraintTop_toTopOf="@+id/mileage_icon"
+                app:layout_constraintBottom_toTopOf="@+id/mileage_text_value"/>
+
+            <TextView
+                android:id="@+id/mileage_text_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:hint="124.273 KM"
+                android:text="@{Integer.toString(carInfo.mileage)}"
+                app:layout_constraintStart_toStartOf="@+id/mileage_text"
+                app:layout_constraintTop_toBottomOf="@+id/mileage_text" />
+
+            <ImageView
+                android:id="@+id/car_type_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_fuel"
+                android:paddingStart="25dp"
+                app:layout_constraintStart_toEndOf="@+id/mileage_text"
+                app:layout_constraintTop_toTopOf="@+id/mileage_icon"
+                app:tint="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/car_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:text="@string/type"
+                app:layout_constraintStart_toEndOf="@+id/car_type_icon"
+                app:layout_constraintTop_toTopOf="@+id/car_type_icon" />
+
+            <TextView
+                android:id="@+id/car_type_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="BEV"
+                android:paddingStart="5dp"
+                android:text="@{carInfo.type}"
+                app:layout_constraintStart_toStartOf="@+id/car_type_text"
+                app:layout_constraintTop_toBottomOf="@+id/car_type_text" />
+
+            <TextView
+                android:id="@+id/terms_of_pickup_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/terms_of_pickup"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/mileage_icon"
+                app:layout_constraintTop_toBottomOf="@+id/mileage_text_value" />
+
+            <TextView
+                android:id="@+id/terms_of_pickup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@{carInfo.termsOfPickUp}"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                app:layout_constraintStart_toStartOf="@+id/terms_of_pickup_title"
+                app:layout_constraintTop_toBottomOf="@+id/terms_of_pickup_title"
+                tools:text="terms_of_pickup" />
+
+            <TextView
+                android:id="@+id/terms_of_return_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/terms_of_return"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/terms_of_pickup_title"
+                app:layout_constraintTop_toBottomOf="@+id/terms_of_pickup" />
+
+            <TextView
+                android:id="@+id/terms_of_return"
+                android:layout_width="fill_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_height="wrap_content"
+                android:text="@{carInfo.termsOfReturn}"
+                app:layout_constraintStart_toStartOf="@+id/terms_of_return_title"
+                app:layout_constraintTop_toBottomOf="@+id/terms_of_return_title"
+                tools:text="terms_of_return" />
 
             <Button
                 android:id="@+id/rent_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/Rent"
-                app:layout_constraintBottom_toBottomOf="@+id/total_price_text"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/terms_of_return" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

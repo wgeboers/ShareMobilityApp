@@ -5,4 +5,5 @@
     <color name="colorPrimary">#00547A</color>
     <color name="dropDownTextColor">#FFFFFF</color>
     <color name="lastKnownLocationIcon">#8A0000</color>
+    <color name="cardView">#494949</color>
 </resources>

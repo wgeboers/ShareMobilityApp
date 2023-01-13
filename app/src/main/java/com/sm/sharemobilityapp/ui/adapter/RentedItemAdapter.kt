@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.ui.ProfileFragment
-import com.sm.sharemobilityapp.model.Car
+import com.sm.sharemobilityapp.model.CarModel
 
 class RentedItemAdapter(
     private val context: ProfileFragment,
-    private val dataset: List<Car>
+    private val dataset: List<CarModel>
 ) : RecyclerView.Adapter<RentedItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
@@ -30,9 +30,9 @@ class RentedItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        holder.imageView.setImageResource(item.image)
-        holder.startDateTextView.text = item.rentedStartDate
-        holder.endDateTextView.text = item.rentedEndDate
+        //holder.imageView.setImageResource(item.image)
+        holder.startDateTextView.text = "7-1-2023"
+        holder.endDateTextView.text = "9-1-2023"
     }
 
     override fun getItemCount() = dataset.size

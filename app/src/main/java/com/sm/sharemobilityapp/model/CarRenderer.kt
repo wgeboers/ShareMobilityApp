@@ -16,8 +16,8 @@ import com.sm.sharemobilityapp.R
 class CarRenderer(
     private val context: Context,
     map: GoogleMap,
-    clusterManager: ClusterManager<Car>
-) : DefaultClusterRenderer<Car>(context, map, clusterManager) {
+    clusterManager: ClusterManager<CarModel>
+) : DefaultClusterRenderer<CarModel>(context, map, clusterManager) {
 
     private val carIcon: BitmapDescriptor by lazy {
         val color = ContextCompat.getColor(context,
@@ -31,7 +31,7 @@ class CarRenderer(
     }
 
     override fun onBeforeClusterItemRendered(
-        item: Car,
+        item: CarModel,
         markerOptions: MarkerOptions
     ) {
         val location = LatLng(item.latitude, item.longitude)
@@ -40,7 +40,7 @@ class CarRenderer(
             .icon(carIcon)
     }
 
-    override fun onClusterItemRendered(clusterItem: Car, marker: Marker) {
+    override fun onClusterItemRendered(clusterItem: CarModel, marker: Marker) {
         marker.tag = clusterItem
     }
 

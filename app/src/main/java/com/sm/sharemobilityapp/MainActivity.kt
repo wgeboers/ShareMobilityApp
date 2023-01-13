@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.sm.sharemobilityapp.databinding.ActivityMainBinding
-import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.model.Car
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
