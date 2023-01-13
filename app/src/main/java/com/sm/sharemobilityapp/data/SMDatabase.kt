@@ -6,11 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.sm.sharemobilityapp.data.User
 
-@Database(entities = [User::class, Car::class, Reservation::class, Image::class], version = 4, exportSchema = false)
+@Database(entities = [User::class, Car::class, Reservation::class, Image::class], version = 11, exportSchema = false)
 abstract class SMRoomDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
     abstract fun carDao(): CarDao
+    abstract fun reservationDao(): ReservationDao
+    abstract fun imageDao(): ImageDao
 
     companion object {
         private var INSTANCE: SMRoomDatabase? = null

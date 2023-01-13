@@ -25,13 +25,13 @@ data class CarInfo(
 	val mileage: Int? = null,
 
 	@Json(name="hourlyRate")
-	val hourlyRate: Any? = null,
+	val hourlyRate: Double? = null,
 
 	@Json(name="longitude")
-	val longitude: Any? = null,
+	val longitude: Double? = null,
 
 	@Json(name="latitude")
-	val latitude: Any? = null,
+	val latitude: Double? = null,
 
 	@Json(name="termsOfPickup")
 	val termsOfPickup: String? = null,
@@ -46,17 +46,17 @@ data class CarInfo(
 	val amountOfYearsOwned: Int? = null,
 
 	@Json(name="usageCostsPerKm")
-	val usageCostsPerKm: Any? = null,
+	val usageCostsPerKm: Double? = null,
 
 	@Json(name="totalCostOfOwnership")
-	val totalCostOfOwnership: Any? = null,
+	val totalCostOfOwnership: Double? = null,
 
 	@Json(name="carImages")
-	val carImages: List<Any?>? = null,
+	val carImages: List<ImageInfo>,
 
 	@Json(name="fuelType")
 	val fuelType: String? = null,
 
 	@Json(name="efficiency")
-	val efficiency: Any? = null
+	val efficiency: Double? = null
 )

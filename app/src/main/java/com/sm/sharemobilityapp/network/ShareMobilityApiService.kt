@@ -4,11 +4,12 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.ResponseBody
 import retrofit2.Response
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
-private const val BASE_URL ="http://10.0.0.2:8080/"
+private const val BASE_URL ="http://192.168.1.135:8080/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -56,10 +57,10 @@ interface ShareMobilityApiService {
     suspend fun getCar(@Path("id") carId: Long): CarInfo
 
     @GET("cars/{make}")
-    suspend fun getCarbyMake(@Path("make") carMake: String): CarInfo
+    suspend fun getCarbyMake(@Path("make") carMake: String): List<CarInfo>
 
     @GET("cars/{model}")
-    suspend fun getCarbyModel(@Path("model") carModel: String): CarInfo
+    suspend fun getCarbyModel(@Path("model") carModel: String): List<CarInfo>
 
     @DELETE("cars/{id}")
     suspend fun deleteCar(@Path("id") carId: Long)
@@ -68,39 +69,39 @@ interface ShareMobilityApiService {
     suspend fun putCar(@Body carInfo: CarInfo, @Path("id") carId: Long): CarInfo
 
     @POST(value = "cars")
-    suspend fun postCar(@Body carInfo: CarInfo)
+    suspend fun postCar(@Body carInfo: CarInfo) : Response<CarInfo>
 
     // Registration
     @GET("carsByOwner/cars_owned/{id}")
     suspend fun getAllRegistrationsById(@Path("id") id: Long): List<Registration>
 
     @POST(value = "carsByOwner")
-    suspend fun postRegistration(@Body registration: Registration): Registration
+    suspend fun postRegistration(@Body registrationDto: RegistrationDto): Response<Registration>
 
     @DELETE("carsByOwner")
     suspend fun deleteRegistration(@Body registration: Registration)
 
     // Reservation
     @GET("reservation")
-    suspend fun getAllReservations(): List<Reservation>
+    suspend fun getAllReservations(): List<ReservationInfo>
 
-    @GET("reservation/{id}")
-    suspend fun getReservation(id: Long): Reservation
+    @GET("reservaton/{id}")
+    suspend fun getReservation(id: Long): ReservationInfo
 
     @GET("reservation/byCar/{id")
-    suspend fun getReservationByCarId(id: Long): List<Reservation>
+    suspend fun getReservationByCarId(id: Long): List<ReservationInfo>
 
     @GET("reservation/byUser")
-    suspend fun getReservationByUser(id: Long): List<Reservation>
+    suspend fun getReservationByUser(id: Long): List<ReservationInfo>
 
     @DELETE("reservation/{id}")
     suspend fun deleteReservation(@Path("id") id: Long)
 
     @PUT(value = "reservation/{id)")
-    suspend fun updateReservationById(@Path("id") id: Long, @Body reservation: Reservation): Reservation
+    suspend fun updateReservationbyId(@Path("id") id: Long, @Body reservation: ReservationInfo): ReservationInfo
 
     @POST(value = "reservation")
-    suspend fun postReservation(@Body reservation: Reservation): Reservation
+    suspend fun postReservation(@Body reservation: ReservationInfo): Response<ReservationInfo>
 
 }
 
