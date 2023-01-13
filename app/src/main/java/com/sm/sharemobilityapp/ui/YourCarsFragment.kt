@@ -8,29 +8,31 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.databinding.FragmentStartBinding
-import com.sm.sharemobilityapp.ui.adapter.ItemAdapter
-import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import com.sm.sharemobilityapp.R
+import com.sm.sharemobilityapp.ui.adapter.CarOwnerListItemAdapter
+import com.sm.sharemobilityapp.data.Datasource
 import com.sm.sharemobilityapp.databinding.FragmentYourCarsBinding
-import kotlinx.coroutines.launch
+import com.sm.sharemobilityapp.ui.viewmodel.CarOwnerListViewModel
+import com.sm.sharemobilityapp.ui.viewmodel.CarOwnerListViewModelFactory
+import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModel
+import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModelFactory
 
-class YourCarsFragment : Fragment() {
-    private val viewModel: CarViewModel by lazy {
-        val activity = requireNotNull(this.activity){
-
-        }
-        ViewModelProvider(this, CarViewModel.CarViewModelFactory(activity.application))
-            .get(CarViewModel::class.java)
+class CarOwnerFragment : Fragment() {
+    private var _binding: FragmentYourCarsBinding? = null
+    private val binding get() = _binding!!
+    private val carOwnerListViewModel: CarOwnerListViewModel by viewModels {
+        CarOwnerListViewModelFactory()
     }
 
-    private var viewModelAdapter: ItemAdapter? = null
+    /*
+    *  The logged in userid is needed to get the cars from the API, which is saved in MAVM
+     */
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
+        MainActivityViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,17 +63,19 @@ class YourCarsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.cars.collect() {
-                    cars -> cars.apply {
-                viewModelAdapter?.cars = cars
-                }
-            }
+        val recyclerView = binding.recyclerView
+        mainActivityViewModel.userId.observe(viewLifecycleOwner) { id ->
+            carOwnerListViewModel.getCarsByOwner(id)
+        }
+        //carOwnerListViewModel.getCarsByOwnerTest()
+        carOwnerListViewModel.carData.observe(viewLifecycleOwner) { response ->
+                recyclerView.adapter = CarOwnerListItemAdapter(response)
         }
 
-        view.findViewById<Button>(R.id.add_car).setOnClickListener{
-                view -> view.findNavController().navigate(R.id.action_fragment_your_cars_to_fragment_add_car)
+        recyclerView.setHasFixedSize(true)
+
+        binding.addCar.setOnClickListener {
+                view -> view.findNavController().navigate(R.id.fragment_add_car)
         }
     }
 

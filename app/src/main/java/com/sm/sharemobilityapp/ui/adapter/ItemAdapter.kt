@@ -17,6 +17,9 @@ import com.sm.sharemobilityapp.model.CarModel
 import com.sm.sharemobilityapp.ui.CarRentalDetailsFragmentDirections
 import com.sm.sharemobilityapp.ui.StartFragmentDirections
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
+import com.sm.sharemobilityapp.databinding.FragmentStartBinding
+import com.sm.sharemobilityapp.ui.StartFragment
+import com.sm.sharemobilityapp.model.Car
 
 class ItemAdapter() : RecyclerView.Adapter<ItemAdapter.CarViewHolder>() {
 

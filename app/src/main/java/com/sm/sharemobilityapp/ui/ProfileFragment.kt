@@ -17,15 +17,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.databinding.FragmentProfileBinding
-import com.sm.sharemobilityapp.databinding.FragmentStartBinding
-import com.sm.sharemobilityapp.ui.adapter.ItemAdapter
-import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
+import com.sm.sharemobilityapp.network.UserInfo
 import com.sm.sharemobilityapp.ui.viewmodel.UserViewModel
-import kotlinx.coroutines.launch
-
+import com.sm.sharemobilityapp.ui.viewmodel.UserViewModelFactory
 
 class ProfileFragment : Fragment() {
     private val userViewModel: UserViewModel by activityViewModels()
+
+    private val userViewModel: UserViewModel by activityViewModels {
+        UserViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,10 +51,47 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.youre_cars_button).setOnClickListener{
-                view -> view.findNavController().navigate(R.id.action_fragment_profile_to_fragment_your_cars)
+//        val recyclerView = binding.recyclerView
+//        recyclerView.setHasFixedSize(true)
+
+        binding.apply {
+            viewModel = userViewModel
+        }
+
+        /*
+         * Load profile of the logged user
+         */
+        userViewModel.userInfo.observe(viewLifecycleOwner) { response ->
+            if(response != null) {
+                Toast.makeText(context, "$response", Toast.LENGTH_SHORT).show()
+                binding.profileName.setText(response.firstname + " " + response.lastname)
+                binding.profileAddress.setText(response.address)
+                binding.profileEmail.setText(response.username)
+                binding.profilePassword.setText(response.password)
+            } else {
+                Toast.makeText(context, "What the fuck?", Toast.LENGTH_SHORT).show()
+                //findNavController().navigate(R.id.action_global_fragment_login)
+            }
+        }
+
+        /*
+         * Edit profile of the logged user
+         * !!!ID AND TYPE HAVE TO BE NULL, BECAUSE ONCE CREATED THEY SHOULD NOT BE CHANGED!!!
+         */
+        binding.editButton.setOnClickListener {
+            val userInfo = UserInfo(null,
+                null,
+                binding.profileEmail.text.toString(),
+                binding.profilePassword.text.toString(),
+                binding.profileName.text!!.split(" ")[0],
+                binding.profileName.text!!.split(" ")[1],
+                binding.profileAddress.text.toString()
+            )
+            userViewModel.updateUser(userInfo)
+        }
+        binding.yourCarsButton.setOnClickListener {
+                view -> view.findNavController().navigate(R.id.fragment_your_cars)
         }
     }
 

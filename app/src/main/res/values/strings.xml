@@ -68,7 +68,16 @@
     <string name="milage">Kilometerstand</string>
     <string name="terms_of_pickup">Voorwaarden afhalen</string>
     <string name="terms_of_return">Voorwaarden retour</string>
-
+    <string name="edit">Verander gegevens</string>
+    <string name="carowner">Verhuurder</string>
+    <string name="caruser">Huurder</string>
+    <string name="registration_address">Adres</string>
+    <string name="euroSign">"€ "</string>
+    <string name="terms">Voorwaarden</string>
+    <string name="pickupTerms">Voorwaarden ophalen</string>
+    <string name="returnTerms">Voorwaarden terugbrengen</string>
+    <string name="rent">Huur</string>
+    
     <!--dit is dummy data-->
     <string-array name="brands">
         <item>Audi</item>
@@ -81,13 +90,13 @@
         <item>i8</item>
     </string-array>
     <string-array name="types">
-        <item>Brandstof</item>
-        <item>Electriciteit</item>
-        <item>Waterstof</item>
+        <item>ICE</item>
+        <item>BEV</item>
+        <item>FCEV</item>
     </string-array>
     <string-array name="fuels">
-        <item>Benzine</item>
-        <item>Diesel</item>
+        <item>GASOLINE</item>
+        <item>DIESEL</item>
         <item>LPG</item>
     </string-array>
     <string-array name="radius">

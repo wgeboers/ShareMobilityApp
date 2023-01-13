@@ -7,15 +7,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.ui.YourCarsFragment
-import com.sm.sharemobilityapp.model.CarModel
+import com.sm.sharemobilityapp.ui.CarOwnerFragment
+import com.sm.sharemobilityapp.model.Car
+import com.sm.sharemobilityapp.network.Registration
 
-class YoureCarListItemAdapter(
-    private val context: YourCarsFragment,
-    private val dataset: List<CarModel>
-) : RecyclerView.Adapter<YoureCarListItemAdapter.ItemViewHolder>() {
+class CarOwnerListItemAdapter(
+    private val carData: List<Registration>
+) : RecyclerView.Adapter<CarOwnerListItemAdapter.ItemViewHolder>() {
 
-    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.image_slider)
         val brandModelTextView: TextView = view.findViewById(R.id.brand_text)
         val pricePerDayTextView: TextView = view.findViewById(R.id.price_per_day_text)
@@ -29,11 +29,10 @@ class YoureCarListItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset[position]
-        //holder.imageView.setImageResource(item.image)
+        val item = carData[position]
         holder.brandModelTextView.text = item.make+" "+item.model
         holder.pricePerDayTextView.text = item.hourlyRate.toString()
     }
 
-    override fun getItemCount() = dataset.size
+    override fun getItemCount() = carData.size
 }

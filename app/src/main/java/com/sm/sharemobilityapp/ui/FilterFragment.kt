@@ -1,6 +1,7 @@
 package com.sm.sharemobilityapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +11,26 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.data.car.Car
 import com.sm.sharemobilityapp.databinding.FragmentFilterBinding
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
+import com.sm.sharemobilityapp.ui.viewmodel.CarViewModelFactory
+import com.sm.sharemobilityapp.ui.viewmodel.UserViewModel
+import com.sm.sharemobilityapp.ui.viewmodel.UserViewModelFactory
+import java.util.concurrent.TimeUnit
 
 class FilterFragment : Fragment() {
     private var _binding: FragmentFilterBinding? = null
     private val binding get() = _binding!!
     private val carViewModel: CarViewModel by activityViewModels()
+
+    private val carViewModel: CarViewModel by viewModels {
+        CarViewModelFactory(
+            (activity?.application as BaseApplication).database.carDao()
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
