@@ -16,7 +16,7 @@ class PhotoUtils {
 
         // Figure out how much to scale down by
         val sampleSize = if (srcHeight <= destHeight && srcWidth <= destWidth) {
-
+            1
         } else {
             val heightScale = srcHeight / destHeight
             val widthScale = srcWidth / destWidth
