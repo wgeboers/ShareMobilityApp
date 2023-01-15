@@ -1,15 +1,19 @@
 package com.sm.sharemobilityapp.repository
 
+import android.util.Log
 import com.sm.sharemobilityapp.data.SMRoomDatabase
 import com.sm.sharemobilityapp.data.car.Car
 import com.sm.sharemobilityapp.data.car.asDomainModel
 import com.sm.sharemobilityapp.model.CarModel
 import com.sm.sharemobilityapp.network.CarInfo
+import com.sm.sharemobilityapp.network.RegistrationInfo
+import com.sm.sharemobilityapp.network.RegistrationDto
 import com.sm.sharemobilityapp.network.ShareMobilityApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
 class CarRepository(private val database: SMRoomDatabase) {
     var cars: Flow<List<CarModel>> = database.carDao.getAll().map { it.asDomainModel() }
@@ -23,13 +27,39 @@ class CarRepository(private val database: SMRoomDatabase) {
         }
     }
 
+    suspend fun insertCar(carInfo: CarInfo) : Response<CarInfo> {
+        var returnInfo: Response<CarInfo>
+        withContext(Dispatchers.IO) {
+            returnInfo = ShareMobilityApi.retrofitService.postCar(carInfo)
+        }
+        return returnInfo
+    }
+
+    suspend fun getCarsByUser(userId: Int): Flow<List<CarModel>> {
+        val cars: Flow<List<CarModel>> =
+            database.carDao.getcarsByUserId(userId).map { it.asDomainModel() }
+
+        return cars
+    }
+
+    suspend fun postRegistration(carId: Int, ownerId: Int) : Response<RegistrationInfo> {
+        Log.d("DATAREP", carId.toString() + ' ' + ownerId.toString())
+        return ShareMobilityApi.retrofitService.postRegistration(
+            RegistrationDto(
+            carId = carId,
+            carOwnerId = ownerId
+        )
+        )
+    }
+
     // map CarInfo to database Car
     private fun prepareCars(carInfo: List<CarInfo>): List<Car> {
-        var carUsers: List<Car> = carInfo.map{
-            Car (
+        var carUsers: List<Car> = carInfo.map {
+            Car(
                 type = it.type,
                 id = it.id,
                 licensePlate = it.licensePlate,
+                carOwnerID = it.carOwner?.id?.toInt() ?: 0,
                 make = it.make,
                 model = it.model,
                 mileage = it.mileage,
@@ -44,7 +74,8 @@ class CarRepository(private val database: SMRoomDatabase) {
                 totalCostOfOwnership = it.totalCostOfOwnership,
                 rechargeTimeInMinutes = it.rechargeTimeInMinutes,
                 maxRangeInKilometers = it.maxRangeInKilometers,
-                maxCapacityOfBattery = it.maxCapacityOfBattery
+                maxCapacityOfBattery = it.maxCapacityOfBattery,
+                fuelType = it.fuelType
             )
         }
 

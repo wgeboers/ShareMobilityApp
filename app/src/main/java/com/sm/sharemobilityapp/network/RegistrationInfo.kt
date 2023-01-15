@@ -2,61 +2,61 @@ package com.sm.sharemobilityapp.network
 
 import com.squareup.moshi.Json
 
-data class Registration (
-    @Json(name="type")
+data class RegistrationInfo(
+    @Json(name = "type")
     val type: String? = null,
 
-    @Json(name="id")
+    @Json(name = "id")
     val id: Int? = null,
 
-    @Json(name="licensePlate")
+    @Json(name = "licensePlate")
     val licensePlate: String? = null,
 
-    @Json(name="carOwner")
+    @Json(name = "carOwner")
     val carOwner: UserInfo? = null,
 
-    @Json(name="make")
+    @Json(name = "make")
     val make: String? = null,
 
-    @Json(name="model")
+    @Json(name = "model")
     val model: String? = null,
 
-    @Json(name="mileage")
+    @Json(name = "mileage")
     val mileage: Int? = null,
 
-    @Json(name="hourlyRate")
+    @Json(name = "hourlyRate")
     val hourlyRate: Double? = null,
 
-    @Json(name="longitude")
+    @Json(name = "longitude")
     val longitude: Double? = null,
 
-    @Json(name="latitude")
+    @Json(name = "latitude")
     val latitude: Double? = null,
 
-    @Json(name="termsOfPickup")
+    @Json(name = "termsOfPickup")
     val termsOfPickup: String? = null,
 
-    @Json(name="termsOfReturn")
+    @Json(name = "termsOfReturn")
     val termsOfReturn: String? = null,
 
-    @Json(name="purchasePrice")
+    @Json(name = "purchasePrice")
     val purchasePrice: Int? = null,
 
-    @Json(name="amountOfYearsOwned")
+    @Json(name = "amountOfYearsOwned")
     val amountOfYearsOwned: Int? = null,
 
-    @Json(name="usageCostsPerKm")
+    @Json(name = "usageCostsPerKm")
     val usageCostsPerKm: Double? = null,
 
-    @Json(name="totalCostOfOwnership")
+    @Json(name = "totalCostOfOwnership")
     val totalCostOfOwnership: Double? = null,
 
-    @Json(name="carImages")
+    @Json(name = "carImages")
     val carImages: List<Any?>? = null,
 
-    @Json(name="fuelType")
+    @Json(name = "fuelType")
     val fuelType: String? = null,
 
-    @Json(name="efficiency")
+    @Json(name = "efficiency")
     val efficiency: Double? = null
 )

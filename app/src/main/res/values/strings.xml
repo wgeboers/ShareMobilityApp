@@ -39,7 +39,6 @@
     <string name="registrate">Registreren</string>
     <string name="already_got_account">Ik heb al een account</string>
     <string name="accept_terms_and_conditions">Akkoord algemene voorwaarden</string>
-    <string name="rent">Huren</string>
     <string name="total_price">Totaal prijs</string>
     <string name="tco">TCO</string>
     <string name="usage_cost">Verbruikkosten</string>
@@ -51,7 +50,6 @@
     <string name="rate">Beoordelen</string>
     <string name="open">Open</string>
     <string name="close">Sluiten</string>
-    <string name="euroSign">€</string>
     <string name="car_icon_description">car icon</string>
     <string name="map">Map</string>
     <string name="search">Zoek nu</string>
@@ -72,12 +70,22 @@
     <string name="carowner">Verhuurder</string>
     <string name="caruser">Huurder</string>
     <string name="registration_address">Adres</string>
-    <string name="euroSign">"€ "</string>
+    <string name="euroSign">€</string>
     <string name="terms">Voorwaarden</string>
     <string name="pickupTerms">Voorwaarden ophalen</string>
     <string name="returnTerms">Voorwaarden terugbrengen</string>
     <string name="rent">Huur</string>
-    
+    <string name="username">Gebruikersnaam</string>
+    <string name="account_creation_reason">Waar wilt u de applicatie voornamelijk voor gebruiken?</string>
+    <string name="renting">Huren</string>
+    <string name="leasing">Verhuren</string>
+    <string name="starting_date">Start datum</string>
+    <string name="ending_date">Eind datum</string>
+    <string name="terms_and_conditions">Huurder verklaart akkoord te gaan met de algemene voorwaarden van ShareMobility. Verhuurder verklaart dat de auto op het moment van de aanvraag van de huurperiode in deugelijke staat verkeert. Zowel huurder als de in het vontract genomede bestuurders zijn hoodelijk aansprakelijk voor nakomen van alle verplichtingen die ui dit contract voortvloeien.</string>
+    <string name="terms_and_conditions_title">Algemene voorwaarden</string>
+    <string name="fotos">Foto\'s</string>
+    <string name="address">Adres</string>
+
     <!--dit is dummy data-->
     <string-array name="brands">
         <item>Audi</item>

@@ -19,8 +19,8 @@ fun List<Reservation>.asDomainModel(): List<ReservationModel> {
             id = it.id,
             carId = it.carId,
             userId = it.userId,
-            startReservation = it.startReservation,
-            endReservation = it.endReservation
+            startReservation = it.startReservation.take(10),
+            endReservation = it.endReservation.take(10)
         )
     }
 }

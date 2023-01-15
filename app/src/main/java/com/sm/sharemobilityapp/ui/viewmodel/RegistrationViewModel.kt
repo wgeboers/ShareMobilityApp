@@ -1,7 +1,5 @@
 package com.sm.sharemobilityapp.ui.viewmodel
 
-import android.view.View
-import android.widget.RadioGroup
 import androidx.lifecycle.*
 import com.sm.sharemobilityapp.network.ShareMobilityApi
 import com.sm.sharemobilityapp.network.UserInfo
@@ -22,9 +20,9 @@ class RegistrationViewModel : ViewModel() {
     }
 }
 
-class RegistrationViewModelFactory() : ViewModelProvider.Factory{
+class RegistrationViewModelFactory() : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(RegistrationViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(RegistrationViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return RegistrationViewModel() as T
         }

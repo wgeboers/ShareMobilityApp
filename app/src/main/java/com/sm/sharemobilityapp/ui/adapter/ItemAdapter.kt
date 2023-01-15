@@ -4,26 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.data.car.Car
 import com.sm.sharemobilityapp.databinding.OfferListItemBinding
 import com.sm.sharemobilityapp.model.CarModel
-import com.sm.sharemobilityapp.ui.CarRentalDetailsFragmentDirections
 import com.sm.sharemobilityapp.ui.StartFragmentDirections
-import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
-import com.sm.sharemobilityapp.databinding.FragmentStartBinding
-import com.sm.sharemobilityapp.ui.StartFragment
-import com.sm.sharemobilityapp.model.Car
 
 class ItemAdapter() : RecyclerView.Adapter<ItemAdapter.CarViewHolder>() {
 
-    var cars : List<CarModel> = emptyList()
+    var cars: List<CarModel> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -46,18 +36,19 @@ class ItemAdapter() : RecyclerView.Adapter<ItemAdapter.CarViewHolder>() {
             it.carInfo = cars[position]
             it.imageSlider.setOnClickListener {
                 val carId = cars[position].id
-                val directions = StartFragmentDirections.actionFragmentStartToFragmentCarRentalDetails(carId)
+                val directions =
+                    StartFragmentDirections.actionFragmentStartToFragmentCarRentalDetails(carId!!)
                 it.findNavController().navigate(directions)
             }
         }
     }
 
     class CarViewHolder(val viewDataBinding: OfferListItemBinding) :
-            RecyclerView.ViewHolder(viewDataBinding.root) {
-                companion object{
-                    @LayoutRes
-                    val LAYOUT = R.layout.offer_list_item
-                }
-            }
+        RecyclerView.ViewHolder(viewDataBinding.root) {
+        companion object {
+            @LayoutRes
+            val LAYOUT = R.layout.offer_list_item
+        }
+    }
 
 }

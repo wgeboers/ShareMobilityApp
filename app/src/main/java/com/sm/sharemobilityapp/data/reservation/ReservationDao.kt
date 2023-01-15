@@ -14,6 +14,9 @@ interface ReservationDao {
     @Query("SELECT * FROM reservation")
     fun getAll(): Flow<List<Reservation>>
 
+    @Query("SELECT * FROM reservation WHERE userId = :userId")
+    fun getReservationsByUserId(userId: Int): Flow<List<Reservation>>
+
     @Query("DELETE FROM reservation")
     fun deleteAllReservations()
 }

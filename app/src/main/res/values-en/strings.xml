@@ -62,12 +62,17 @@
     <string name="No">No</string>
     <string name="EnableGpsWarning">Enable GPS</string>
     <string name="CannotDetermineLocation">Cannot determine location</string>
-    <string name="edit">edit</string>
-    <string name="carowner">owner</string>
-    <string name="caruser">renter</string>
-    <string name="registration_address">address</string>
-    <string name="rent">rent</string>
+    <string name="edit">Edit</string>
+    <string name="carowner">Owner</string>
+    <string name="caruser">Renter</string>
+    <string name="registration_address">Address</string>
+    <string name="rent">Rent</string>
     <string name="terms">Terms</string>
     <string name="pickupTerms">Terms of pickup</string>
     <string name="returnTerms">Terms of return</string>
+    <string name="filter">Filter</string>
+    <string name="value">Value</string>
+    <string name="milage">Miles</string>
+    <string name="terms_of_pickup">Terms of pickup</string>
+    <string name="terms_of_return">Terms of return</string>
 </resources>

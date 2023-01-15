@@ -2,22 +2,17 @@ package com.sm.sharemobilityapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.RadioButton
 import androidx.activity.viewModels
-import androidx.core.view.get
-import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.sm.sharemobilityapp.databinding.ActivityMainBinding
-import com.sm.sharemobilityapp.ui.LoginFragment
 import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModelFactory
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
-    private val mainActivityViewModel : MainActivityViewModel by viewModels {
+    private val mainActivityViewModel: MainActivityViewModel by viewModels {
         MainActivityViewModelFactory()
     }
 
@@ -32,10 +27,11 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         mainActivityViewModel.loginSuccessful.observe(this) { result ->
-            if(result == true) {
+            if (result == true) {
                 binding.bottomNavigationView.menu.getItem(1).isVisible = true
-                binding.bottomNavigationView.menu.getItem(2).setIcon(R.drawable.ic_logout)
-                binding.bottomNavigationView.menu.getItem(2).title = "Logout"
+                binding.bottomNavigationView.menu.getItem(2).isVisible = false
+//                binding.bottomNavigationView.menu.getItem(2).setIcon(R.drawable.ic_logout)
+//                binding.bottomNavigationView.menu.getItem(2).title = "Logout"
             } else {
                 binding.bottomNavigationView.menu.getItem(1).isVisible = false
                 binding.bottomNavigationView.menu.getItem(2).isVisible = true
@@ -43,9 +39,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.home -> {
-                    navHostFragment.navController.navigate(R.id.fragment_add_car)
+                    navHostFragment.navController.navigate(R.id.action_global_fragment_start)
                 }
                 R.id.profile -> {
                     navHostFragment.navController.navigate(R.id.action_global_fragment_profile)

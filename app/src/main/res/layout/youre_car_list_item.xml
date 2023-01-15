@@ -11,7 +11,12 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,58 +29,138 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/car1"
                 tools:srcCompat="@drawable/car1" />
 
             <TextView
                 android:id="@+id/brand_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
                 android:text="@{carInfo.make}"
-                tools:text="@string/brand"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/price_per_hour_value"
                 app:layout_constraintStart_toStartOf="@+id/image_slider"
-                app:layout_constraintTop_toBottomOf="@+id/image_slider" />
+                app:layout_constraintTop_toTopOf="@+id/price_per_hour_text"
+                tools:text="@string/brand" />
+
+            <TextView
+                android:id="@+id/license_plate_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{carInfo.licensePlate}"
+                app:layout_constraintStart_toStartOf="@+id/brand_text"
+                app:layout_constraintTop_toBottomOf="@+id/brand_text"
+                tools:text="@string/license_plate" />
 
             <TextView
                 android:id="@+id/model_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{carInfo.model}"
                 android:paddingStart="5dp"
+                android:text="@{carInfo.model}"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/brand_text"
                 app:layout_constraintStart_toEndOf="@+id/brand_text"
                 app:layout_constraintTop_toTopOf="@+id/brand_text"
                 tools:text="@string/model" />
 
             <TextView
-                android:id="@+id/price_per_day_text"
+                android:id="@+id/price_per_hour_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{Double.toString(carInfo.hourlyRate)}"
-                tools:text="@string/price_per_hour"
-                app:layout_constraintEnd_toEndOf="@+id/image_slider"
+                android:paddingTop="5dp"
+                android:paddingEnd="15dp"
+                android:text="@string/price_per_hour"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_slider" />
 
-            <Button
-                android:id="@+id/usage_cost_button"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:text="@string/usage_cost"
-                android:backgroundTint="@color/colorPrimary"
-                app:layout_constraintEnd_toStartOf="@+id/Ttco"
-                app:layout_constraintStart_toStartOf="@+id/brand_text"
-                app:layout_constraintTop_toBottomOf="@+id/brand_text" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="5dp"
+                android:text="@string/euroSign"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/price_per_hour_value"
+                app:layout_constraintEnd_toStartOf="@+id/price_per_hour_value"
+                app:layout_constraintTop_toBottomOf="@+id/price_per_hour_text" />
 
-            <Button
-                android:id="@+id/Ttco"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:text="@string/tco"
-                android:layout_marginLeft="40dp"
-                android:backgroundTint="@color/colorPrimary"
-                app:layout_constraintEnd_toEndOf="@+id/price_per_day_text"
-                app:layout_constraintTop_toBottomOf="@+id/price_per_day_text"
-                app:layout_constraintStart_toEndOf="@+id/usage_cost_button"/>
+            <TextView
+                android:id="@+id/price_per_hour_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="15dp"
+                android:text="@{Double.toString(carInfo.hourlyRate)}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/price_per_hour_text"
+                tools:text="@string/value" />
 
+            <ImageView
+                android:id="@+id/mileage_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_road"
+                app:layout_constraintStart_toStartOf="@+id/license_plate_text"
+                app:layout_constraintTop_toBottomOf="@+id/license_plate_text"
+                app:tint="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/mileage_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:text="@string/milage"
+                app:layout_constraintBottom_toTopOf="@+id/mileage_text_value"
+                app:layout_constraintStart_toEndOf="@+id/mileage_icon"
+                app:layout_constraintTop_toTopOf="@+id/mileage_icon" />
+
+            <TextView
+                android:id="@+id/mileage_text_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="124.273 KM"
+                android:paddingStart="5dp"
+                android:text="@{Integer.toString(carInfo.mileage)}"
+                app:layout_constraintStart_toStartOf="@+id/mileage_text"
+                app:layout_constraintTop_toBottomOf="@+id/mileage_text" />
+
+            <ImageView
+                android:id="@+id/car_type_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_fuel"
+                android:paddingStart="25dp"
+                app:layout_constraintStart_toEndOf="@+id/mileage_text"
+                app:layout_constraintTop_toTopOf="@+id/mileage_icon"
+                app:tint="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/car_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:text="@string/type"
+                app:layout_constraintStart_toEndOf="@+id/car_type_icon"
+                app:layout_constraintTop_toTopOf="@+id/car_type_icon" />
+
+            <TextView
+                android:id="@+id/car_type_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="BEV"
+                android:paddingStart="5dp"
+                android:text="@{carInfo.fuelType}"
+                app:layout_constraintStart_toStartOf="@+id/car_type_text"
+                app:layout_constraintTop_toBottomOf="@+id/car_type_text" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -20,7 +20,8 @@ class CarRenderer(
 ) : DefaultClusterRenderer<CarModel>(context, map, clusterManager) {
 
     private val carIcon: BitmapDescriptor by lazy {
-        val color = ContextCompat.getColor(context,
+        val color = ContextCompat.getColor(
+            context,
             R.color.colorPrimary
         )
         BitmapHelper.vectorToBitmap(
@@ -34,7 +35,7 @@ class CarRenderer(
         item: CarModel,
         markerOptions: MarkerOptions
     ) {
-        val location = LatLng(item.latitude, item.longitude)
+        val location = LatLng(item.latitude!!, item.longitude!!)
         markerOptions.title(item.make)
             .position(location)
             .icon(carIcon)

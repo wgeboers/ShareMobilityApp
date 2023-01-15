@@ -5,20 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
-import com.sm.sharemobilityapp.data.car.Car
 import com.sm.sharemobilityapp.databinding.FragmentCarRentalDetailsBinding
-import com.sm.sharemobilityapp.databinding.OfferListItemBinding
-import com.sm.sharemobilityapp.model.CarModel
-import com.sm.sharemobilityapp.ui.adapter.ItemAdapter
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -44,10 +37,12 @@ class CarRentalDetailsFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             binding.carInfo = carViewModel.car.first().elementAtOrNull(0)
+            carViewModel.setCarPricePerHour(carViewModel.car.first().elementAtOrNull(0)?.hourlyRate)
         }
 
-        view.findViewById<Button>(R.id.rent_button).setOnClickListener{
-                view -> view.findNavController().navigate(R.id.action_fragment_car_rental_details_to_fragment_rent)
+        view.findViewById<Button>(R.id.rent_button).setOnClickListener { view ->
+            view.findNavController()
+                .navigate(R.id.action_fragment_car_rental_details_to_fragment_rent)
         }
     }
 }

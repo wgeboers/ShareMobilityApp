@@ -10,31 +10,32 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.view.doOnLayout
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.BaseApplication
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.databinding.FragmentAddCarBinding
+import com.sm.sharemobilityapp.databinding.FragmentCarRentalDetailsBinding
+import com.sm.sharemobilityapp.databinding.FragmentStartBinding
 import com.sm.sharemobilityapp.network.CarInfo
 import com.sm.sharemobilityapp.network.ImageInfo
+import com.sm.sharemobilityapp.ui.adapter.ItemAdapter
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
-import com.sm.sharemobilityapp.ui.viewmodel.CarViewModelFactory
 import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModelFactory
+import com.sm.sharemobilityapp.utils.GPSUtils
+import com.sm.sharemobilityapp.utils.GPSUtils.longitude
 import com.sm.sharemobilityapp.utils.PhotoUtils
 import java.io.File
 import java.util.*
 
 class AddCarFragment : Fragment() {
+    private val carViewModel: CarViewModel by activityViewModels()
+    private var viewModelAdapter: ItemAdapter? = null
     private var _binding: FragmentAddCarBinding? = null
     private val binding get() = _binding!!
-
-    private val carViewModel: CarViewModel by activityViewModels {
-        CarViewModelFactory(
-            (activity?.application as BaseApplication).database.carDao()
-        )
-    }
 
     private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
         MainActivityViewModelFactory()
@@ -83,9 +84,9 @@ class AddCarFragment : Fragment() {
         binding.addCarTypeAutocomplete.setAdapter(typeArrayAdapter)
         binding.addCarFuelAutocomplete.setAdapter(fuelArrayAdapter)
 
-        binding.addCarButton.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_fragment_add_car_to_fragment_your_cars)
-        }
+//        binding.addCarButton.setOnClickListener { view ->
+//            view.findNavController().navigate(R.id.action_fragment_add_car_to_fragment_your_cars)
+//        }
 
         binding.carCamera.setOnClickListener {
             photoName = "IMG_${Date()}.JPG"
@@ -98,9 +99,11 @@ class AddCarFragment : Fragment() {
             takePhoto.launch(photoUri)
             Log.d("Fotofile", photoFile.path.toString())
         }
+
         binding.addCarButton.setOnClickListener {
             if (!checkInputFields()) {
                 insertCar()
+                view.findNavController().navigate(R.id.action_fragment_add_car_to_profile)
             }
         }
 
@@ -164,8 +167,16 @@ class AddCarFragment : Fragment() {
     }
 
     private fun insertCar() {
-        val longitude = 0.0
-        val latitude = 0.0
+        val address = binding.addCarAddressAutocomplete.text.toString()
+        val zipcode = binding.addCarZipcodeAutocomplete.text.toString()
+        val city = binding.addCarCityAutocomplete.text.toString()
+
+        val fullAddress = address+", "+zipcode+", "+city
+
+        val latLng = GPSUtils.getLatLonFromAdress(requireActivity(),fullAddress)
+
+        val longitude = latLng!![1]
+        val latitude = latLng!![0]
 
         carViewModel.insertCar(
             CarInfo(
@@ -182,8 +193,8 @@ class AddCarFragment : Fragment() {
                 termsOfReturn = binding.addCarReturntermsAutocomplete.text.toString(),
                 purchasePrice = binding.addCarValueAutocomplete.text.toString().toInt(),
                 amountOfYearsOwned = binding.addCarYearsOwnedAutocomplete.text.toString().toInt(),
-                usageCostsPerKm = 2.0,
-                totalCostOfOwnership = 5.0,
+                usageCostsPerKm = 3.0,
+                totalCostOfOwnership = 6.0,
                 fuelType = binding.addCarFuelAutocomplete.text.toString(),
                 carImages = listOf(
                     ImageInfo(

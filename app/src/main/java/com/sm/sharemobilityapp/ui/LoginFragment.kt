@@ -7,9 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.sm.sharemobilityapp.R
@@ -50,30 +47,29 @@ class LoginFragment : Fragment() {
          * !!! REMOVE LOGINTEST WHEN DONE TESTING, ONLY USED TO EASILY TEST PROFILE/THINGS AFTER LOGGING IN!!!
          */
         binding.loginLoginButton.setOnClickListener {
-            mainActivityViewModel.login(binding.loginEmailEditText.text.toString(),binding.loginPasswordEditText.text.toString())
+            mainActivityViewModel.login(
+                binding.loginEmailEditText.text.toString(),
+                binding.loginPasswordEditText.text.toString()
+            )
             //mainActivityViewModel.loginTest()
             mainActivityViewModel.userId.observe(viewLifecycleOwner) {
                 if (it != null) {
                     userViewModel.getUser(it)
-                } else {
-                    Toast.makeText(context, "IT WORKS NOT", Toast.LENGTH_SHORT).show()
                 }
             }
             //Temporary navigation on login...
             mainActivityViewModel.apiResponse.observe(viewLifecycleOwner) { response ->
 
-                if(response.isNotEmpty() && response.equals("204")) {
+                if (response.isNotEmpty() && response.equals("204")) {
                     Toast.makeText(context, "Wrong username/password", Toast.LENGTH_SHORT).show()
                 } else {
-                    findNavController().navigate(R.id.action_global_fragment_profile)
+                    findNavController().navigate(R.id.action_fragment_login_to_profile)
                 }
             }
-            //findNavController().navigate(R.id.action_global_fragment_profile)
-
         }
 
-        binding.notYetAccountButton.setOnClickListener {
-                view -> view.findNavController().navigate(R.id.fragment_registration)
+        binding.notYetAccountButton.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.fragment_registration)
         }
     }
 

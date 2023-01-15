@@ -67,28 +67,62 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/rent_total_price_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:hint="@string/total_price"
+                app:layout_constraintStart_toStartOf="@+id/rent_end_date"
+                app:layout_constraintTop_toBottomOf="@+id/rent_end_date" />
+
+            <TextView
+                android:id="@+id/value_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="5dp"
+                android:text="@string/euroSign"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/rent_total_price_title"
+                app:layout_constraintTop_toBottomOf="@+id/rent_total_price_title" />
+
+            <TextView
                 android:id="@+id/rent_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Totaal prijs"
-                app:layout_constraintStart_toStartOf="@+id/rent_end_date"
-                app:layout_constraintTop_toBottomOf="@+id/rent_end_date" />
+                android:hint="@string/total_price"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@{Double.toString(viewModel.totalPrice)}"
+                app:layout_constraintBottom_toBottomOf="@+id/value_sign"
+                app:layout_constraintStart_toEndOf="@+id/value_sign"
+                app:layout_constraintTop_toTopOf="@+id/value_sign" />
+
+            <TextView
+                android:id="@+id/rent_terms_and_conditions_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/terms_and_conditions_title"
+                app:layout_constraintStart_toStartOf="@+id/value_sign"
+                app:layout_constraintTop_toBottomOf="@+id/rent_total_price" />
 
             <TextView
                 android:id="@+id/rent_terms_and_conditions"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:hint="@string/accept_terms_and_conditions"
+                android:hint="@string/terms_and_conditions"
                 app:helperTextTextColor="@android:color/holo_red_dark"
                 app:layout_constraintStart_toStartOf="@+id/rent_total_price"
-                app:layout_constraintTop_toBottomOf="@+id/rent_total_price" />
+                app:layout_constraintTop_toBottomOf="@+id/rent_terms_and_conditions_title" />
 
             <CheckBox
                 android:id="@+id/rent_terms_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/rent_total_price"
+                app:layout_constraintStart_toStartOf="@+id/rent_terms_and_conditions"
                 app:layout_constraintTop_toBottomOf="@+id/rent_terms_and_conditions" />
 
             <TextView

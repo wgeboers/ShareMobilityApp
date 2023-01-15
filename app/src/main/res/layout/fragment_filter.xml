@@ -21,9 +21,9 @@
             android:padding="15dp">
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="11dp"
                 android:text="@string/search"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/remove_filters_button"
@@ -41,71 +41,12 @@
                 app:tint="@color/colorPrimary" />
 
             <ImageView
-                android:id="@+id/filter_location_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_location"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/remove_filters_button"
-                app:tint="@color/colorPrimary" />
-
-            <TextView
-                android:id="@+id/filter_location_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="11dp"
-                android:text="@string/location"
-                app:layout_constraintBottom_toBottomOf="@+id/filter_location_icon"
-                app:layout_constraintStart_toEndOf="@+id/filter_location_icon"
-                app:layout_constraintTop_toTopOf="@+id/filter_location_icon" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/filter_city"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginEnd="20dp"
-                app:helperTextTextColor="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/filter_radius"
-                app:layout_constraintEnd_toStartOf="@+id/filter_radius"
-                app:layout_constraintStart_toEndOf="@+id/filter_location_icon"
-                app:layout_constraintTop_toBottomOf="@+id/filter_location_icon">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/filter_city_autocomplete"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/city"
-                    android:inputType="text"
-                    android:lines="1"
-                    android:text="@{viewModel.cityFilter}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/filter_radius"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/radius"
-                app:layout_constraintBottom_toBottomOf="@+id/filter_city"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/filter_city"
-                app:layout_constraintTop_toTopOf="@+id/filter_city">
-
-                <AutoCompleteTextView
-                    android:id="@+id/filter_radius_autocomplete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageView
                 android:id="@+id/filter_main_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:src="@drawable/ic_car"
-                app:layout_constraintStart_toStartOf="@+id/filter_location_icon"
-                app:layout_constraintTop_toBottomOf="@+id/filter_city"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/remove_filters_button"
                 app:tint="@color/colorPrimary" />
 
             <TextView
@@ -124,6 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/brand"
+                android:paddingStart="11dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/filter_main_icon"
                 app:layout_constraintTop_toBottomOf="@+id/filter_main_text">
@@ -141,6 +83,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/model"
+                android:paddingStart="11dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/filter_brand"
                 app:layout_constraintTop_toBottomOf="@+id/filter_brand">
@@ -166,6 +109,7 @@
                 android:id="@+id/filter_price_per_hour_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingStart="11dp"
                 android:text="@string/price_per_hour"
                 app:layout_constraintBottom_toBottomOf="@+id/filter_price_icon"
                 app:layout_constraintStart_toEndOf="@+id/filter_price_icon"
@@ -175,6 +119,7 @@
                 android:id="@+id/filter_price_from"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:paddingStart="11dp"
                 app:helperTextTextColor="@color/colorPrimary"
                 app:layout_constraintEnd_toStartOf="@+id/filter_price_till"
                 app:layout_constraintStart_toStartOf="@+id/filter_model"
@@ -187,7 +132,7 @@
                     android:hint="@string/from"
                     android:inputType="numberDecimal"
                     android:lines="1"
-                    android:text="@{viewModel.priceFromFilter.toString()}"/>
+                    android:text="@{viewModel.priceFromFilter.toString()}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -207,7 +152,7 @@
                     android:hint="@string/till"
                     android:inputType="numberDecimal"
                     android:lines="1"
-                    android:text="@{viewModel.priceTillFilter.toString()}"/>
+                    android:text="@{viewModel.priceTillFilter.toString()}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

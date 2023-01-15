@@ -4,16 +4,19 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.LocationManager
 import android.location.LocationManager.GPS_PROVIDER
 import android.provider.Settings
+import android.provider.Telephony.Mms.Addr
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.sm.sharemobilityapp.R
+import java.io.IOException
 
 object GPSUtils {
     var longitude: Double? = null
@@ -36,7 +39,7 @@ object GPSUtils {
 //        )
 //    }
 
-    fun initPermissions(activity: Activity){
+    fun initPermissions(activity: Activity) {
         ActivityCompat.requestPermissions(activity, permissions, REQUEST_LOCATION)
     }
 
@@ -67,7 +70,8 @@ object GPSUtils {
             initPermissions(activity)
         }
 
-        val location = listOf(GPS_PROVIDER,
+        val location = listOf(
+            GPS_PROVIDER,
             LocationManager.NETWORK_PROVIDER,
             LocationManager.PASSIVE_PROVIDER
         )
@@ -75,12 +79,42 @@ object GPSUtils {
             .firstOrNull()
 
         when (location) {
-            null -> Toast.makeText(activity, R.string.CannotDetermineLocation, Toast.LENGTH_SHORT).show()
+            null -> Toast.makeText(activity, R.string.CannotDetermineLocation, Toast.LENGTH_SHORT)
+                .show()
             else -> {
                 latitude = location.latitude
                 longitude = location.longitude
             }
         }
+    }
+
+    fun getLatLonFromAdress(activity: Activity, strAddress: String): MutableList<Double>? {
+        val geocoder = Geocoder(activity)
+        val latLng = mutableListOf<Double>()
+
+        try {
+            val address = geocoder.getFromLocationName(strAddress, 5);
+            if (address == null) {
+                latLng.add(0.0)
+                latLng.add(0.0)
+
+                return latLng
+            }
+            val location:Address = address[0]
+            val lat = location.latitude
+            val lng = location.longitude
+
+            latLng.add(lat)
+            latLng.add(lng)
+
+            return latLng
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        latLng.add(0.0)
+        latLng.add(0.0)
+
+        return latLng
     }
 
     fun Activity.hasPermission(permission: String) =

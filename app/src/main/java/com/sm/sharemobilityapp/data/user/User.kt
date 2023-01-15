@@ -12,7 +12,8 @@ data class User constructor(
     val password: String,
     val firstname: String,
     val lastname: String,
-    val address: String
+    val address: String,
+    val bonusPoints: Int = 0
 )
 
 fun List<User>.asDomainModel(): List<UserModel> {

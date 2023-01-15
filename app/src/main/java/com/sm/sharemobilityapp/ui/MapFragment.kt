@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -20,11 +19,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.maps.android.clustering.ClusterManager
@@ -80,10 +77,6 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.filter_button).setOnClickListener{
-                view -> view.findNavController().navigate(R.id.action_fragment_map_to_fragment_filter)
-        }
-
         view.findViewById<FloatingActionButton>(R.id.map_button).setOnClickListener{
                 view -> view.findNavController().navigate(R.id.action_fragment_map_to_home)
         }
@@ -106,8 +99,8 @@ class MapFragment : Fragment() {
                     carViewModel.filteredCars.collect {clusterManager.addItems(it)}
                 }
             } else {
-            carViewModel.viewModelScope.launch {
-                carViewModel.cars.collect {clusterManager.addItems(it)}
+                carViewModel.viewModelScope.launch {
+                    carViewModel.cars.collect {clusterManager.addItems(it)}
                 }
             }
         }

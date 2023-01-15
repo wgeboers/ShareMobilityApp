@@ -1,6 +1,5 @@
 package com.sm.sharemobilityapp.network
 
-import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

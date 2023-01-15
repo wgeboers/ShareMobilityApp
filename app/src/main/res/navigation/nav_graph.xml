@@ -40,6 +40,12 @@
         <action
             android:id="@+id/action_fragment_profile_to_fragment_your_cars"
             app:destination="@id/fragment_your_cars" />
+        <action
+            android:id="@+id/action_profile_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profile_to_fragment_login"
+            app:destination="@id/fragment_login" />
     </fragment>
     <fragment
         android:id="@+id/fragment_login"
@@ -52,6 +58,9 @@
         <action
             android:id="@+id/action_fragment_login_to_home"
             app:destination="@id/home" />
+        <action
+            android:id="@+id/action_fragment_login_to_profile"
+            app:destination="@id/profile" />
     </fragment>
     <fragment
         android:id="@+id/fragment_registration"
@@ -80,8 +89,8 @@
         android:label="fragment_add_car"
         tools:layout="@layout/fragment_add_car">
         <action
-            android:id="@+id/action_fragment_add_car_to_fragment_your_cars"
-            app:destination="@id/fragment_your_cars" />
+            android:id="@+id/action_fragment_add_car_to_profile"
+            app:destination="@id/profile" />
     </fragment>
     <fragment
         android:id="@+id/fragment_car_rental_details"
@@ -124,5 +133,13 @@
         <action
             android:id="@+id/action_fragment_map_to_fragment_car_rental_details"
             app:destination="@id/fragment_car_rental_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profile"
+            app:destination="@id/profile" />
     </fragment>
 </navigation>

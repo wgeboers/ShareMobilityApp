@@ -19,41 +19,42 @@ class MainActivityViewModel : ViewModel() {
     val apiResponse: LiveData<String>
         get() = _apiResponse
 
-    private val _userId = MutableLiveData<Long>()
-    val userId: LiveData<Long>
+    private val _userId = MutableLiveData<Int>()
+    val userId: LiveData<Int>
         get() = _userId
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
             val response = ShareMobilityApi.retrofitService.loginWithResponse(username, password)
-            if(response.isSuccessful) {
+            if (response.isSuccessful) {
                 _loginSuccessful.value = true
             }
             _apiResponse.value = "${response.code()}"
-            if(response.body()?.id != null) {
-                _userId.value = response.body()?.id!!.toLong()
+            if (response.body()?.id != null) {
+                _userId.value = response.body()?.id!!.toInt()
             }
         }
     }
 
     fun loginTest() {
         viewModelScope.launch {
-            val response = ShareMobilityApi.retrofitService.loginWithResponse("wgeboers", "Welkom@120!")
-            if(response.isSuccessful) {
+            val response =
+                ShareMobilityApi.retrofitService.loginWithResponse("wgeboers", "Welkom@120!")
+            if (response.isSuccessful) {
                 _loginSuccessful.value = true
             }
             _apiResponse.value = "${response.code()}"
-            if(response.body()?.id != null) {
-                _userId.value = response.body()?.id!!.toLong()
+            if (response.body()?.id != null) {
+                _userId.value = response.body()?.id!!.toInt()
             }
         }
     }
 
 }
 
-class MainActivityViewModelFactory() : ViewModelProvider.Factory{
+class MainActivityViewModelFactory() : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(MainActivityViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(MainActivityViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return MainActivityViewModel() as T
         }

@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.sm.sharemobilityapp"
-        minSdk 21
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -74,8 +74,5 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
-    // To use Kotlin Symbol Processing (KSP)
-    //ksp "androidx.room:room-compiler:$room_version"
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1'
 
 }

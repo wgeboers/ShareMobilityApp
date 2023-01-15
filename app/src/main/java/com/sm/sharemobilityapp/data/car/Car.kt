@@ -4,27 +4,30 @@ package com.sm.sharemobilityapp.data.car
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.sm.sharemobilityapp.model.CarModel
+import com.sm.sharemobilityapp.network.UserInfo
 
 @Entity
 data class Car constructor(
-    @PrimaryKey val id: Int,
-    val type: String,
-    val licensePlate: String,
-    val make: String,
-    val model: String,
-    val mileage: Int,
-    val hourlyRate: Double,
-    val latitude: Double,
-    val longitude: Double,
-    val termsOfPickup: String,
-    val termsOfReturn: String,
-    val purchasePrice: Int,
-    val amountOfYearsOwned: Int,
-    val usageCostsPerKm: Double,
-    val totalCostOfOwnership: Double,
-    val rechargeTimeInMinutes: Double,
-    val maxRangeInKilometers: Double,
-    val maxCapacityOfBattery: Double
+    @PrimaryKey val id: Int?,
+    val type: String?,
+    val licensePlate: String?,
+    val carOwnerID: Int? = null,
+    val make: String?,
+    val model: String?,
+    val mileage: Int?,
+    val hourlyRate: Double?,
+    val latitude: Double?,
+    val longitude: Double?,
+    val termsOfPickup: String?,
+    val termsOfReturn: String?,
+    val purchasePrice: Int?,
+    val amountOfYearsOwned: Int?,
+    val usageCostsPerKm: Double?,
+    val totalCostOfOwnership: Double?,
+    val rechargeTimeInMinutes: Double?,
+    val maxRangeInKilometers: Double?,
+    val maxCapacityOfBattery: Double?,
+    val fuelType: String?
 )
 
 fun List<Car>.asDomainModel(): List<CarModel> {
@@ -47,7 +50,8 @@ fun List<Car>.asDomainModel(): List<CarModel> {
             totalCostOfOwnership = it.totalCostOfOwnership,
             rechargeTimeInMinutes = it.rechargeTimeInMinutes,
             maxRangeInKilometers = it.maxRangeInKilometers,
-            maxCapacityOfBattery = it.maxCapacityOfBattery
+            maxCapacityOfBattery = it.maxCapacityOfBattery,
+            fuelType = it.fuelType
         )
     }
 }
