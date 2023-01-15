@@ -19,8 +19,8 @@ class MainActivityViewModel : ViewModel() {
     val apiResponse: LiveData<String>
         get() = _apiResponse
 
-    private val _userId = MutableLiveData<Int>()
-    val userId: LiveData<Int>
+    private val _userId = MutableLiveData<Int?>()
+    val userId: LiveData<Int?>
         get() = _userId
 
     fun login(username: String, password: String) {
@@ -47,6 +47,13 @@ class MainActivityViewModel : ViewModel() {
             if (response.body()?.id != null) {
                 _userId.value = response.body()?.id!!.toInt()
             }
+        }
+    }
+
+    fun logout() {
+        viewModelScope.launch {
+            _loginSuccessful.value = false
+            _userId.value = null
         }
     }
 

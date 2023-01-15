@@ -38,7 +38,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
 
-        //val loginButton = view.findViewById<View>(R.id.login_login_button)
         binding.apply {
             viewModel = userViewModel
         }
@@ -57,13 +56,13 @@ class LoginFragment : Fragment() {
                     userViewModel.getUser(it)
                 }
             }
-            //Temporary navigation on login...
+            //Navigation is global, because a profile -> login bricks app after logging out and logging back in...
             mainActivityViewModel.apiResponse.observe(viewLifecycleOwner) { response ->
 
                 if (response.isNotEmpty() && response.equals("204")) {
                     Toast.makeText(context, "Wrong username/password", Toast.LENGTH_SHORT).show()
                 } else {
-                    findNavController().navigate(R.id.action_fragment_login_to_profile)
+                    findNavController().navigate(R.id.action_global_fragment_profile)
                 }
             }
         }
