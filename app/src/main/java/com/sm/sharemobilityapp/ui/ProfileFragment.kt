@@ -70,12 +70,17 @@ class ProfileFragment : Fragment() {
                 view.findViewById<TextView>(R.id.last_name).text = response.lastname
                 view.findViewById<TextView>(R.id.address).text = response.address
 
-                reservationViewModel.getReservationsByUser(response.id!!)
+                if(response.type == "CAR_USER") {
+                    reservationViewModel.refreshDataFromRepository()
+                    reservationViewModel.getReservationsByUser(response.id!!)
 
-                viewLifecycleOwner.lifecycleScope.launch {
-                    reservationViewModel.reservationsByUser.collect() { reservations ->
-                        reservations.apply {
-                            viewModelAdapter?.reservations = reservations
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        reservationViewModel.reservationsByUser.collect() { reservations ->
+                            reservations.apply {
+                                if (reservations != null) {
+                                    viewModelAdapter?.reservations = reservations
+                                }
+                            }
                         }
                     }
                 }
