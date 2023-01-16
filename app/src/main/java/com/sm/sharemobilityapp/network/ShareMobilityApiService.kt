@@ -49,6 +49,7 @@ interface ShareMobilityApiService {
     //User
     @GET("users")
     suspend fun getUsers(): List<UserInfo>
+    //suspend fun getUsers(): NetworkUserContainer
 
     @GET("users/{id}")
     suspend fun getUser(@Path("id") userId: Int): UserInfo
@@ -63,7 +64,7 @@ interface ShareMobilityApiService {
     ): Response<UserInfo>
 
     @POST(value = "users")
-    suspend fun postUser(@Body userInfo: UserInfo): UserInfo
+    suspend fun postUser(@Body userInfo: UserInfo): Response<UserInfo>
 
     @DELETE("users/{id}")
     suspend fun deleteUserWithResponse(@Path("id") userId: Int): Response<ResponseBody>
