@@ -11,5 +11,6 @@ data class UserInfo(
     val firstname: String? = null,
     val lastname: String? = null,
     val address: String? = null,
-    val bonuspoints: Int = 0
+    val bonuspoints: Int = 0,
+    val userType: String? = null,
 )

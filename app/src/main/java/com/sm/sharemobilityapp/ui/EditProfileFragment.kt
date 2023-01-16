@@ -15,6 +15,7 @@ import com.sm.sharemobilityapp.ui.viewmodel.UserViewModelFactory
 class EditProfileFragment : Fragment() {
     private var _binding: FragmentEditProfileBinding? = null
     private val binding get() = _binding!!
+    private lateinit var type: String
 
     private val userViewModel: UserViewModel by activityViewModels {
         UserViewModelFactory()
@@ -47,6 +48,7 @@ class EditProfileFragment : Fragment() {
                 binding.profileAddress.setText(response.address)
                 binding.profileEmail.setText(response.username)
                 binding.profilePassword.setText(response.password)
+                type = response.userType!!
             }
         }
 
@@ -56,12 +58,13 @@ class EditProfileFragment : Fragment() {
          */
         binding.editButton.setOnClickListener {
             val userInfo = UserInfo(null,
-                null,
+                type,
                 binding.profileEmail.text.toString(),
                 binding.profilePassword.text.toString(),
                 binding.profileName.text!!.split(" ")[0],
                 binding.profileName.text!!.split(" ")[1],
-                binding.profileAddress.text.toString()
+                binding.profileAddress.text.toString(),
+
             )
             userViewModel.updateUser(userInfo)
         }
