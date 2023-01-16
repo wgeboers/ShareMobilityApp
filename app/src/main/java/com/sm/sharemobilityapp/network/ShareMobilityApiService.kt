@@ -49,6 +49,7 @@ interface ShareMobilityApiService {
     //User
     @GET("users")
     suspend fun getUsers(): List<UserInfo>
+    //suspend fun getUsers(): NetworkUserContainer
 
     @GET("users/{id}")
     suspend fun getUser(@Path("id") userId: Int): UserInfo
