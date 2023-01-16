@@ -131,11 +131,14 @@ class CarViewModel(application: Application) : AndroidViewModel(application) {
     var filteredCars = carRepository.cars.map {
         it.filter {
             it.make == brandFilter.value &&
-                    it.model == modelFilter.value &&
-                    it.hourlyRate!! >= priceFromFilter.value!! && //Nog kijken waarom value van double niet null mag zijn
-                    it.hourlyRate <= priceTillFilter.value!!
+            it.model == modelFilter.value
+            it.hourlyRate!! >= priceFromFilter.value!! &&
+            it.hourlyRate <= priceTillFilter.value!!
         }
     }
+
+    var brands = carRepository.brands
+    var models = carRepository.models
 
     var carsByUser: Flow<List<CarModel>> = emptyFlow()
 

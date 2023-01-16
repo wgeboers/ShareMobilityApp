@@ -31,14 +31,14 @@ private val retrofit = Retrofit.Builder()
 interface ShareMobilityApiService {
     //Cars
     @GET("cars")
-    suspend fun getCars(): List<CarInfo>
+    suspend fun getCars(): Response<List<CarInfo>>
 
     @POST(value = "cars")
     suspend fun postCar(@Body carInfo: CarInfo): Response<CarInfo>
 
     //Reservation
     @GET("reservation")
-    suspend fun getReservations(): List<ReservationInfo>
+    suspend fun getReservations(): Response<List<ReservationInfo>>
 
     @POST("reservation")
     suspend fun postReservation(@Body reservation: Reservation): ReservationInfo

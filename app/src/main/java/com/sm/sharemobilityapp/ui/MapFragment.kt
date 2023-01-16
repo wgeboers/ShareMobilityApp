@@ -17,6 +17,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.google.android.apps.common.testing.accessibility.framework.ClusteringUtils.cluster
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -85,6 +86,7 @@ class MapFragment : Fragment() {
     @SuppressLint("PotentialBehaviorOverride")
     private fun addClusteredMarkers(googleMap: GoogleMap) {
         val clusterManager = ClusterManager<CarModel>(requireActivity(), googleMap)
+
         clusterManager.renderer =
             CarRenderer(
                 requireActivity(),
@@ -95,18 +97,11 @@ class MapFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             if (carViewModel.areFiltersSet()) {
-                carViewModel.viewModelScope.launch {
-                    carViewModel.filteredCars.collect {clusterManager.addItems(it)}
-                }
+                carViewModel.filteredCars.collect {
+                    clusterManager.addItems(it)}
             } else {
-                carViewModel.viewModelScope.launch {
-                    carViewModel.cars.collect {clusterManager.addItems(it)}
-                }
+                carViewModel.cars.collect {clusterManager.addItems(it)}
             }
-        }
-
-        carViewModel.viewModelScope.launch {
-            carViewModel.cars.collect {clusterManager.addItems(it)}
         }
 
         clusterManager.cluster()

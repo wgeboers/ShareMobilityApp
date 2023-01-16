@@ -65,18 +65,30 @@ class StartFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             if (carViewModel.areFiltersSet()) {
                 carViewModel.filteredCars.collect() { cars ->
-                    cars.apply {
-                        viewModelAdapter?.cars = cars
-                        view.findViewById<TextView>(R.id.start_filter_results_amount).text =
-                            carViewModel.filteredCars.count().toString()
+                    if (cars.isNotEmpty()) {
+                        cars.apply {
+                            viewModelAdapter?.cars = cars
+                            view.findViewById<TextView>(R.id.start_filter_results_amount).text =
+                                carViewModel.filteredCars.count().toString()
+                        }
+                    } else {
+                        val toast =
+                            Toast.makeText(context, "Geen auto's", Toast.LENGTH_LONG)
+                        toast.show()
                     }
                 }
             } else {
                 carViewModel.cars.collect() { cars ->
-                    cars.apply {
-                        viewModelAdapter?.cars = cars
-                        view.findViewById<TextView>(R.id.start_filter_results_amount).text =
-                            carViewModel.cars.count().toString()
+                    if (cars.isNotEmpty()) {
+                        cars.apply {
+                            viewModelAdapter?.cars = cars
+                            view.findViewById<TextView>(R.id.start_filter_results_amount).text =
+                                carViewModel.cars.count().toString()
+                        }
+                    } else {
+                        val toast =
+                            Toast.makeText(context, "Geen auto's", Toast.LENGTH_LONG)
+                        toast.show()
                     }
                 }
             }
