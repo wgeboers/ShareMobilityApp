@@ -50,6 +50,10 @@ class UserViewModel() : ViewModel() {
             _apiResponse.value = "updated item ${_userInfo.value!!.id!!}"
         }
     }
+
+    fun setUser(user: UserInfo) {
+        _userInfo.value = user
+    }
 }
 
 class UserViewModelFactory() : ViewModelProvider.Factory {
