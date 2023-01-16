@@ -23,7 +23,7 @@ class ReservationViewModel(application: Application) : AndroidViewModel(applicat
     private val userRepository = UserRepository(getDatabase(application))
     var reservations = reservationRepository.reservations
 
-    var reservationsByUser: Flow<List<ReservationModel>?> = emptyFlow()
+    var reservationsByUser: Flow<List<ReservationModel>> = emptyFlow()
 
     var cars = carRepository.cars
     var users = userRepository.users
