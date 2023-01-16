@@ -1,23 +1,20 @@
 package com.sm.sharemobilityapp.ui
 
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Im
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.activity.viewModels
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.databinding.FragmentProfileBinding
 import com.sm.sharemobilityapp.ui.adapter.RentedItemAdapter
@@ -70,8 +67,14 @@ class ProfileFragment : Fragment() {
 
                 viewLifecycleOwner.lifecycleScope.launch {
                     reservationViewModel.reservationsByUser.collect() { reservations ->
-                        reservations.apply {
-                            viewModelAdapter?.reservations = reservations
+                        if (reservations.isNotEmpty()){
+                            reservations.apply {
+                                viewModelAdapter?.reservations = reservations
+                            }
+                        } else {
+                            val toast =
+                                Toast.makeText(context,getString(R.string.NoReservations), Toast.LENGTH_LONG)
+                            toast.show()
                         }
                     }
                 }

@@ -72,48 +72,4 @@ class YourCarsFragment : Fragment() {
             }
         }
     }
-
-//    private var _binding: FragmentYourCarsBinding? = null
-//    private val binding get() = _binding!!
-//    private val carOwnerListViewModel: CarOwnerListViewModel by viewModels {
-//        CarOwnerListViewModelFactory()
-//    }
-//
-//    /*
-//    *  The logged in userid is needed to get the cars from the API, which is saved in MAVM
-//     */
-//    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
-//        MainActivityViewModelFactory()
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        _binding = FragmentYourCarsBinding.inflate(inflater, container, false)
-//        return binding.root
-//    }
-//
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        val recyclerView = binding.recyclerView
-//        mainActivityViewModel.userId.observe(viewLifecycleOwner) { id ->
-//            carOwnerListViewModel.getCarsByOwner(id!!)
-//        }
-//        //carOwnerListViewModel.getCarsByOwnerTest()
-//        carOwnerListViewModel.carData.observe(viewLifecycleOwner) { response ->
-//            recyclerView.adapter = CarOwnerListItemAdapter(response)
-//        }
-//
-//        recyclerView.setHasFixedSize(true)
-//
-//        binding.addCar.setOnClickListener {
-//                view -> view.findNavController().navigate(R.id.fragment_add_car)
-//        }
-//    }
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        _binding = null
-//    }
 }

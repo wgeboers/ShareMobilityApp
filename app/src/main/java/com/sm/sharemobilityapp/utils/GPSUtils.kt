@@ -12,7 +12,6 @@ import android.location.Geocoder
 import android.location.LocationManager
 import android.location.LocationManager.GPS_PROVIDER
 import android.provider.Settings
-import android.provider.Telephony.Mms.Addr
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.sm.sharemobilityapp.R

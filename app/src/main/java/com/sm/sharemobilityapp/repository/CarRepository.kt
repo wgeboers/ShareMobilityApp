@@ -13,17 +13,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.jsonArray
 import retrofit2.Response
 
 class CarRepository(private val database: SMRoomDatabase) {
     var cars: Flow<List<CarModel>> = database.carDao.getAll().map { it.asDomainModel() }
+    var brands: Flow<List<String>> = database.carDao.getBrands()
+    var models: Flow<List<String>> = database.carDao.getModels()
 
     suspend fun refreshCars() {
         withContext(Dispatchers.IO) {
-            val carList: List<CarInfo> = ShareMobilityApi.retrofitService.getCars()
+            val carList: Response<List<CarInfo>> = ShareMobilityApi.retrofitService.getCars()
             val cars = prepareCars(carList)
             database.carDao.deleteAllCars()
-            database.carDao.insertAll(cars)
+            if (cars != null) {
+                database.carDao.insertAll(cars)
+            }
         }
     }
 
@@ -48,13 +55,13 @@ class CarRepository(private val database: SMRoomDatabase) {
             RegistrationDto(
             carId = carId,
             carOwnerId = ownerId
-        )
+            )
         )
     }
 
     // map CarInfo to database Car
-    private fun prepareCars(carInfo: List<CarInfo>): List<Car> {
-        var carUsers: List<Car> = carInfo.map {
+    private fun prepareCars(carInfo: Response<List<CarInfo>>): List<Car>?{
+        var carUsers: List<Car>? = carInfo.body()?.map {
             Car(
                 type = it.type,
                 id = it.id,

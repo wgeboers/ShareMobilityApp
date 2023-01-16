@@ -1,15 +1,21 @@
 package com.sm.sharemobilityapp.ui
 
+import android.Manifest
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.view.doOnLayout
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -26,6 +32,7 @@ import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModel
 import com.sm.sharemobilityapp.ui.viewmodel.MainActivityViewModelFactory
 import com.sm.sharemobilityapp.utils.GPSUtils
+import com.sm.sharemobilityapp.utils.GPSUtils.hasPermission
 import com.sm.sharemobilityapp.utils.GPSUtils.longitude
 import com.sm.sharemobilityapp.utils.PhotoUtils
 import java.io.File
@@ -62,6 +69,8 @@ class AddCarFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        PhotoUtils.initPermissions(requireActivity())
+
         val type = resources.getStringArray(R.array.types)
         val fuel = resources.getStringArray(R.array.fuels)
 
@@ -89,15 +98,21 @@ class AddCarFragment : Fragment() {
 //        }
 
         binding.carCamera.setOnClickListener {
-            photoName = "IMG_${Date()}.JPG"
-            val photoFile = File(requireContext().applicationContext.filesDir, photoName)
-            val photoUri = FileProvider.getUriForFile(
-                requireContext(),
-                "com.sm.sharemobilityapp.fileprovider",
-                photoFile
-            )
-            takePhoto.launch(photoUri)
-            Log.d("Fotofile", photoFile.path.toString())
+            if (requireActivity().hasPermission(Manifest.permission.CAMERA)) {
+                photoName = "IMG_${Date()}.JPG"
+                val photoFile = File(requireContext().applicationContext.filesDir, photoName)
+                val photoUri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "com.sm.sharemobilityapp.fileprovider",
+                    photoFile
+                )
+                takePhoto.launch(photoUri)
+                Log.d("Fotofile", photoFile.path.toString())
+            } else {
+                val toast =
+                    Toast.makeText(context, getString(R.string.NoCameraPermissionDescription), Toast.LENGTH_LONG)
+                toast.show()
+            }
         }
 
         binding.addCarButton.setOnClickListener {
@@ -112,28 +127,28 @@ class AddCarFragment : Fragment() {
             if (userId != -1) {
                 carViewModel.insertRegistration(newCar.id!!, userId)
             } else {
-                showToast("User not found, please (re)login.")
+                showToast(getString(R.string.UserNotFound))
             }
         }
 
         carViewModel.isNetworkMessage.observe(viewLifecycleOwner) { text ->
             Log.d("AddCAR", text)
             if (text.get(0) == '5') {
-                showToast("Something went wrong, please try again later.")
+                showToast(getString(R.string.SomethingWentWrongTryAgainLater))
             } else if (text.get(0) == '4') {
-                showToast("Something went wrong, please check your input.")
+                showToast(getString(R.string.SomethingWentWrongCheckInput))
             } else if (text.get(0) != '2') {
-                showToast("Something went wrong, please check your input.")
+                showToast(getString(R.string.SomethingWentWrongCheckInput))
             }
         }
 
         carViewModel.isNetworkMessageRegistration.observe(viewLifecycleOwner) { text ->
             if (text.get(0) == '5') {
-                showToast("Something went wrong, please try again later.")
+                showToast(getString(R.string.SomethingWentWrongTryAgainLater))
             } else if (text.get(0) == '4') {
-                showToast("Something went wrong, please check your input.")
+                showToast(getString(R.string.SomethingWentWrongCheckInput))
             } else if (text.get(0) == '2') {
-                showToast("Registration succesvol")
+                showToast(getString(R.string.RegistrationSuccesvol))
             }
         }
     }
@@ -151,7 +166,7 @@ class AddCarFragment : Fragment() {
 
             if (photoFile?.exists() == true) {
                 binding.carPhoto.doOnLayout { measuredView ->
-                    val scaledBitmap = PhotoUtils().getScaledBitmap(
+                    val scaledBitmap = PhotoUtils.getScaledBitmap(
                         photoFile.path,
                         binding.carPhoto.width,
                         binding.carPhoto.height

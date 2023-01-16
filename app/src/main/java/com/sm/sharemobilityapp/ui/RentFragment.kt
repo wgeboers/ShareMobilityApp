@@ -45,7 +45,7 @@ class RentFragment : Fragment() {
 
         val dateRangePicker =
             MaterialDatePicker.Builder.dateRangePicker()
-                .setTitleText("Select dates")
+                .setTitleText(getString(R.string.SelectDates))
                 .setSelection(
                     Pair(
                         MaterialDatePicker.thisMonthInUtcMilliseconds(),
@@ -84,13 +84,13 @@ class RentFragment : Fragment() {
                             view.findNavController().navigate(R.id.action_fragment_rent_to_home)
                         } else {
                             val toastDates =
-                                Toast.makeText(context, "Graag datums selecteren", Toast.LENGTH_LONG)
+                                Toast.makeText(context, getString(R.string.PleaseSelectDates), Toast.LENGTH_LONG)
                             toastDates.show()
                         }
                     } else {
                         val toastTerms = Toast.makeText(
                             context,
-                            "Graag akkoord op de algemene voorwaarden",
+                            getString(R.string.ApproveTerms),
                             Toast.LENGTH_LONG
                         )
                         toastTerms.show()
