@@ -14,14 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.databinding.FragmentYourCarsBinding
-import com.sm.sharemobilityapp.ui.adapter.YoureCarListItemAdapter
+import com.sm.sharemobilityapp.ui.adapter.YourCarListItemAdapter
 import com.sm.sharemobilityapp.ui.viewmodel.*
-import com.sm.sharemobilityapp.utils.GPSUtils
 import kotlinx.coroutines.launch
 
 class YourCarsFragment : Fragment() {
     private val carViewModel: CarViewModel by activityViewModels()
-    private var viewModelAdapter: YoureCarListItemAdapter? = null
+    private var viewModelAdapter: YourCarListItemAdapter? = null
     private val userViewModel: UserViewModel by activityViewModels {
         UserViewModelFactory()
     }
@@ -40,7 +39,7 @@ class YourCarsFragment : Fragment() {
 
         binding.setLifecycleOwner(viewLifecycleOwner)
         binding.viewModel = carViewModel
-        viewModelAdapter = YoureCarListItemAdapter()
+        viewModelAdapter = YourCarListItemAdapter()
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
             layoutManager = LinearLayoutManager(context)

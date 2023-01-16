@@ -9,7 +9,7 @@ import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.databinding.YoureCarListItemBinding
 import com.sm.sharemobilityapp.model.CarModel
 
-class YoureCarListItemAdapter() : RecyclerView.Adapter<YoureCarListItemAdapter.CarViewHolder>() {
+class YourCarListItemAdapter() : RecyclerView.Adapter<YourCarListItemAdapter.CarViewHolder>() {
 
     var cars: List<CarModel> = emptyList()
         set(value) {
@@ -17,19 +17,19 @@ class YoureCarListItemAdapter() : RecyclerView.Adapter<YoureCarListItemAdapter.C
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YoureCarListItemAdapter.CarViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): YourCarListItemAdapter.CarViewHolder {
         val withDataBinding: YoureCarListItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            YoureCarListItemAdapter.CarViewHolder.LAYOUT,
+            YourCarListItemAdapter.CarViewHolder.LAYOUT,
             parent,
             false
         )
-        return (YoureCarListItemAdapter.CarViewHolder(withDataBinding))
+        return (YourCarListItemAdapter.CarViewHolder(withDataBinding))
     }
 
     override fun getItemCount() = cars.size
 
-    override fun onBindViewHolder(holder: YoureCarListItemAdapter.CarViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: YourCarListItemAdapter.CarViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.carInfo = cars[position]
             it.imageSlider.setOnClickListener {

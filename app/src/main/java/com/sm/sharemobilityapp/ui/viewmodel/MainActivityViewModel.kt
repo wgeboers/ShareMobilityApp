@@ -56,6 +56,14 @@ class MainActivityViewModel : ViewModel() {
         }
     }
 
+    fun setUserId(int: Int) {
+        _userId.value = int
+    }
+
+    fun setLoggedIn(bool: Boolean) {
+        _loginSuccessful.value = bool
+    }
+
 }
 
 class MainActivityViewModelFactory() : ViewModelProvider.Factory {
