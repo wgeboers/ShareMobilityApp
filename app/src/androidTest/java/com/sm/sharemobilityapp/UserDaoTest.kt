@@ -37,6 +37,7 @@ class UserDaoTest {
     fun closeDatabase() {
         database.close()
     }
+
     @Test
     fun insertUserTest() = runBlocking {
         val user1 = User (
@@ -57,6 +58,7 @@ class UserDaoTest {
            user.forEach {
                assert("George" == it.username)
                Log.d("User collect", it.username)
+               this.coroutineContext.cancel()
            }
        }
 
