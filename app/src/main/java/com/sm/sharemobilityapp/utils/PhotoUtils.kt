@@ -1,10 +1,21 @@
 package com.sm.sharemobilityapp.utils
 
+import android.Manifest
+import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.core.app.ActivityCompat
 import kotlin.math.roundToInt
 
-class PhotoUtils {
+object PhotoUtils {
+    private const val REQUEST_CAMERA = 1
+    private const val camera = Manifest.permission.CAMERA
+    private val permissions = arrayOf(camera)
+
+    fun initPermissions(activity: Activity) {
+        ActivityCompat.requestPermissions(activity, permissions, REQUEST_CAMERA)
+    }
+
     fun getScaledBitmap(path: String, destWidth: Int, destHeight: Int): Bitmap {
         // Read in the dimensions of the image on disk
         val options = BitmapFactory.Options()

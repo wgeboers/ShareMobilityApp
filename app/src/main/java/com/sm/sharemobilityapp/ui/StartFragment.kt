@@ -65,18 +65,18 @@ class StartFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             if (carViewModel.areFiltersSet()) {
                 carViewModel.filteredCars.collect() { cars ->
-                    cars.apply {
-                        viewModelAdapter?.cars = cars
-                        view.findViewById<TextView>(R.id.start_filter_results_amount).text =
-                            carViewModel.filteredCars.count().toString()
+                    if (cars.isNotEmpty()) {
+                        cars.apply {
+                            viewModelAdapter?.cars = cars
+                        }
                     }
                 }
             } else {
                 carViewModel.cars.collect() { cars ->
-                    cars.apply {
-                        viewModelAdapter?.cars = cars
-                        view.findViewById<TextView>(R.id.start_filter_results_amount).text =
-                            carViewModel.cars.count().toString()
+                    if (cars.isNotEmpty()) {
+                        cars.apply {
+                            viewModelAdapter?.cars = cars
+                        }
                     }
                 }
             }
@@ -93,7 +93,7 @@ class StartFragment : Fragment() {
 
     private fun onNetworkError() {
         if (!carViewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, getString(R.string.NetworkError), Toast.LENGTH_LONG).show()
             carViewModel.onNetworkErrorShown()
         }
     }

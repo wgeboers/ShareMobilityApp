@@ -61,7 +61,7 @@ class LoginFragment : Fragment() {
             mainActivityViewModel.apiResponse.observe(viewLifecycleOwner) { response ->
 
                 if (response.isNotEmpty() && response.equals("204")) {
-                    Toast.makeText(context, "Wrong username/password", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, getString(R.string.WrongUsernamePassword) , Toast.LENGTH_SHORT).show()
                 } else {
                     findNavController().navigate(R.id.action_fragment_login_to_profile)
                 }

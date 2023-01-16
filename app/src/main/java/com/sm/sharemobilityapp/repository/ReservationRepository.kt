@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
 class ReservationRepository(private val database: SMRoomDatabase) {
     val reservations: Flow<List<ReservationModel>> =
@@ -17,11 +18,13 @@ class ReservationRepository(private val database: SMRoomDatabase) {
 
     suspend fun refreshReservations() {
         withContext(Dispatchers.IO) {
-            val reservationList: List<ReservationInfo> =
+            val reservationList: Response<List<ReservationInfo>> =
                 ShareMobilityApi.retrofitService.getReservations()
             val reservations = prepareReservations(reservationList)
             database.reservationDao.deleteAllReservations()
-            database.reservationDao.insertAll(reservations)
+            if (reservations != null) {
+                database.reservationDao.insertAll(reservations)
+            }
         }
     }
 
@@ -36,8 +39,8 @@ class ReservationRepository(private val database: SMRoomDatabase) {
         return reservations
     }
 
-    private fun prepareReservations(reservationInfo: List<ReservationInfo>): List<Reservation> {
-        var reservationMapping: List<Reservation> = reservationInfo.map {
+    private fun prepareReservations(reservationInfo: Response<List<ReservationInfo>>): List<Reservation>? {
+        var reservationMapping: List<Reservation>? = reservationInfo.body()?.map {
             Reservation(
                 id = it.id,
                 carId = it.carInfo.id!!,

@@ -55,6 +55,15 @@ dependencies {
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
 
 
+    androidTestImplementation'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.navigation:navigation-testing:2.5.3'
+    androidTestImplementation'androidx.test:runner:1.5.2'
+    androidTestImplementation'androidx.test:rules:1.5.0'
+    debugImplementation 'androidx.fragment:fragment-testing:1.5.5'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
+    testImplementation "org.mockito:mockito-core:4.0.0"
+    testImplementation "org.mockito:mockito-inline:4.0.0"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
@@ -77,5 +86,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
 
 }

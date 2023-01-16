@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.databinding.FragmentFilterBinding
 import com.sm.sharemobilityapp.ui.viewmodel.CarViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 
 class FilterFragment : Fragment() {
     private var _binding: FragmentFilterBinding? = null
@@ -31,38 +35,60 @@ class FilterFragment : Fragment() {
             viewModel = carViewModel
         }
 
-        val brands = resources.getStringArray(R.array.brands)
-        val model = resources.getStringArray(R.array.model)
 
-        val brandArrayAdapter = activity?.let {
-            ArrayAdapter<String>(
-                it,
-                R.layout.dropwdown_item,
-                brands
-            )
+        viewLifecycleOwner.lifecycleScope.launch {
+            val brand = ArrayList<String>()
+
+            val brandArrayAdapter = activity?.let {
+                ArrayAdapter<String>(
+                    it,
+                    R.layout.dropwdown_item,
+                    brand
+                )
+            }
+            binding.filterBrandAutocomplete.setAdapter(brandArrayAdapter)
+            binding.filterBrandAutocomplete.setText(carViewModel.brandFilter.value, false)
+
+            carViewModel.brands.collect{
+                brand.addAll(it)
+            }
         }
 
-        val modelArrayAdapter = activity?.let {
-            ArrayAdapter<String>(
-                it,
-                R.layout.dropwdown_item,
-                model
-            )
+        viewLifecycleOwner.lifecycleScope.launch {
+            val model = ArrayList<String>()
+
+            val modelArrayAdapter = activity?.let {
+                ArrayAdapter<String>(
+                    it,
+                    R.layout.dropwdown_item,
+                    model
+                )
+            }
+
+            binding.filterModelAutocomplete.setAdapter(modelArrayAdapter)
+            binding.filterModelAutocomplete.setText(carViewModel.modelFilter.value, false)
+
+            carViewModel.models.collect{
+                model.addAll(it)
+            }
         }
-
-        binding.filterBrandAutocomplete.setAdapter(brandArrayAdapter)
-        binding.filterBrandAutocomplete.setText(carViewModel.brandFilter.value, false)
-
-        binding.filterModelAutocomplete.setAdapter(modelArrayAdapter)
-        binding.filterModelAutocomplete.setText(carViewModel.modelFilter.value, false)
 
         binding.filterButton.setOnClickListener {
-            setFilters(
-                binding.filterBrandAutocomplete.text.toString().ifEmpty { null },
-                binding.filterModelAutocomplete.text.toString().ifEmpty { null },
-                binding.filterPriceFromAutocomplete.text.toString().toDoubleOrNull(),
-                binding.filterPriceTillAutocomplete.text.toString().toDoubleOrNull()
-            )
+            if(binding.filterPriceFromAutocomplete.text.toString().ifEmpty { null } == null) {
+                setFilters(
+                    binding.filterBrandAutocomplete.text.toString().ifEmpty { null },
+                    binding.filterModelAutocomplete.text.toString().ifEmpty { null },
+                    "0.0",
+                    "9999.00"
+                )
+            } else {
+                setFilters(
+                    binding.filterBrandAutocomplete.text.toString().ifEmpty { null },
+                    binding.filterModelAutocomplete.text.toString().ifEmpty { null },
+                    binding.filterPriceFromAutocomplete.text.toString().ifEmpty { null },
+                    binding.filterPriceTillAutocomplete.text.toString().ifEmpty { null }
+                )
+            }
         }
 
         binding.removeFiltersButton.setOnClickListener {
@@ -70,11 +96,11 @@ class FilterFragment : Fragment() {
         }
     }
 
-    private fun setFilters(brand: String?, model: String?, priceFrom: Double?, priceTill: Double?) {
+    private fun setFilters(brand: String?, model: String?, priceFrom: String?, priceTill: String?) {
         carViewModel.setBrandFilter(brand)
         carViewModel.setModelFilter(model)
-        carViewModel.setPriceFromFilter(priceFrom)
-        carViewModel.setPriceTillFilter(priceTill)
+        carViewModel.setPriceFromFilter(priceFrom?.toDoubleOrNull())
+        carViewModel.setPriceTillFilter(priceTill?.toDoubleOrNull())
         view?.findNavController()?.navigate(R.id.action_fragment_filter_to_fragment_start)
     }
 
@@ -85,7 +111,7 @@ class FilterFragment : Fragment() {
         carViewModel.clearModelFilter()
         carViewModel.clearPriceFromFilter()
         carViewModel.clearPriceTillFilter()
-        view?.findNavController()?.navigate(R.id.action_fragment_filter_self)
+        view?.findNavController()?.navigate(R.id.action_fragment_filter_to_fragment_start)
     }
 
     override fun onDestroyView() {
