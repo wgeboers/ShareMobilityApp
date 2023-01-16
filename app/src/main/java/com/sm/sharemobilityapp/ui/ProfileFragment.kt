@@ -1,23 +1,20 @@
 package com.sm.sharemobilityapp.ui
 
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Im
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.activity.viewModels
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
 import com.sm.sharemobilityapp.R
 import com.sm.sharemobilityapp.databinding.FragmentProfileBinding
 import com.sm.sharemobilityapp.ui.adapter.RentedItemAdapter
@@ -33,10 +30,6 @@ class ProfileFragment : Fragment() {
         UserViewModelFactory()
     }
 
-    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
-        MainActivityViewModelFactory()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,7 +42,7 @@ class ProfileFragment : Fragment() {
             false
         )
 
-        binding.lifecycleOwner = viewLifecycleOwner
+        binding.setLifecycleOwner(viewLifecycleOwner)
         binding.viewModel = reservationViewModel
         viewModelAdapter = RentedItemAdapter()
 
@@ -70,17 +63,18 @@ class ProfileFragment : Fragment() {
                 view.findViewById<TextView>(R.id.last_name).text = response.lastname
                 view.findViewById<TextView>(R.id.address).text = response.address
 
-                if(response.type == "CAR_USER") {
-                    reservationViewModel.refreshDataFromRepository()
-                    reservationViewModel.getReservationsByUser(response.id!!)
+                reservationViewModel.getReservationsByUser(response.id!!)
 
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        reservationViewModel.reservationsByUser.collect() { reservations ->
+                viewLifecycleOwner.lifecycleScope.launch {
+                    reservationViewModel.reservationsByUser.collect() { reservations ->
+                        if (reservations.isNotEmpty()){
                             reservations.apply {
-                                if (reservations != null) {
-                                    viewModelAdapter?.reservations = reservations
-                                }
+                                viewModelAdapter?.reservations = reservations
                             }
+                        } else {
+                            val toast =
+                                Toast.makeText(context,getString(R.string.NoReservations), Toast.LENGTH_LONG)
+                            toast.show()
                         }
                     }
                 }
@@ -92,7 +86,6 @@ class ProfileFragment : Fragment() {
 
                 val logoutButton: ImageButton = view.findViewById(R.id.log_out_button)
                 logoutButton.setOnClickListener {
-                    mainActivityViewModel.logout()
                     view.findNavController().navigate(R.id.action_profile_to_fragment_login)
                 }
 

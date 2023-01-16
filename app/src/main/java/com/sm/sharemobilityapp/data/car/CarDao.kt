@@ -30,6 +30,12 @@ interface CarDao {
     @Delete
     suspend fun delete(car: Car)
 
+    @Query("SELECT make FROM car GROUP BY make ORDER BY make")
+    fun getBrands(): Flow<List<String>>
+
+    @Query("SELECT model FROM car GROUP BY model ORDER BY model")
+    fun getModels(): Flow<List<String>>
+
     @Query("SELECT * from car WHERE id = :id")
     fun getCar(id: Long): Flow<Car>
 
@@ -45,12 +51,6 @@ interface CarDao {
     @Query("SELECT * from car where make LIKE :make and model LIKE :model")
     fun getCarsByModelAndMake(model: String, make: String): Flow<List<Car>>
 
-    @Query("SELECT DISTINCT model FROM car ORDER BY model")
-    fun getDistinctModels(): Flow<List<String>>
-
-    @Query("SELECT DISTINCT make FROM car ORDER BY model")
-    fun getDistinctMakes(): Flow<List<String>>
-
     @Query("SELECT * FROM car WHERE make LIKE :make AND model LIKE :model AND (usageCostsPerKm BETWEEN :from AND :to)")
     fun getCarsByFilter(
         make: String,
@@ -58,5 +58,4 @@ interface CarDao {
         from: Double = 0.0,
         to: Double = 999999.0
     ): Flow<List<Car>>
-
 }

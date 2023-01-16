@@ -81,22 +81,11 @@
     <string name="leasing">Verhuren</string>
     <string name="starting_date">Start datum</string>
     <string name="ending_date">Eind datum</string>
-    <string name="terms_and_conditions">Huurder verklaart akkoord te gaan met de algemene voorwaarden van ShareMobility. Verhuurder verklaart dat de auto op het moment van de aanvraag van de huurperiode in deugelijke staat verkeert. Zowel huurder als de in het vontract genomede bestuurders zijn hoodelijk aansprakelijk voor nakomen van alle verplichtingen die ui dit contract voortvloeien.</string>
     <string name="terms_and_conditions_title">Algemene voorwaarden</string>
     <string name="fotos">Foto\'s</string>
     <string name="address">Adres</string>
 
     <!--dit is dummy data-->
-    <string-array name="brands">
-        <item>Audi</item>
-        <item>BMW</item>
-        <item>Volvo</item>
-    </string-array>
-    <string-array name="model">
-        <item>A4</item>
-        <item>V70</item>
-        <item>i8</item>
-    </string-array>
     <string-array name="types">
         <item>ICE</item>
         <item>BEV</item>
@@ -107,12 +96,16 @@
         <item>DIESEL</item>
         <item>LPG</item>
     </string-array>
-    <string-array name="radius">
-        <item>5 KM</item>
-        <item>10 KM</item>
-        <item>15 KM</item>
-        <item>25 KM</item>
-        <item>50 KM</item>
-        <item>>50 KM</item>
-    </string-array>
+    <string name="terms_and_conditions">Huurder verklaart akkoord te gaan met de algemene voorwaarden van ShareMobility. Verhuurder verklaart dat de auto op het moment van de aanvraag van de huurperiode in deugelijke staat verkeert. Zowel huurder als de in het vontract genomede bestuurders zijn hoodelijk aansprakelijk voor nakomen van alle verplichtingen die ui dit contract voortvloeien.</string>
+    <string name="SomethingWentWrongTryAgainLater">Er is iets misgegaan, probeer het later nog eens.</string>
+    <string name="WrongUsernamePassword">Verkeerde gebruikersnaam / wachtwoord</string>
+    <string name="NoReservations">Geen reserveringen</string>
+    <string name="SelectDates">Selecteer datums</string>
+    <string name="PleaseSelectDates">Graag datums selecteren</string>
+    <string name="ApproveTerms">Graag akkoord met de algemene voorwaarden</string>
+    <string name="NetworkError">Netwerkfout</string>
+    <string name="NoCameraPermissionDescription">Zonder het accepteren van de permissies kunt u geen gebruik maken van deze functie.</string>
+    <string name="UserNotFound">Gebruiker niet gevonden, gelieve (opnieuw) in te loggen.</string>
+    <string name="SomethingWentWrongCheckInput">Er is iets misgegaan, controleer uw invoer.</string>
+    <string name="RegistrationSuccesvol">Registratie succesvol</string>
 </resources>
