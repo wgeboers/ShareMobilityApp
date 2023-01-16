@@ -107,7 +107,6 @@ class AddCarFragment : Fragment() {
                     photoFile
                 )
                 takePhoto.launch(photoUri)
-                Log.d("Fotofile", photoFile.path.toString())
             } else {
                 val toast =
                     Toast.makeText(context, getString(R.string.NoCameraPermissionDescription), Toast.LENGTH_LONG)
@@ -118,7 +117,7 @@ class AddCarFragment : Fragment() {
         binding.addCarButton.setOnClickListener {
             if (!checkInputFields()) {
                 insertCar()
-                view.findNavController().navigate(R.id.action_fragment_add_car_to_profile)
+                //view.findNavController().navigate(R.id.action_fragment_add_car_to_profile)
             }
         }
 
@@ -132,7 +131,6 @@ class AddCarFragment : Fragment() {
         }
 
         carViewModel.isNetworkMessage.observe(viewLifecycleOwner) { text ->
-            Log.d("AddCAR", text)
             if (text.get(0) == '5') {
                 showToast(getString(R.string.SomethingWentWrongTryAgainLater))
             } else if (text.get(0) == '4') {
@@ -149,6 +147,7 @@ class AddCarFragment : Fragment() {
                 showToast(getString(R.string.SomethingWentWrongCheckInput))
             } else if (text.get(0) == '2') {
                 showToast(getString(R.string.RegistrationSuccesvol))
+                view.findNavController().navigate(R.id.action_fragment_add_car_to_profile)
             }
         }
     }

@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
-private const val BASE_URL = "http://192.168.1.205:8080/"
+private const val BASE_URL = "http://192.168.41.102:8080/"
 private val logging: HttpLoggingInterceptor =
     HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 private val apiInterceptor: OkHttpClient = OkHttpClient.Builder().apply {

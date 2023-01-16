@@ -186,12 +186,11 @@ class CarViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun insertCar(carInfo: CarInfo) {
-        Log.d("CarVM Carinfo", carInfo.toString())
         viewModelScope.launch() {
             try {
                 val response = carRepository.insertCar(carInfo)
                 if (response.code() == 201) {
-                    _carInfo.postValue(response.body())
+                    _carInfo.value = response.body()
                 }
                 _isNetworkMessage.value = response.code().toString()
             } catch (networkError: IOException) {
