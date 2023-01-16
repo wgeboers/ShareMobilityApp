@@ -20,6 +20,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.GrantPermissionRule
 import com.sm.sharemobilityapp.ui.StartFragment
+import okhttp3.internal.wait
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
@@ -108,7 +109,76 @@ class NavigationTests {
     }
 
     @Test
-    fun navigate_to_rent_nav_component(){
+    fun navigate_to_login_nav_component() {
+        val bottomNavigationItemView = onView(
+            Matchers.allOf(
+                withId(R.id.login), ViewMatchers.withContentDescription("Login"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.bottomNavigationView),
+                        0
+                    ),
+                    2
+                ),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        bottomNavigationItemView.perform(click())
+
+        val button = onView(
+            Matchers.allOf(
+                withId(R.id.login_login_button), ViewMatchers.withText("INLOGGEN"),
+                ViewMatchers.withParent(ViewMatchers.withParent(IsInstanceOf.instanceOf(ScrollView::class.java))),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        button.check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun navigate_to_register_nav_component() {
+        val bottomNavigationItemView = onView(
+            Matchers.allOf(
+                withId(R.id.login), ViewMatchers.withContentDescription("Login"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.bottomNavigationView),
+                        0
+                    ),
+                    2
+                ),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        bottomNavigationItemView.perform(click())
+
+        val materialTextView = onView(
+            Matchers.allOf(
+                withId(R.id.not_yet_account_button), ViewMatchers.withText("Nog geen account?"),
+                childAtPosition(
+                    childAtPosition(
+                        ViewMatchers.withClassName(Matchers.`is`("android.widget.ScrollView")),
+                        0
+                    ),
+                    3
+                )
+            )
+        )
+        materialTextView.perform(ViewActions.scrollTo(), click())
+
+        val textView = onView(
+            Matchers.allOf(
+                withId(R.id.account_reason_text),
+                ViewMatchers.withText("Waar wilt u de applicatie voornamelijk voor gebruiken?"),
+                ViewMatchers.withParent(ViewMatchers.withParent(IsInstanceOf.instanceOf(ScrollView::class.java))),
+                ViewMatchers.isDisplayed()
+            )
+        )
+        textView.check(ViewAssertions.matches(ViewMatchers.withText("Waar wilt u de applicatie voornamelijk voor gebruiken?")))
+    }
+
+    @Test
+    fun navigate_to_rent_nav_component() {
         val bottomNavigationItemView = onView(
             Matchers.allOf(
                 withId(R.id.login), ViewMatchers.withContentDescription("Login"),
@@ -168,42 +238,18 @@ class NavigationTests {
         )
         materialButton.perform(ViewActions.scrollTo(), click())
 
-        val button = onView(
+        val textView = onView(
             Matchers.allOf(
-                withId(R.id.rent_button), ViewMatchers.withText("HUUR"),
+                withId(R.id.rent_terms_and_conditions_title),
+                ViewMatchers.withText("Algemene voorwaarden"),
                 ViewMatchers.withParent(ViewMatchers.withParent(IsInstanceOf.instanceOf(ScrollView::class.java))),
                 ViewMatchers.isDisplayed()
             )
         )
-        button.check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        textView.check(ViewAssertions.matches(ViewMatchers.withText("Algemene voorwaarden")))
     }
 
-    @Test
-    fun navigate_to_login_nav_component() {
-        val bottomNavigationItemView = onView(
-            Matchers.allOf(
-                withId(R.id.login), ViewMatchers.withContentDescription("Login"),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.bottomNavigationView),
-                        0
-                    ),
-                    2
-                ),
-                ViewMatchers.isDisplayed()
-            )
-        )
-        bottomNavigationItemView.perform(click())
 
-        val linearLayout = onView(
-            Matchers.allOf(
-                withId(R.id.login_username),
-                ViewMatchers.withParent(ViewMatchers.withParent(IsInstanceOf.instanceOf(ScrollView::class.java))),
-                ViewMatchers.isDisplayed()
-            )
-        )
-        linearLayout.check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-    }
 
     private fun childAtPosition(
         parentMatcher: Matcher<View>, position: Int

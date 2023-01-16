@@ -131,7 +131,7 @@ class CarViewModel(application: Application) : AndroidViewModel(application) {
     var filteredCars = carRepository.cars.map {
         it.filter {
             it.make == brandFilter.value &&
-            it.model == modelFilter.value
+            it.model == modelFilter.value &&
             it.hourlyRate!! >= priceFromFilter.value!! &&
             it.hourlyRate <= priceTillFilter.value!!
         }

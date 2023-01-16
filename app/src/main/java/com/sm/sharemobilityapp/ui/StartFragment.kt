@@ -68,13 +68,7 @@ class StartFragment : Fragment() {
                     if (cars.isNotEmpty()) {
                         cars.apply {
                             viewModelAdapter?.cars = cars
-                            view.findViewById<TextView>(R.id.start_filter_results_amount).text =
-                                carViewModel.filteredCars.count().toString()
                         }
-                    } else {
-                        val toast =
-                            Toast.makeText(context, "Geen auto's", Toast.LENGTH_LONG)
-                        toast.show()
                     }
                 }
             } else {
@@ -82,13 +76,7 @@ class StartFragment : Fragment() {
                     if (cars.isNotEmpty()) {
                         cars.apply {
                             viewModelAdapter?.cars = cars
-                            view.findViewById<TextView>(R.id.start_filter_results_amount).text =
-                                carViewModel.cars.count().toString()
                         }
-                    } else {
-                        val toast =
-                            Toast.makeText(context, "Geen auto's", Toast.LENGTH_LONG)
-                        toast.show()
                     }
                 }
             }
@@ -105,7 +93,7 @@ class StartFragment : Fragment() {
 
     private fun onNetworkError() {
         if (!carViewModel.isNetworkErrorShown.value!!) {
-            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, getString(R.string.NetworkError), Toast.LENGTH_LONG).show()
             carViewModel.onNetworkErrorShown()
         }
     }

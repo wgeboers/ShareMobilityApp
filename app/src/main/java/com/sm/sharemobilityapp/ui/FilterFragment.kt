@@ -111,7 +111,7 @@ class FilterFragment : Fragment() {
         carViewModel.clearModelFilter()
         carViewModel.clearPriceFromFilter()
         carViewModel.clearPriceTillFilter()
-        view?.findNavController()?.navigate(R.id.action_fragment_filter_self)
+        view?.findNavController()?.navigate(R.id.action_fragment_filter_to_fragment_start)
     }
 
     override fun onDestroyView() {

@@ -75,4 +75,25 @@
     <string name="milage">Miles</string>
     <string name="terms_of_pickup">Terms of pickup</string>
     <string name="terms_of_return">Terms of return</string>
+    <string name="username">Usernamen</string>
+    <string name="account_creation_reason">What do you mainly want to use the application for?</string>
+    <string name="renting">Renting</string>
+    <string name="leasing">Leasing</string>
+    <string name="starting_date">Starting date</string>
+    <string name="ending_date">Ending date</string>
+    <string name="terms_and_conditions">" The renter declares to agree with the general terms and conditions of ShareMobility. The lessor declares that the car is in a sound condition at the time of the application for the rental period. Both the renter and the directors mentioned in the contract are jointly and severally liable for the fulfillment of all obligations arising from this contract."</string>
+    <string name="terms_and_conditions_title">Terms and conditions</string>
+    <string name="fotos">photos</string>
+    <string name="address">Address</string>
+    <string name="NoCameraPermissionDescription">" You cannot use this feature without accepting the permissions."</string>
+    <string name="UserNotFound">User not found, please (re)login.</string>
+    <string name="SomethingWentWrongTryAgainLater">Something went wrong, please try again later.</string>
+    <string name="SomethingWentWrongCheckInput">Something went wrong, please check your input.</string>
+    <string name="RegistrationSuccesvol">Registration succesvol</string>
+    <string name="WrongUsernamePassword">Wrong username/password</string>
+    <string name="NoReservations">No reservations</string>
+    <string name="SelectDates">Select dates</string>
+    <string name="PleaseSelectDates">Please select the dates</string>
+    <string name="ApproveTerms">Graag akkoord op de algemene voorwaarden</string>
+    <string name="NetworkError">Network Error</string>
 </resources>

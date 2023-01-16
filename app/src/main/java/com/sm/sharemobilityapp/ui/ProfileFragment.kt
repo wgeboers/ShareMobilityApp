@@ -73,7 +73,7 @@ class ProfileFragment : Fragment() {
                             }
                         } else {
                             val toast =
-                                Toast.makeText(context, "Geen reserveringen", Toast.LENGTH_LONG)
+                                Toast.makeText(context,getString(R.string.NoReservations), Toast.LENGTH_LONG)
                             toast.show()
                         }
                     }
