@@ -52,7 +52,7 @@ class UserDaoTest {
        var users = launch { userDao.getUsers().collect() {user ->
            Log.d("User collect", user.toString())
            user.forEach {
-               assert("George" == it.username)
+               assert("George2" == it.username)
                Log.d("User collect", it.username)
              this.coroutineContext.cancel()
            }
