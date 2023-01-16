@@ -64,7 +64,7 @@ interface ShareMobilityApiService {
     ): Response<UserInfo>
 
     @POST(value = "users")
-    suspend fun postUser(@Body userInfo: UserInfo): UserInfo
+    suspend fun postUser(@Body userInfo: UserInfo): Response<UserInfo>
 
     @DELETE("users/{id}")
     suspend fun deleteUserWithResponse(@Path("id") userId: Int): Response<ResponseBody>
