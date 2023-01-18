@@ -56,6 +56,7 @@ class EditProfileFragment : Fragment() {
          * Edit profile of the logged user
          * !!!ID AND TYPE HAVE TO BE NULL, BECAUSE ONCE CREATED THEY SHOULD NOT BE CHANGED!!!
          */
+
         binding.editButton.setOnClickListener {
             val userInfo = UserInfo(null,
                 type,
@@ -67,6 +68,7 @@ class EditProfileFragment : Fragment() {
 
             )
             userViewModel.updateUser(userInfo)
+            view.findNavController().navigate(R.id.action_editProfileFragment_to_profile)
         }
     }
 

@@ -29,6 +29,9 @@ class ProfileFragment : Fragment() {
     private val userViewModel: UserViewModel by activityViewModels {
         UserViewModelFactory()
     }
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
+        MainActivityViewModelFactory()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,6 +89,7 @@ class ProfileFragment : Fragment() {
 
                 val logoutButton: ImageButton = view.findViewById(R.id.log_out_button)
                 logoutButton.setOnClickListener {
+                    mainActivityViewModel.logout()
                     view.findNavController().navigate(R.id.action_profile_to_fragment_login)
                 }
 

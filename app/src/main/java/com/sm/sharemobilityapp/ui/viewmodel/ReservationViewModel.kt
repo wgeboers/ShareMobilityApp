@@ -72,9 +72,9 @@ class ReservationViewModel(application: Application) : AndroidViewModel(applicat
         _totalPrice.value = null
     }
 
-//    init {
-//        refreshDataFromRepository()
-//    }
+    init {
+        refreshDataFromRepository()
+    }
 
     fun refreshDataFromRepository() {
         viewModelScope.launch {

@@ -52,6 +52,8 @@ class RegistrationFragment : Fragment() {
                 binding.registrationFirstnameEditText.text.toString(),
                 binding.registrationSecondnameEditText.text.toString(),
                 binding.registrationAddressEditText.text.toString(),
+                0,
+                type
             )
             registrationViewModel.registerUser(userInfo)
             view.findNavController().navigate(R.id.action_fragment_registration_to_fragment_login)
